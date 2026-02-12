@@ -15,4 +15,6 @@ public class Denuncia {
     private String localizacao;
     private String contato;
     private boolean anonimo;
+
+
 }
