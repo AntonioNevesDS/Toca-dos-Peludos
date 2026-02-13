@@ -1,0 +1,202 @@
+📝 PRD: Sistema de Gestão e Adoção – Toca dos Peludos
+1. Objetivo e Visão
+Facilitar o encontro entre animais resgatados e adotantes responsáveis, centralizando o inventário da ONG e automatizando o fluxo de interesse em adoção.
+Problema: Processo de adoção descentralizado e dificuldade em manter o status dos animais atualizado.
+Meta: Reduzir o tempo de resposta aos interessados e dar visibilidade aos animais,a ONG e facilitar a inscrição de novos voluntários e denúncias de maus tratos anônimas.
+2. Personas (Público-Alvo)
+Adotante: Pessoa física que busca um pet e quer filtrar por características (porte, idade, temperamento,raça).
+Administrador da ONG: Voluntário que cadastra animais, atualiza fotos e gerencia os pedidos de adoção.
+3. Requisitos Funcionais (O "O que fazer")
+ID
+Funcionalidade
+Descrição
+RF01
+Cadastro de Animais
+O admin deve cadastrar fotos, nome, idade estimada, porte,raça,cor e histórico médico.
+RF02
+Filtros de Busca
+O usuário deve filtrar por Espécie (Cão/Gato), Porte,raça e Sexo.
+RF03
+Formulário de Interesse
+O adotante envia dados de contato vinculados a um animal específico.
+RF04
+Dashboard Admin
+Visualização de quantos animais estão disponíveis vs. adotados, formulários de voluntários e denúncias anônimas.
+
+4. Requisitos Não Funcionais (O "Como deve ser")
+Performance: A listagem de animais deve carregar em menos de 2 segundos (importante para o SEO e retenção).
+Disponibilidade: O sistema deve ser responsivo (funcionar bem em celulares).
+Segurança: Dados dos adotantes (LGPD) devem ser armazenados de forma segura na API.
+5. Fora de Escopo (O que não faremos agora)
+Pagamento de doações via cartão de crédito (será apenas exibido o PIX da ONG).
+Chat em tempo real (o contato inicial será via formulário/WhatsApp).
+6. Critérios de Aceite
+Um animal cadastrado deve aparecer imediatamente na lista pública.
+O formulário de interesse não pode ser enviado sem um e-mail válido.
+Apenas usuários autenticados (Admin) podem deletar registros de animais.
+
+7.Estrutura do Banco Postgresql SQL
+-- Tabela de Animais (RF01)
+CREATE TABLE pets (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    especie ENUM('CACHORRO', 'GATO') NOT NULL,
+    porte ENUM('PEQUENO', 'MEDIO', 'GRANDE') NOT NULL,
+    sexo ENUM('MACHO', 'FEMEA') NOT NULL,
+    idade_estimada INT, -- Em meses ou anos
+    descricao TEXT,
+    status ENUM('DISPONIVEL', 'ADOTADO', 'EM_PROCESSO') DEFAULT 'DISPONIVEL',
+    url_foto VARCHAR(255),
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela de Interessados/Adoções (RF03)
+CREATE TABLE solicitacoes_adocao (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    pet_id BIGINT,
+    nome_interessado VARCHAR(150) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    whatsapp VARCHAR(20),
+    mensagem TEXT,
+    data_solicitacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (pet_id) REFERENCES pets(id)
+);
+
+8. Design da API (Endpoints)
+Baseado nos Requisitos Funcionais (RF) do PRD, estes seriam os principais recursos da sua API Spring Boot:
+Público (Adotantes)
+GET /api/v1/pets: Lista todos os animais.
+Filtros (Query Params): ?especie=GATO&porte=PEQUENO
+GET /api/v1/pets/{id}: Detalhes de um animal específico.
+POST /api/v1/adocoes: Envia o formulário de interesse (corpo JSON com pet_id e dados do adotante).
+Administrativo (ONG)
+POST /api/v1/admin/pets: Cadastra um novo animal.
+PUT /api/v1/admin/pets/{id}: Atualiza dados ou status (ex: mudar para "ADOTADO").
+GET /api/v1/admin/solicitacoes: Lista todas as pessoas que mostraram interesse.
+
+
+
+
+
+ 9. Stack Tecnológica (Arquitetura)
+Para este projeto, optamos por uma arquitetura desacoplada (Client-Server), permitindo que o backend sirva apenas dados via JSON para o frontend.
+Camada
+Tecnologia
+Papel no Projeto
+Backend
+Java 25+ / Spring Boot
+Gestão de regras de negócio, persistência no banco e segurança (Spring Security).
+Frontend
+HTML5, CSS3, JavaScript (ES6+)
+Interface do usuário responsiva e consumo da API via fetch() ou Axios.
+Banco de Dados
+MySQL / PostgreSQL
+Armazenamento de dados dos animais e formulários de adoção.
+Comunicação
+REST API (JSON)
+Formato de troca de dados entre o navegador e o servidor.
+
+A API deverá ser documentada utilizando Swagger/OpenAPI, permitindo que o frontend visualize os endpoints disponíveis de forma interativa.
+
+Segurança é um dos pilares mais importantes de um PRD, especialmente quando você lida com dados de adotantes (nome, telefone, e-mail) e acesso administrativo para gerenciar os animais. No seu projeto Toca dos Peludos, a segurança deve ser dividida em duas frentes: Autenticação (quem você é) e Autorização (o que você pode fazer).
+Aqui está como você deve adicionar a seção de Segurança no seu PRD:
+
+ 10. Requisitos de Segurança e Privacidade
+Para garantir a integridade dos dados da ONG e a privacidade dos usuários, o sistema seguirá os seguintes protocolos:
+10.1. Controle de Acesso (RBAC - Role Based Access Control)
+O sistema terá dois níveis de permissão distintos:
+ROLE_USER (Público): Pode apenas visualizar pets e enviar formulários de interesse. Não precisa de login.
+ROLE_ADMIN (ONG): Requer login e senha para cadastrar, editar ou excluir pets, além de visualizar a lista de interessados.
+10.2. Proteção da API (Spring Security)
+Como você está usando Spring Boot, a implementação deve focar em:
+JWT (JSON Web Token): Para manter a sessão do administrador no frontend (HTML/JS) de forma segura sem usar cookies tradicionais que são vulneráveis a CSRF.
+CORS (Cross-Origin Resource Sharing): Configurar o backend para aceitar requisições apenas do domínio onde seu frontend está hospedado.
+BCrypt: As senhas dos administradores nunca devem ser salvas em texto plano no banco de dados; devem ser criptografadas com BCryptPasswordEncoder.
+10.3. Privacidade de Dados (LGPD)
+Minimização: Coletar apenas o necessário no formulário de interesse (Nome, E-mail, WhatsApp).
+Consentimento: Adicionar um checkbox de "Aceito os termos de privacidade" no formulário de contato.
+
+11. Identidade Visual (UI Guidelines)
+A interface deve ser limpa e amigável, utilizando uma paleta que remeta à natureza e ao cuidado animal.
+11.1. Paleta de Cores Sugerida
+Categoria
+Cor (Hex)
+Uso Sugerido
+Sensação
+Primária
+#4CAF50 (Verde)
+Botões de "Adotar", Ícones de Saúde.
+Esperança, Natureza, Vitalidade.
+Secundária
+#FF9800 (Laranja)
+Chamadas de atenção, selos de "Urgente".
+Energia, Alegria, Amizade.
+Destaque
+#2196F3 (Azul)
+Links, informações de contato, selos de vacinação.
+Confiança, Higiene, Tranquilidade.
+Fundo
+#F5F5F5 (Cinza Claro)
+Cor de fundo das páginas para não cansar a vista.
+Limpeza, Organização.
+Texto
+#333333 (Grafite)
+Textos principais e parágrafos.
+Leitura confortável.
+
+11.2. Tipografia
+Títulos: Fonte Sans-serif arredondada (ex: Quicksand ou Montserrat). Fontes arredondadas transmitem mais amabilidade.
+Corpo: Fonte Sans-serif padrão (ex: Roboto ou Open Sans) para garantir legibilidade no mobile.
+ 
+11.3. Layout Atual
+Topo com barra amarela e logo à esquerda, botão de doação em azul.
+Banner de herói com imagem de pets e texto sobreposto.
+Grade de duas ações com ícones e links rápidos.
+Seção de depoimentos com fundo amarelo e cartão branco.
+Seção de doações com fundo roxo e botões amarelos.
+Listagem de pets e formulário de interesse abaixo, responsivos.
+ 
+11.4. Paleta de Cores Atualizada
+Primária: #FFCC00 (Amarelo) – barra superior, destaques e banners.
+Secundária: #6A1B9A (Roxo) – seção de doação e cartões de ação.
+Destaque: #2196F3 (Azul) – links e botões de ação.
+Fundo: #F5F5F5 (Cinza Claro) – fundo neutro.
+Texto: #333333 (Grafite) – textos principais.
+150→
+151→12. Decisões de Implementação – v0.1
+152→Backend: Spring Boot 3.3, Java 21 (compatível com 25). Maven. JWT com jjwt.
+153→Banco: PostgreSQL padrão, variáveis de ambiente DB_URL, DB_USERNAME, DB_PASSWORD. H2 somente para testes locais.
+154→Segurança: Admin em memória com BCrypt (ADMIN_USERNAME, ADMIN_PASSWORD). JWT Bearer com expiração configurável (JWT_SECRET, JWT_EXPIRATION_SECONDS). CORS restringido ao frontend.
+155→Documentação: Swagger/OpenAPI acessível em /swagger-ui.html.
+156→Frontend: HTML/CSS/JS responsivo com paleta definida. Consome API via fetch.
+157→
+158→12.1. Endpoints Implementados
+159→Público
+160→GET /api/v1/pets
+161→GET /api/v1/pets/{id}
+162→POST /api/v1/adocoes (valida e-mail e consentimento no frontend)
+163→Autenticação
+164→POST /api/v1/auth/login (retorna JWT)
+165→Administrativo
+166→POST /api/v1/admin/pets
+167→PUT /api/v1/admin/pets/{id}
+168→GET /api/v1/admin/solicitacoes
+169→
+170→12.2. Critérios de Aceite – Implementação
+171→Cadastro de animal aparece na listagem pública imediatamente após criação.
+172→Formulário no frontend exige e-mail válido e consentimento LGPD antes de enviar.
+173→Acesso admin protegido por JWT. Exclusão de animais limitada a admin (a implementar).
+174→
+175→12.3. Considerações de Banco
+176→Enums persistidos como texto (Especie, Porte, Sexo, StatusPet).
+177→Migrações poderão ser adicionadas via Flyway em versão futura.
+178→
+179→12.4. CORS e Ambientes
+180→cors.allowed-origins: http://localhost:8081, http://127.0.0.1:8081.
+181→server.port: 8080 por padrão.
+182→
+183→12.5. Próximos Passos
+184→Dashboard Admin com métricas RF04.
+185→Fluxo de voluntários e denúncias anônimas.
+186→Autenticação de usuários reais via banco (em vez de usuário em memória).
+

@@ -1,5 +1,6 @@
 package br.edu.eniac.api_toca_dos_peludos.Models;
 
+import br.edu.eniac.api_toca_dos_peludos.Enums.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,4 +18,7 @@ public class Usuario {
     private String senha;
     private String endereco;
     private String preferencias;
+
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipo = TipoUsuario.CLIENTE;
 }
