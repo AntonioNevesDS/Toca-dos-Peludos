@@ -17,7 +17,7 @@
         <span>Toca dos Peludos</span>
       </div>
       <nav class="links">
-        <a href="index.html">Início</a>
+        <a href="home.html">Início</a>
         <a href="sobre_nos.html">Sobre</a>
         <a href="pets.html">Pets</a>
         <a href="eventos.html">Eventos</a>
@@ -25,7 +25,9 @@
         <a href="contatos.html">Contatos</a>
       </nav>
       <div class="actions">
-        <button class="btn-accent">Entrar</button>
+          <a href="login.html">
+            <button class="btn-accent">Entrar</button>
+          </a>
         <button class="btn-accent">Doar</button>
       </div>
     </div>
@@ -74,26 +76,27 @@
             <h2>Formulário de Denúncia</h2>
     
             <form>
-                <label>Tipo de Denúncia *</label>
+                <label class="label_text">Tipo de Denúncia *</label>
                 <select required>
                     <option value="">Selecione o tipo</option>
                     <option>Maus-tratos</option>
                     <option>Abandono</option>
                     <option>Desmatamento</option>
+                    <option value="">Outros</option>
                 </select>
     
-                <label>Descreva a Situação *</label>
+                <label class="label_text">Descreva a Situação *</label>
                 <textarea placeholder="Forneça o máximo de detalhes possível sobre a situação." required></textarea>
     
-                <label>Local da Ocorrência</label>
+                <label class="label_text">Local da Ocorrência</label>
                 <input type="text" placeholder="Endereço ou ponto de referência">
-    
-                <label>
-                    <input type="checkbox">
-                    Fazer denúncia anônima
-                </label>
-    
-                <button type="submit">Enviar Denúncia</button>
+                <div id="options_container">
+                  <label for="anonimo">Fazer denúncia anônima</label>
+                  <input type="checkbox" id="anonimo">
+
+                </div>
+                  <button class="btn-accent" type="submit">Cadastrar Denuncia</button>
+                
             </form>
         </div>
     
