@@ -1,194 +1,156 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toca dos Peludos</title>
-  <link rel="stylesheet" href="css/style_index.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toca dos Peludos</title>
+    <link rel="stylesheet" href="css/style_home.css">
+    <link rel="stylesheet" href="css/style_contatos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-  <header class="nav">
-    <div class="nav-content">
-      <div class="brand">
-        <img src="https://placehold.co/48x48?text=TP" alt="Logo">
-        <span>Toca dos Peludos</span>
-      </div>
-      <nav class="links">
-        <a href="index.html">Início</a>
-        <a href="sobre_nos.html">Sobre</a>
-        <a href="pets.html">Pets</a>
-        <a href="eventos.html">Eventos</a>
-        <a href="denuncias.html">Denúncias</a>
-        <a href="contatos.html">Contatos</a>
-      </nav>
-      <div class="actions">
-        <button class="btn-accent">Entrar</button>
-        <button class="btn-accent">Doar</button>
-      </div>
-    </div>
-  </header>
-
-  <section class="hero" id="inicio">
-    <div class="hero-inner">
-      <h1>Encontre Seu Novo Amigo</h1>
-      <p>Adote e ajude a salvar vidas com carinho</p>
-      <div class="hero-actions">
-        <a href="#adotar" class="btn-primary">Ver Animais</a>
-      </div>
-    </div>
-  </section>
-
-  <main class="container">
-    <section class="action-cards">
-      <div class="action-grid">
-        <a class="action-card" href="#ajude">
-          <div class="icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M3 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12a4 4 0 0 0-4-4h-1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="text">Veja como ajudar a ONG</div>
-        </a>
-        <a class="action-card" href="#depoimentos">
-          <div class="icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="text">Veja depoimentos de adotantes</div>
-        </a>
-      </div>
-    </section>
-
-    <section class="filters">
-      <h2>Busque por características</h2>
-      <div class="filter-grid">
-        <label>Espécie
-          <select id="filter-especie">
-            <option value="">Todas</option>
-            <option value="CACHORRO">Cachorro</option>
-            <option value="GATO">Gato</option>
-          </select>
-        </label>
-        <label>Porte
-          <select id="filter-porte">
-            <option value="">Todos</option>
-            <option value="PEQUENO">Pequeno</option>
-            <option value="MEDIO">Médio</option>
-            <option value="GRANDE">Grande</option>
-          </select>
-        </label>
-        <label>Sexo
-          <select id="filter-sexo">
-            <option value="">Todos</option>
-            <option value="MACHO">Macho</option>
-            <option value="FEMEA">Fêmea</option>
-          </select>
-        </label>
-        <button id="btn-filtrar" class="btn-primary">Aplicar Filtros</button>
-      </div>
-    </section>
-
-    <section class="pets" id="adotar">
-      <h2>Animais Disponíveis</h2>
-      <div id="pets-list" class="cards"></div>
-    </section>
-
-    <section class="testimonials" id="depoimentos">
-      <h2>Veja Alguns Depoimentos Dos Nossos Adotantes</h2>
-      <div class="testimonial-card"></div>
-    </section>
-
-    <section class="donate" id="ajude">
-      <div class="donate-grid">
-        <div class="donate-content">
-          <h2>Ajude A Toca Dos Peludos</h2>
-          <p>Contribua para resgates, cuidados e adoções responsáveis.</p>
-          <div class="donate-actions">
-            <button class="btn-yellow">Doar R$10</button>
-            <button class="btn-yellow">Doar R$50</button>
-            <button class="btn-yellow">Doar outro valor</button>
-          </div>
+    <header class="nav">
+        <div class="nav-content">
+            <div class="brand">
+                <img src="/frontend/img/logo-tdp.jpg" alt="Logo">
+                <span>Toca dos Peludos</span>
+            </div>
+            <nav class="links">
+                <a href="index.html">Início</a>
+                <a href="sobre_nos.html">Sobre</a>
+                <a href="pets.html">Pets</a>
+                <a href="eventos.html">Eventos</a>
+                <a href="denuncias.html">Denúncias</a>
+                <a href="contatos.html">Contatos</a>
+            </nav>
+            <div class="actions">
+                <button class="btn-accent">Entrar</button>
+                <button class="btn-accent">Doar</button>
+            </div>
         </div>
-        <img class="donate-image" src="https://images.unsplash.com/photo-1558944351-c6b3a3d05d13?q=80&w=800&auto=format&fit=crop" alt="Adoção">
-      </div>
+    </header>
+
+
+    <div class="container-cabecalho">
+        <img src="img/capa-home.png" alt="">
+        <div class="texto">
+            <h2>Encontre Seu Novo Melhor Amigo e Adote um Animal de Estimação</h2>
+            <p>Mais de 12.000 Histórias Salvas</p>
+        </div>
+    </div>
+
+    <div class="secao-cards">
+        <div class="cards">
+            <div class="card">
+                <img src="img/adotando.jpg" alt="" class="imagem-link">
+                <p>Veja Nossos Pets Adotados</p>
+            </div>
+    
+            <div class="card">
+                <img src="img/resgatando.jpg" alt="" class="imagem-link">
+                <p>Veja Um Dos Nossos Resgates</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="depoimentos">
+        <h2 class="titulo-depoimentos">Veja Alguns Depoimentos Dos Nossos Adotantes</h2>
+
+        <div class="container-foto">
+            <img src="img/casal-com-cachorro.jpg" alt="Casal com cachorro">
+        </div>
+    </section>
+    <section class="doacao-container">
+        <div class="doacao-info">
+            <h2>Ajude A Toca Dos Peludos</h2>
+            <p>Sua doação ajuda no resgate, alimentação e cuidados veterinários.</p>
+
+            <div class="doacao-grid">
+                <div class="doacao-card">
+                    <span>Doe R$10,00</span>
+                    <button>Doar</button>
+                </div>
+                <div class="doacao-card">
+                    <span>Doe R$20,00</span>
+                    <button>Doar</button>
+                </div>
+                <div class="doacao-card">
+                    <span>Doe R$50,00</span>
+                    <button>Doar</button>
+                </div>
+                <div class="doacao-card">
+                    <span>Doar outros valores</span>
+                    <button>Doar</button>
+                </div>
+            </div>
+        </div>
+        <div class="doacao-imagem">
+            <img src="img/resgatando-doacao.jpg" alt="Resgate">
+        </div>
     </section>
 
-    <section class="interesse">
-      <h2>Formulário de Interesse</h2>
-      <form id="form-interesse" novalidate>
-        <div class="form-grid">
-          <label>
-            Pet
-            <select id="pet-id" required></select>
-          </label>
-          <label>
-            Nome
-            <input type="text" id="nome" required maxlength="150" />
-          </label>
-          <label>
-            E-mail
-            <input type="email" id="email" required maxlength="100" />
-          </label>
-          <label>
-            WhatsApp
-            <input type="tel" id="whatsapp" maxlength="20" placeholder="(XX) 9XXXX-XXXX" />
-          </label>
-          <label class="full">
-            Mensagem
-            <textarea id="mensagem" rows="3"></textarea>
-          </label>
-          <label class="consent full">
-            <input type="checkbox" id="consent" required />
-            Aceito os termos de privacidade (LGPD)
-          </label>
+    <section class="parceiros">
+        <h2>Nossas ONGs Parceiras</h2>
+
+        <div class="grid-parceiros">
+            <div class="logo-ong"></div>
+            <div class="logo-ong"></div>
+            <div class="logo-ong"></div>
+            <div class="logo-ong"></div>
+            <div class="logo-ong"></div>
+            <div class="logo-ong"></div>
+            <div class="logo-ong"></div>
         </div>
-        <button type="submit" class="btn-primary">Enviar Interesse</button>
-      </form>
-      <div id="feedback" class="feedback"></div>
     </section>
-  </main>
 
-  <footer class="footer">
-    <div id="itens_footer">
-      <div id="logo_footer">
-        <img src="" alt="">
-        <p>Somos uma ONG dedicada ao resgate, cuidado e adoção responsável de animais. Nossa missão é dar uma segunda chance para cada peludo encontrar um lar cheio de amor.</p>
-        <h3>Redes Sociais</h3>
-        <div id="icons_redes">
-          <a href="https://www.instagram.com/toca_dos_peludos/" target="blank">
-            <img src="img/icons8-instagram-50.svg" alt="">
-          </a>
-          <a href=""target="blank">
-            <img src="img/icons8-tiktok-50.svg" alt="" >
-          </a>
-          <a href=""target="blank">
-            <img src="img/icons8-whatsapp-50.svg" alt="">
-          </a>
-          <a href=""target="blank">
-            <img src="img/icons8-facebook-50.svg" alt="">
-          </a>
+    <footer class="footer">
+        <div id="itens_footer">
+            <div id="logo_footer">
+                <img src="" alt="">
+                <p>Somos uma ONG dedicada ao resgate, cuidado e adoção responsável de animais. Nossa missão é dar uma
+                    segunda chance para cada peludo encontrar um lar cheio de amor.</p>
+                <h3>Redes Sociais</h3>
+                <div id="icons_redes">
+                    <a href="https://www.instagram.com/toca_dos_peludos/" target="blank">
+                        <img src="img/icons8-instagram-50.svg" alt="">
+                    </a>
+                    <a href="https://www.tiktok.com/@toca_dos_peludos" target="blank">
+                        <img src="img/icons8-tiktok-50.svg" alt="">
+                    </a>
+                    <a href="" target="blank">
+                        <img src="img/icons8-whatsapp-50.svg" alt="">
+                    </a>
+                    <a href="https://www.facebook.com/tocadospeludos/?locale=pt_BR" target="blank">
+                        <img src="img/icons8-facebook-50.svg" alt="">
+                    </a>
+                </div>
+            </div>
+            <div id="links_footer">
+                <h3>Links Rápidos</h3>
+                <a href="pets.html">Adotar um Pet</a>
+                <a href="#ajude">Fazer Doação</a>
+                <a href="">Ser voluntário</a>
+                <a href="eventos.html">Eventos</a>
+            </div>
+            <div id="contato_footer">
+                <h3>Contato</h3>
+                <a href="">contato@tocadospeludos.org</a>
+                <a href="">(11) 99999 - 9999</a>
+                <a href="">São Paulo, SP</a>
+            </div>
         </div>
-      </div>
-      <div id="links_footer">
-        <h3>Links Rápidos</h3>
-        <a href="pets.html">Adotar um Pet</a>
-        <a href="#ajude">Fazer Doação</a>
-        <a href="">Ser voluntário</a>
-        <a href="eventos.html">Eventos</a>
-      </div>
-      <div id="contato_footer">
-        <h3>Contato</h3>
-        <a href="">contato@tocadospeludos.org</a>
-        <a href="">(11) 99999 - 9999</a>
-        <a href="">São Paulo, SP</a>
-      </div>
-    </div>
-    <div id="copyright">
-      <p>© 2026 Toca dos Peludos. Feito com S2 para os animais.</p>
-    </div>
- 
-  </footer>
+        <div id="copyright">
+            <p>© 2026 Toca dos Peludos. Feito com S2 para os animais.</p>
+        </div>
 
-  <script src="script.js"></script>
+    </footer>
+
 </body>
+
 </html>
