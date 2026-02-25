@@ -1,0 +1,209 @@
+.container-cabecalho {
+   position: relative;
+   width: 100%;
+   max-width: 1288;
+}
+
+.container-cabecalho img {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    background-color: white;
+    z-index: 3; 
+    padding-bottom: 70px;
+}
+
+
+.texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    background-color: rgba(0,0,0,0.0);
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    z-index: 1; 
+}
+
+
+.depoimentos {
+    background-color: #ffcc33; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .titulo-depoimentos {
+    color: #7b61ff; 
+    font-family: sans-serif;
+    font-size: 24px;
+    margin-bottom: 40px;
+    font-weight: bold;
+  }
+  
+  .container-foto {
+    width: 465px;
+    height: 549px;
+    max-width: 600px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+  }
+  
+  .container-foto img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px; 
+  }
+
+  .cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 300px;
+    text-align: center;
+}
+
+.imagem-link {
+    background-color: #ededff;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.card p {
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+  .doacao-container {
+    background-color: #6f42c1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 8%;
+    color: white;
+    font-family: sans-serif;
+    gap: 40px;
+  }
+  
+  .doacao-info {
+    flex: 1;
+  }
+  
+  .doacao-info h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  .doacao-info p {
+    margin-bottom: 40px;
+    font-size: 16px;
+  }
+  
+  .doacao-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  .doacao-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .doacao-card span {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .doacao-card button {
+    background-color: #ffcc33;
+    color: #6f42c1;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    width: 160px;
+    cursor: pointer;
+  }
+  
+  .doacao-imagem {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .doacao-imagem img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 4px solid #7b61ff;
+  }
+  
+  @media (max-width: 900px) {
+    .doacao-container {
+      flex-direction: column;
+      text-align: center;
+    }
+    .doacao-imagem {
+      justify-content: center;
+    }
+    .doacao-grid {
+      justify-items: center;
+    }
+  }
+
+  .parceiros {
+    text-align: center;
+    padding: 40px 0;
+    font-family: sans-serif;
+  }
+
+.parceiros h2{
+    margin-bottom: 40px;
+    font-size: 24px;
+    color: #333;
+}
+
+.grid-parceiros {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-ong {
+  width: 150px;
+  height: 150px;
+  background-color: #d9d9d9;
+  border-radius: 4px;
+}
+
+.logo-ong:hover {
+    transform: scale(1.05);
+    background-color: #ccc;
+}
+
+@media (max-width: 600px) {
+    .grid-parceiros {
+        grid-template-columns: repeat(2,1fr);
+        gap: 15px;
+    }
+}
