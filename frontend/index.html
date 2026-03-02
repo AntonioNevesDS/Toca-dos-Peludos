@@ -104,37 +104,41 @@
     </div>
   </div>
 </section>
-
   </a>
+  
+<section class="doacao-container">
+    <div class="doacao-info">
+        <h2>Ajude A Toca Dos Peludos</h2>
+        <p>Sua doação ajuda no resgate, alimentação e cuidados veterinários.</p>
 
-    <section class="doacao-container">
-        <div class="doacao-info">
-            <h2>Ajude A Toca Dos Peludos</h2>
-            <p>Sua doação ajuda no resgate, alimentação e cuidados veterinários.</p>
-
-            <div class="doacao-grid">
-                <div class="doacao-card">
-                    <span>Doe R$10,00</span>
-                    <button>Doar</button>
-                </div>
-                <div class="doacao-card">
-                    <span>Doe R$20,00</span>
-                    <button>Doar</button>
-                </div>
-                <div class="doacao-card">
-                    <span>Doe R$50,00</span>
-                    <button>Doar</button>
-                </div>
-                <div class="doacao-card">
-                    <span>Doar outros valores</span>
-                    <button>Doar</button>
-                </div>
+        <div class="doacao-grid">
+            <div class="doacao-card">
+                <span>Doe R$10,00</span>
+                <button onclick="enviarDoacao(10)">Doar</button>
+            </div>
+            <div class="doacao-card">
+                <span>Doe R$20,00</span>
+                <button onclick="enviarDoacao(20)">Doar</button>
+            </div>
+            <div class="doacao-card">
+                <span>Doe R$50,00</span>
+                <button onclick="enviarDoacao(50)">Doar</button>
+            </div>
+            <div class="doacao-card">
+                <span>Doar outros valores</span>
+                <button onclick="enviarDoacao(100)">Doar</button>
             </div>
         </div>
-        <div class="doacao-imagem">
-            <img src="img/resgatando-doacao.jpg" alt="Resgate">
+
+        <div style="margin-top: 20px;">
+            <h3>Doações Recentes:</h3>
+            <ul id="listaDoacoes"></ul> 
         </div>
-    </section>
+    </div>
+    <div class="doacao-imagem">
+        <img src="img/resgatando-doacao.jpg" alt="Resgate">
+    </div>
+</section>
 
     <section class="parceiros">
         <h2>Nossas ONGs Parceiras</h2>
@@ -192,6 +196,7 @@
 
     </footer>
 
+    <script src="js/apiScript.js"></script>
     <script src="js/script.js"></script>
 </body>
 
