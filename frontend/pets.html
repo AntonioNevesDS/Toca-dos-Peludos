@@ -40,6 +40,9 @@
     </section>
   </main>
 
+<div id="listaPets" class="grid-animais">
+    </div>
+
   <footer class="footer">
     <div id="itens_footer">
       <div id="logo_footer">
@@ -80,7 +83,29 @@
     </div>
  
   </footer>
+<script>
+fetch('/api/pets.php')
+  .then(resposta => resposta.json())
+  .then(pets => { 
+    const container = document.getElementById('listaPets');
+    container.innerHTML = ''; 
+    
+    pets.forEach(pet => {
+      container.innerHTML += `
+        <div class="card">
+          <img src="${pet.foto_url}" alt="${pet.nome}">
+          <h3>${pet.nome}</h3>
+          <p>Espécie: ${pet.especie}</p>
+          <p>Idade: ${pet.idade} anos</p>
+          <button class="btn-accent">Adotar</button>
+        </div>
+      `;
+    });
+  })
+  .catch(erro => console.error('Erro ao carregar pets:', erro));
 
+</script>
+  
 </body>
 <script src="js/apiScript.js"></script>
 </html>

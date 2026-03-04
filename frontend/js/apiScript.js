@@ -76,7 +76,7 @@ function doarValorAberto()  {
 
 async function carregarPets() {
     const container = document.getElementById('listaPets');
-    if (!container) return;
+    if (!container) return;fetch()
     try {
         const response = await fetch(API_PETS_URL);
         const pets = await response.json();
