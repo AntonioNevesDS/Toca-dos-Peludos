@@ -122,44 +122,47 @@
  
   </footer>
 
-</body>
-<script src="js/apiScript.js"></script>
+<!-- <script src="js/script.js"></script> -->
+  <script src="js/apiScript.js"></script>
 
-<script>  
- const btnNext = document.getElementById('nextSlide')
- const btnPrevious = document.getElementById('previousSlide')
- const slider = document.querySelector('.slider')
- const content = document.querySelector('.content')
-
- const { width: slideWidth } = window.getComputedStyle(slider)
- const { width: contentWidth } = window.getComputedStyle(content)
-
- const slideProps = {
-  width: parseInt(slideWidth),
-  scroll: 0,
- }
-
- function controlSlide({ target: { id }}){
-  switch (id) {
-    case 'nextSlide':{
-      if (slideProps.scroll + slideProps.width < parseInt(contentWidth)) {
-      slideProps.scroll += slideProps.width;
+  <script>
+   const btnNext = document.getElementById('nextSlide')
+   const btnPrevious = document.getElementById('previousSlide')
+   const slider = document.querySelector('.slider')
+   const content = document.querySelector('.content')
+  
+   const { width: slideWidth } = window.getComputedStyle(slider)
+   const { width: contentWidth } = window.getComputedStyle(content)
+  
+   const slideProps = {
+    width: parseInt(slideWidth),
+    scroll: 0,
+   }
+  
+   function controlSlide({ target: { id }}){
+    switch (id) {
+      case 'nextSlide':{
+        if (slideProps.scroll + slideProps.width < parseInt(contentWidth)) {
+        slideProps.scroll += slideProps.width;
+        }
+        return slider.scrollLeft = slideProps.scroll;
       }
-      return slider.scrollLeft = slideProps.scroll;
+        
+      
+      case 'previousSlide':
+        slideProps.scroll = slideProps.scroll - slideProps.width < 0 ? 0: slideProps.scroll - slideProps.width ;
+        return slider.scrollLeft = slideProps.scroll;
+      
+        
+      default:
+        break;
     }
-      
-    
-    case 'previousSlide':
-      slideProps.scroll = slideProps.scroll - slideProps.width < 0 ? 0: slideProps.scroll - slideProps.width ;
-      return slider.scrollLeft = slideProps.scroll;
-    
-      
-    default:
-      break;
-  }
- }
+   }
+  
+   btnNext.addEventListener('click', controlSlide)
+   btnPrevious.addEventListener('click', controlSlide)
+  </script> 
 
- btnNext.addEventListener('click', controlSlide)
- btnPrevious.addEventListener('click', controlSlide)
-</script>
+</body>
+
 </html>
