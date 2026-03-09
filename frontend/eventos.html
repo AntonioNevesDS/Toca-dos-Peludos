@@ -57,22 +57,28 @@
       </div>
   </Section>
 
+
+  <div>
+    <h2>Momentos que marcaram nossa jornada!</h2>
+  </div>
   <section id="moments">
-    <div>
-      <h2>Momentos que marcaram nossa jornada!</h2>
-    </div>
-    <div id="slider">
-      <div class="content">
-        <img src="img/eventos/foto1_carrossel.png" alt="">
-        <img src="img/eventos/foto2_carrossel.png" alt="">
-        <img src="img/eventos/foto3_carrossel.png" alt="">
-        <img src="img/eventos/foto4_carrossel.png" alt="">
-        <img src="img/eventos/foto5_carrossel.png" alt="">
-        <img src="img/eventos/foto6_carrossel.png" alt="">
+    <div class="slide">
+      <div class="slider">
+        <div class="content">
+          <img src="img/eventos/foto1_carrossel.png" alt="">
+          <img src="img/eventos/foto2_carrossel.png" alt="">
+          <img src="img/eventos/foto3_carrossel.png" alt="">
+          <img src="img/eventos/foto4_carrossel.png" alt="">
+          <img src="img/eventos/foto5_carrossel.png" alt="">
+          <img src="img/eventos/foto6_carrossel.png" alt="">
+        </div>
       </div>
-
+      <button id="previousSlide">◀</button>
+      <button id="nextSlide">▶</button>
+      <div class="length-dots">
+        <span class="dot"></span>
+      </div>
     </div>
-
   </section>
     
   <footer class="footer">
@@ -118,4 +124,42 @@
 
 </body>
 <script src="js/apiScript.js"></script>
+
+<script>  
+ const btnNext = document.getElementById('nextSlide')
+ const btnPrevious = document.getElementById('previousSlide')
+ const slider = document.querySelector('.slider')
+ const content = document.querySelector('.content')
+
+ const { width: slideWidth } = window.getComputedStyle(slider)
+ const { width: contentWidth } = window.getComputedStyle(content)
+
+ const slideProps = {
+  width: parseInt(slideWidth),
+  scroll: 0,
+ }
+
+ function controlSlide({ target: { id }}){
+  switch (id) {
+    case 'nextSlide':{
+      if (slideProps.scroll + slideProps.width < parseInt(contentWidth)) {
+      slideProps.scroll += slideProps.width;
+      }
+      return slider.scrollLeft = slideProps.scroll;
+    }
+      
+    
+    case 'previousSlide':
+      slideProps.scroll = slideProps.scroll - slideProps.width < 0 ? 0: slideProps.scroll - slideProps.width ;
+      return slider.scrollLeft = slideProps.scroll;
+    
+      
+    default:
+      break;
+  }
+ }
+
+ btnNext.addEventListener('click', controlSlide)
+ btnPrevious.addEventListener('click', controlSlide)
+</script>
 </html>
