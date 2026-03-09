@@ -121,6 +121,63 @@ body {
 #moments{
   background-color: #7956a6;
   text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+
+}
+.slide{
+  position: relative;
+}
+.slider{
+  overflow-x: hidden;
+  width: 900px; 
+  border-radius: 20px;
+  scroll-behavior: smooth;
+  
+}
+.content{
+  display: flex;
+  width: fit-content;
+
+
+}
+.content img {
+  width: 950px;
+  height: 350px;
+  object-fit: cover;
+}
+#moments button{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ffcc33;
+  color: #000000;
+  position: absolute;
+  top: 50%;
+}
+#moments button:first-of-type{
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+#moments button:last-of-type{
+  right: 0;
+  transform: translate(50%, -50%);
+}
+#moments button:hover{
+  background-color: #ffc107;
+}
+.dot{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+
+}
+.length-dots{
+  position: absolute;
 }
 
 #moments h2{
