@@ -1,14 +1,14 @@
 --.pets
-CREATE TABLE pets (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    tipo VARCHAR(50) NOT NULL, 
-    raca VARCHAR(50) NOT NULL,
-    porte VARCHAR(50) NOT NULL, 
-    status VARCHAR(30) DEFAULT 'DISPONÍVEL',
-    imagemUrl VARCHAR(255),
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+    CREATE TABLE pets (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL,
+        tipo VARCHAR(50) NOT NULL, 
+        raca VARCHAR(50) NOT NULL,
+        porte VARCHAR(50) NOT NULL, 
+        status VARCHAR(30) DEFAULT 'DISPONÍVEL',
+        imagemUrl VARCHAR(255),
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
 
 --.usuario
 CREATE TABLE IF NOT EXISTS usuario (
