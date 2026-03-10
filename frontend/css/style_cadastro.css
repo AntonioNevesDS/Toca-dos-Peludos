@@ -34,7 +34,8 @@
     cursor: pointer;
     font-weight: 700;
     margin-top: 25px;
-    align-items: center;
+    grid-column: 1 / -1;
+    justify-self: center;
 }
 
 input, select {
