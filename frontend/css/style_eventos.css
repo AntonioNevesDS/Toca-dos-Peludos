@@ -1,5 +1,5 @@
 :root {
-  --primary: #FFCC00;
+--primary: #ffcc33;
   --secondary: #6A1B9A;
   --accent: #7956a6;
   --bg: #F5F5F5;
@@ -42,10 +42,30 @@ body {
   font-weight: 700;
 }
 .links a {
+  position: relative;
   color: #7956a6;
   text-decoration: none;
   margin: 0 8px;
   font-weight: 600;
+}
+
+.links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background-color: #7956a6;
+  transition: width 0.6s ease;
+}
+
+.links a:hover::after {
+  width: 100%;
+}
+
+.links a:hover {
+  color: var(--accent);
 }
 .btn-accent {
   background: var(--accent);
@@ -56,6 +76,18 @@ body {
   cursor: pointer;
   font-weight: 700;
 }
+.btn-accent:hover { transform: scale(1.05); }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+}
+
+.actions button {
+  margin: 0; 
+}
+
  
 /*cards iniciais*/
 #cards {
