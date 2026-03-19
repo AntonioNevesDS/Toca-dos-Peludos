@@ -76,6 +76,14 @@ body {
 .links a:hover {
   color: var(--accent);
 }
+
+.links a.active {
+  color: var(--accent);
+}
+
+.links a.active::after {
+  width: 100%;
+}
 .btn-accent {
   background: var(--accent);
   color: #fff;
@@ -172,20 +180,26 @@ iframe {
 
 
 /* Rodapé */
+/* Rodapé */
 .footer {
   width: 100%;
-}
-
-.footer #itens_footer {
   background-color: var(--accent);
-  padding: 12px 5% 8px;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr 0.8fr 0.8fr;
-  gap: 20px;
-  align-items: start;
 }
 
+/* Container principal */
+.footer #itens_footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 5% 15px;
 
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: space-between;
+  align-items: start;
+  gap: 40px;
+}
+
+/* Todas as colunas */
 #logo_footer,
 #redes_footer,
 #links_footer,
@@ -195,14 +209,16 @@ iframe {
   gap: 10px;
 }
 
+/* Logo / texto */
 #logo_footer {
-  max-width: 280px;
+  max-width: 260px;
+  align-items: center;
+  text-align: center;
 }
 
 #img_logo_footer {
   width: 70px;
   height: auto;
-  display: block;
 }
 
 #logo_footer p {
@@ -211,59 +227,73 @@ iframe {
   line-height: 1.4;
   max-width: 260px;
 }
-
+/* Títulos */
 .footer h3 {
   color: var(--primary);
-  font-size: 17px;
-  margin: 0 0 8px;
+  font-size: 16px;
+  margin-bottom: 8px;
 }
 
+/* Links */
 .footer a,
 .footer span {
   color: #fff;
-  text-decoration: none;
   font-size: 14px;
-  line-height: 1.5;
+  text-decoration: none;
 }
 
 .footer a:hover {
   text-decoration: underline;
 }
 
-footer #icons_redes{
- margin-top: 40px;
+/* ===================== */
+/*   REDES SOCIAIS       */
+/* ===================== */
+
+#redes_footer {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 #icons_redes {
   display: flex;
-  align-items: center;
   gap: 10px;
+  justify-content: center;
   flex-wrap: wrap;
+  margin-top: 16px;
 }
 
-#icons_redes a img {
-  width: 32px;
-  height: 32px;
+#icons_redes a {
+  background: rgba(255,255,255,0.15);
+  padding: 6px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+#icons_redes a:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+#icons_redes img {
+  width: 26px;
+  height: 26px;
   display: block;
-  transition: transform 0.2s ease;
 }
 
-#icons_redes a img:hover {
-  transform: scale(1.12);
-}
 
 #copyright {
   background-color: var(--primary);
-  padding: 8px;
   text-align: center;
+  padding: 8px;
 }
 
 #copyright p {
-  margin: 0;
   font-size: 13px;
   color: #222;
   font-weight: 500;
 }
+
 
 @media (max-width: 900px) {
   .footer #itens_footer {
@@ -308,6 +338,7 @@ footer #icons_redes{
   #contato_footer {
     max-width: 100%;
     align-items: center;
+    text-align: center;
   }
 
   #logo_footer p {

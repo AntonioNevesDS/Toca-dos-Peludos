@@ -75,6 +75,13 @@ body {
 .links a:hover {
   color: var(--accent);
 }
+.links a.active {
+  color: var(--accent);
+}
+
+.links a.active::after {
+  width: 100%;
+}
 .btn-accent {
   background: var(--accent);
   color: #fff;
@@ -95,7 +102,7 @@ body {
 .actions button {
   margin: 0; 
 }
-
+ 
 .container-cabecalho {
     position: relative;
     width: 100%;
@@ -134,66 +141,99 @@ body {
     transform: translateY(-50%) scale(1.05);
 }
 
-/* Depoimentos */
+/**/
 #texto-animado {
     font-size: clamp(24px, 5vw, 36px);
     font-style: bold;
 
 }
 
-.depoimentos {
-  background-color: #ffcc33;
-  text-align: center;
-  color: #6f42c1;
-  padding-top: 40px;
-  font-size: 10px;
-}
-.slider-depoimentos {
-  width: 100%;
-  overflow: hidden;
+
+#moments {
+  background-color: var(--primary);
   padding: 40px 0;
-  position: relative;
-}
-
-.slide-track {
-  padding-top: 50px;
-  display: flex;
-  transition: transform 0.5s ease;
-}
-
-.container-foto {
-  width: 300px; 
-  margin: 0 10px;
   text-align: center;
-  flex-shrink: 0; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centraliza horizontalmente */
+  justify-content: center;
+  
 }
 
-.container-foto img {
+#moments h2{
+  color: var(--accent);
+  margin-bottom: 40px;
+}
+
+.slide {
+  position: relative;
+  width: 950px;
+  margin: 0 auto; 
+  max-width: 100%; 
+  box-sizing: border-box;
+}
+.slider {
+  overflow-x: hidden;
+  border-radius: 20px;
+  scroll-behavior: smooth;
   width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Controles do carrossel */
-.carousel-prev, .carousel-next {
+.content {
+  display: flex;
+  width: fit-content;
+  transition: all 0.5s ease;
+}
+
+
+
+.content img {
+  width: 950px;
+  height: 350px;
+  object-fit: cover;
+}
+#moments button{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--accent);
+  color: #000000;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  background-color: #6f42c1;
-  color: #fff;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  cursor: pointer;
-  z-index: 3;
+  
 }
-.carousel-prev { left: 10px; }
-.carousel-next { right: 10px; }
+#moments button:first-of-type{
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+#moments button:last-of-type{
+  right: 0;
+  transform: translate(50%, -50%);
+}
+#moments button:hover{
+  background-color: var(--secondary);
+}
+.dot{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
 
+}
+.length-dots{
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 200%);
+  display: flex;
+  gap: 10px;
+}
 
+.dot.current{
+  background-color: var(--secondary);
+}
 .cards {
     display: flex;
     justify-content: center;
@@ -226,7 +266,7 @@ body {
 
 /* Seção de Doação */
 .doacao-container {
-    background-color: #6f42c1;
+    background-color: var(--accent);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -355,49 +395,197 @@ body {
         justify-items: center;
     }
 }
-/*rodapé*/
-.footer #itens_footer {
+/* Rodapé */
+.footer {
+  width: 100%;
   background-color: var(--accent);
-  padding: 40px 5%;
-  display: flex;
-  flex-wrap: wrap;
+}
+
+/* Container principal */
+.footer #itens_footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 5% 15px;
+
+  display: grid;
+  grid-template-columns: repeat(4, auto);
   justify-content: space-between;
-  gap: 30px;
+  align-items: start;
+  gap: 40px;
 }
 
-#logo_footer {
-  flex: 1;
-  min-width: 250px;
-  text-align: center;
-}
-
-#logo_footer h3 { color: var(--primary); margin-bottom: 10px; }
-#logo_footer p { color: #fff; font-size: 14px; }
-
-.footer #contato_footer, 
-.footer #links_footer {
-  flex: 1;
-  min-width: 150px;
+/* Todas as colunas */
+#logo_footer,
+#redes_footer,
+#links_footer,
+#contato_footer {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.footer h3 { color: var(--primary); font-size: 18px; }
-.footer a { color: white; text-decoration: none; font-size: 14px; }
+/* Logo / texto */
+#logo_footer {
+  max-width: 260px;
+  align-items: center;
+  text-align: center;
+}
+
+#img_logo_footer {
+  width: 70px;
+  height: auto;
+}
+
+#logo_footer p {
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.4;
+  max-width: 260px;
+}
+/* Títulos */
+.footer h3 {
+  color: var(--primary);
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+/* Links */
+.footer a,
+.footer span {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ===================== */
+/*   REDES SOCIAIS       */
+/* ===================== */
+
+#redes_footer {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+#icons_redes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+#icons_redes a {
+  background: rgba(255,255,255,0.15);
+  padding: 6px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+#icons_redes a:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+#icons_redes img {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
 
 #copyright {
   background-color: var(--primary);
-  padding: 10px;
   text-align: center;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 8px;
 }
 
-/* Ajustes Mobile */
-@media (max-width: 768px) {
-  .nav-content { flex-direction: column; text-align: center; }
-  .secao-contato { flex-direction: column; align-items: center; }
-  .footer #itens_footer { flex-direction: column; text-align: center; }
-  iframe { height: 250px; }
+#copyright p {
+  font-size: 13px;
+  color: #222;
+  font-weight: 500;
+}
+
+
+@media (max-width: 900px) {
+  .footer #itens_footer {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  #logo_footer {
+    grid-column: 1 / -1;
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  #logo_footer p {
+    max-width: 520px;
+  }
+
+  #redes_footer,
+  #links_footer,
+  #contato_footer {
+    align-items: center;
+    text-align: center;
+  }
+
+  #icons_redes {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer #itens_footer {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 14px 20px 12px;
+    gap: 16px;
+  }
+
+  #logo_footer,
+  #redes_footer,
+  #links_footer,
+  #contato_footer {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  #logo_footer p {
+    max-width: 100%;
+    font-size: 13px;
+  }
+
+  .footer h3 {
+    font-size: 16px;
+  }
+
+  .footer a,
+  .footer span,
+  #copyright p {
+    font-size: 13px;
+  }
+
+  #img_logo_footer {
+    width: 90px;
+  }
+
+  #icons_redes {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  #icons_redes a img {
+    width: 24px;
+    height: 24px;
+  }
+
+  #copyright {
+    padding: 8px;
+  }
 }

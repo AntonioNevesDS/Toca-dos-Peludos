@@ -23,7 +23,7 @@
         <span>Toca dos Peludos</span>
       </div>
       <nav class="links">
-        <a href="index.html">Início</a>
+        <a href="index.html" class="active">Início</a>
         <a href="sobre_nos.html">Sobre</a>
         <a href="pets.html">Pets</a>
         <a href="eventos.html">Eventos</a>
@@ -34,7 +34,10 @@
         <a href="login.html">
             <button class="btn-accent">Entrar</button>
         </a>
-        <button class="btn-accent">Doar</button>
+        <a href="#ajude">
+            <button class="btn-accent">Doar</button>
+        </a>
+
       </div>
     </div>
   </header>
@@ -68,74 +71,61 @@
         </div>
     </div>
 <section class="depoimentos">
-  <h2 class="titulo-depoimentos">
+
+    <section id="moments">
+          <h2 class="titulo-depoimentos">
     <span id="texto-animado">Veja Alguns Depoimentos Dos Nossos Adotantes</span><span class="cursor">|</span>
   </h2>
-  
-  <div class="slider-depoimentos" id="depoimentos">
-    <button class="carousel-prev">‹</button>
-    <div class="slide-track">
-      
-      <a href="seu-link-aqui-1.html" class="container-foto">
-        <img src="img/casal-com-cachorro.jpg" alt="Casal com cachorro">
-        <p>"A melhor decisão que tomamos!"</p>
-      </a>
-
-      <a href="seu-link-aqui-2.html" class="container-foto">
-        <img src="img/casal-com-cachorro.jpg" alt="Pessoa com gato">
-        <p>"O Mia mudou nossa casa."</p>
-      </a>
-
-      <a href="seu-link-aqui-3.html" class="container-foto">
-        <img src="img/casal-com-cachorro.jpg" alt="Família com dog">
-        <p>"Gratidão pela Toca dos Peludos."</p>
-      </a>
-
-      <a href="seu-link-aqui-1.html" class="container-foto">
-        <img src="img/casal-com-cachorro.jpg" alt="Casal com cachorro">
-        <p>"A melhor decisão que tomamos!"</p>
-      </a>
-      <a href="seu-link-aqui-2.html" class="container-foto">
-        <img src="img/casal-com-cachorro.jpg" alt="Pessoa com gato">
-        <p>"O Mia mudou nossa casa."</p>
-      </a>
-      <a href="seu-link-aqui-3.html" class="container-foto">
-        <img src="img/casal-com-cachorro.jpg" alt="Família com dog">
-        <p>"Gratidão pela Toca dos Peludos."</p>
-      </a>
-
+    <div class="slide">
+      <div class="slider">
+        <div class="content">
+          <img src="img/eventos/foto1_carrossel.png" alt="">
+          <img src="img/eventos/foto2_carrossel.png" alt="">
+          <img src="img/eventos/foto3_carrossel.png" alt="">
+          <img src="img/eventos/foto4_carrossel.png" alt="">
+          <img src="img/eventos/foto5_carrossel.png" alt="">
+          <img src="img/eventos/foto6_carrossel.png" alt="">
+        </div>
+      </div>
+      <button id="previousSlide">◀</button>
+      <button id="nextSlide">▶</button>
+      <div class="length-dots">
+        <span class="dot"></span>
+      </div>
     </div>
-    <button class="carousel-next">›</button>
-  </div>
+  </section>
+
 </section>
   </a>
   
 <section class="doacao-container">
-    <div class="doacao-info">
-        <h2>Ajude A Toca Dos Peludos</h2>
-        <p>Sua doação ajuda no resgate, alimentação e cuidados veterinários.</p>
+    <div id="#ajude">
+        <div class="doacao-info">
+            <h2>Ajude A Toca Dos Peludos</h2>
+            <p>Sua doação ajuda no resgate, alimentação e cuidados veterinários.</p>
 
-        <div class="doacao-grid">
-            <div class="doacao-card">
-                <span>Doe R$10,00</span>
-                <button onclick="enviarDoacao(10)">Doar</button>
+            <div class="doacao-grid">
+                <div class="doacao-card">
+                    <span>Doe R$10,00</span>
+                    <button onclick="enviarDoacao(10)">Doar</button>
+                </div>
+                <div class="doacao-card">
+                    <span>Doe R$20,00</span>
+                    <button onclick="enviarDoacao(20)">Doar</button>
+                </div>
+                <div class="doacao-card">
+                    <span>Doe R$50,00</span>
+                    <button onclick="enviarDoacao(50)">Doar</button>
+                </div>
             </div>
-            <div class="doacao-card">
-                <span>Doe R$20,00</span>
-                <button onclick="enviarDoacao(20)">Doar</button>
-            </div>
-            <div class="doacao-card">
-                <span>Doe R$50,00</span>
-                <button onclick="enviarDoacao(50)">Doar</button>
-            </div>
-        </div>
 
-        <div style="margin-top: 20px;">
-            <h3>Doações Recentes:</h3>
-            <ul id="listaDoacoes"></ul> 
+            <div style="margin-top: 20px;">
+                <h3>Doações Recentes:</h3>
+                <ul id="listaDoacoes"></ul> 
+            </div>
         </div>
     </div>
-    <div class="doacao-imagem">
+        <div class="doacao-imagem">
         <img src="img/resgatando-doacao.jpg" alt="Resgate">
     </div>
 </section>
@@ -154,55 +144,63 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <div id="itens_footer">
-            <div id="logo_footer">
-                <img src="" alt="">
-                <p>Somos uma ONG dedicada ao resgate, cuidado e adoção responsável de animais. Nossa missão é dar uma
-                    segunda chance para cada peludo encontrar um lar cheio de amor.</p>
-                <h3>Redes Sociais</h3>
-                <div id="icons_redes">
-                    <a href="https://www.instagram.com/toca_dos_peludos/" target="blank">
-                        <img src="img/icons8-instagram-50.svg" alt="">
-                    </a>
-                    <a href="https://www.tiktok.com/@toca_dos_peludos" target="blank">
-                        <img src="img/icons8-tiktok-50.svg" alt="">
-                    </a>
-                    <a href="" target="blank">
-                        <img src="img/icons8-whatsapp-50.svg" alt="">
-                    </a>
-                    <a href="https://www.facebook.com/tocadospeludos/?locale=pt_BR" target="blank">
-                        <img src="img/icons8-facebook-50.svg" alt="">
-                    </a>
-                </div>
-            </div>
-            <div id="links_footer">
-                <h3>Links Rápidos</h3>
-                <a href="pets.html">Adotar um Pet</a>
-                <a href="#ajude">Fazer Doação</a>
-                <a href="">Ser voluntário</a>
-                <a href="eventos.html">Eventos</a>
-            </div>
-            <div id="contato_footer">
-                <h3>Contato</h3>
-                <a href="">contato@tocadospeludos.org</a>
-                <a href="">(11) 99999 - 9999</a>
-                <a href="">São Paulo, SP</a>
-            </div>
-        </div>
-        <div id="copyright">
-            <p>© 2026 Toca dos Peludos. Feito com S2 para os animais.</p>
-        </div>
+  <footer class="footer">
+  <div id="itens_footer">
+    <div id="logo_footer">
+      <img src="img/logo-tdp.jpg" alt="Logo Toca dos Peludos" id="img_logo_footer">
 
-    </footer>
+      <p>
+        Somos uma ONG dedicada ao resgate, cuidado e adoção responsável de animais.
+        Nossa missão é dar uma segunda chance para cada peludo encontrar um lar cheio de amor.
+      </p>
+    </div>
+
+    <div id="redes_footer">
+      <h3>Redes Sociais</h3>
+
+      <div id="icons_redes">
+        <a href="https://www.instagram.com/toca_dos_peludos/" target="_blank" rel="noopener noreferrer">
+          <img src="img/icons8-instagram-50.svg" alt="Instagram">
+        </a>
+
+        <a href="https://www.tiktok.com/@toca_dos_peludos" target="_blank" rel="noopener noreferrer">
+          <img src="img/icons8-tiktok-50.svg" alt="TikTok">
+        </a>
+
+        <a href="#" target="_blank" rel="noopener noreferrer">
+          <img src="img/icons8-whatsapp-50.svg" alt="WhatsApp">
+        </a>
+
+        <a href="https://www.facebook.com/tocadospeludos/?locale=pt_BR" target="_blank" rel="noopener noreferrer">
+          <img src="img/icons8-facebook-50.svg" alt="Facebook">
+        </a>
+      </div>
+    </div>
+    <div id="links_footer">
+      <h3>Links Rápidos</h3>
+      <a href="pets.html">Adotar um Pet</a>
+      <a href="#ajude">Fazer Doação</a>
+      <a href="#">Ser voluntário</a>
+      <a href="eventos.html">Eventos</a>
+    </div>
+
+    <div id="contato_footer">
+      <h3>Contato</h3>
+      <a href="mailto:contato@tocadospeludos.org">contato@tocadospeludos.org</a>
+      <a href="tel:+5511999999999">(11) 99999 - 9999</a>
+      <span>São Paulo, SP</span>
+    </div>
+  </div>
+
+  <div id="copyright">
+    <p>© 2026 Toca dos Peludos. Feito com S2 para os animais.</p>
+  </div>
+</footer>
 
     <script src="js/apiScript.js"></script>
-<<<<<<< HEAD
     <script src="js/script.js"></script>
     <script src="js/painelADMScript.js"></script>
-=======
     <script src="js/index.js"></script>
->>>>>>> 9d171102e05bb256be899788175764d777870acb
 </body>
 
 </html>

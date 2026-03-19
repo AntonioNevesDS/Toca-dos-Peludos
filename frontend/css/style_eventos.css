@@ -67,6 +67,13 @@ body {
 .links a:hover {
   color: var(--accent);
 }
+.links a.active {
+  color: var(--accent);
+}
+
+.links a.active::after {
+  width: 100%;
+}
 .btn-accent {
   background: var(--accent);
   color: #fff;
@@ -243,82 +250,197 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-/*rodape*/
-.footer #itens_footer{
-  background-color: #7956a6;
-  text-align: center;
-  padding: 20px 300px;
-  color: #555;
-  display: flex ;
+/* Rodapé */
+.footer {
+  width: 100%;
+  background-color: var(--accent);
+}
+
+/* Container principal */
+.footer #itens_footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 5% 15px;
+
+  display: grid;
+  grid-template-columns: repeat(4, auto);
   justify-content: space-between;
-  gap: 20px;
+  align-items: start;
+  gap: 40px;
 }
 
-footer h3 {
-  color: #ffcc33;
-}
-
-footer a{
-  color: white;
-  text-decoration: none;
-  font-size: 12px;
-  
-}
-
-.footer #contato_footer {
+/* Todas as colunas */
+#logo_footer,
+#redes_footer,
+#links_footer,
+#contato_footer {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-width: 200px;
-}
-.footer #links_footer {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 200px;
+  gap: 10px;
 }
 
+/* Logo / texto */
 #logo_footer {
-  width: 400px;
-}
-
-#logo_footer p{
-  color: #ffffff;
-  font-size: 12px;
-}
-
-#logo_footer h3 {
+  max-width: 260px;
+  align-items: center;
   text-align: center;
 }
+
+#img_logo_footer {
+  width: 70px;
+  height: auto;
+}
+
+#logo_footer p {
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.4;
+  max-width: 260px;
+}
+/* Títulos */
+.footer h3 {
+  color: var(--primary);
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+/* Links */
+.footer a,
+.footer span {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ===================== */
+/*   REDES SOCIAIS       */
+/* ===================== */
+
+#redes_footer {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+#icons_redes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+#icons_redes a {
+  background: rgba(255,255,255,0.15);
+  padding: 6px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+#icons_redes a:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+#icons_redes img {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
 
 #copyright {
-  background-color: #ffcc33;
-  margin: 0;
-  padding: 3px 5px;
+  background-color: var(--primary);
   text-align: center;
+  padding: 8px;
 }
 
-@media (max-width: 768px) {
-  .nav-content {
-    flex-wrap: wrap;
-    gap: 10px;
+#copyright p {
+  font-size: 13px;
+  color: #222;
+  font-weight: 500;
+}
+
+
+@media (max-width: 900px) {
+  .footer #itens_footer {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
   }
-  .links {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+
+  #logo_footer {
+    grid-column: 1 / -1;
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  #logo_footer p {
+    max-width: 520px;
+  }
+
+  #redes_footer,
+  #links_footer,
+  #contato_footer {
+    align-items: center;
+    text-align: center;
+  }
+
+  #icons_redes {
     justify-content: center;
   }
+}
+
+@media (max-width: 600px) {
   .footer #itens_footer {
-    padding: 20px;
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 14px 20px 12px;
+    gap: 16px;
+  }
+
+  #logo_footer,
+  #redes_footer,
+  #links_footer,
+  #contato_footer {
+    max-width: 100%;
     align-items: center;
+    text-align: center;
   }
-  #logo_footer {
-    width: 100%;
+
+  #logo_footer p {
+    max-width: 100%;
+    font-size: 13px;
   }
-  #area_eventos div {
-    padding: 0 16px;
+
+  .footer h3 {
+    font-size: 16px;
+  }
+
+  .footer a,
+  .footer span,
+  #copyright p {
+    font-size: 13px;
+  }
+
+  #img_logo_footer {
+    width: 90px;
+  }
+
+  #icons_redes {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  #icons_redes a img {
+    width: 24px;
+    height: 24px;
+  }
+
+  #copyright {
+    padding: 8px;
   }
 }
