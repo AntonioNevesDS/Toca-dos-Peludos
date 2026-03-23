@@ -13,7 +13,7 @@
     color: var(--text);
     background: var(--bg);
   }
-  /*cabecalho*/
+ /* Cabeçalho */
 .nav {
   background: var(--primary);
   color: #18212f;
@@ -67,6 +67,7 @@
 .links a:hover {
   color: var(--accent);
 }
+
 .links a.active {
   color: var(--accent);
 }
@@ -96,11 +97,6 @@
 }
 
 
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f3f2f7;
-}
 
 .container {
     display: flex;
@@ -294,13 +290,15 @@ textarea {
 #copyright {
   background-color: var(--primary);
   text-align: center;
-  padding: 8px;
+  padding: 8px 0; 
 }
 
 #copyright p {
+  margin: 0;              /* REMOVE o espaço invisível */
   font-size: 13px;
   color: #222;
   font-weight: 500;
+  line-height: 1.2;       /* deixa mais compacto */
 }
 
 

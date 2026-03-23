@@ -105,7 +105,7 @@ body {
 }
 
 .cards_primary {
-  background-color: #D9D9D9;
+  background-color: #fff;
   width: 45%;
   max-width: 500px; 
   border-radius: 12px; 
@@ -114,7 +114,8 @@ body {
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  justify-content: space-between;
+   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06); 
 }
 
 .cards_primary h2 {
@@ -355,13 +356,15 @@ body {
 #copyright {
   background-color: var(--primary);
   text-align: center;
-  padding: 8px;
+  padding: 8px 0; 
 }
 
 #copyright p {
+  margin: 0;              /* REMOVE o espaço invisível */
   font-size: 13px;
   color: #222;
   font-weight: 500;
+  line-height: 1.2;       /* deixa mais compacto */
 }
 
 

@@ -15,7 +15,7 @@
     <div class="nav-content">
       <div class="brand">
         <a href="index.html">
-          <img src="img/logo-tdp.jpg"Logo>
+          <img src="img/logo-tdp.jpg" alt="Logo Toca dos Peludos">
         </a>
         <span>Toca dos Peludos</span>
       </div>
@@ -37,22 +37,28 @@
   </header>
 
   <main class="container-principal">
-    <section class="secao-filtro"> 
-      <input type="text" id="inputBusca" placeholder="Pesquisar por nome..." class="campo-busca">
-        <h1>Encontre seu novo melhor amigo</h1>
-        <div class="filtro-container">
-       
-            <select id="filtroTipo">
-                <option value="todos">Todos os Pets</option>
-                <option value="Cachorro">Cachorros</option>
-                <option value="Gato">Gatos</option>
-            </select>
-            <button id="btnFiltrar" class="btn-filtrar">Filtrar</button>
-        </div>
+    <section class="secao-filtro">
+      <h1>Encontre seu novo melhor amigo</h1>
+
+      <div class="filtro-container">
+        <input
+          type="text"
+          id="inputBusca"
+          placeholder="Pesquisar por nome..."
+          class="campo-busca"
+        >
+
+        <select id="filtroTipo" class="select-filtro">
+          <option value="todos">Todos os Pets</option>
+          <option value="Cachorro">Cachorros</option>
+          <option value="Gato">Gatos</option>
+        </select>
+
+        <button id="btnFiltrar" class="btn-filtrar">Filtrar</button>
+      </div>
     </section>
 
-    <div id="listaPets" class="grid-pets">
-        </div>
+    <div id="listaPets" class="grid-pets"></div>
   </main>
 
 <footer class="footer">

@@ -6,6 +6,9 @@
   --text: #333333;
   --radius: 12px;
 }
+html {
+  overflow-y: scroll;
+}
 * { box-sizing: border-box; }
 body {
   margin: 0;
@@ -196,19 +199,19 @@ body {
   display: block;
 }
 
-
 #copyright {
   background-color: var(--primary);
   text-align: center;
-  padding: 8px;
+  padding: 8px 0; 
 }
 
 #copyright p {
+  margin: 0;              /* REMOVE o espaço invisível */
   font-size: 13px;
   color: #222;
   font-weight: 500;
+  line-height: 1.2;       /* deixa mais compacto */
 }
-
 
 @media (max-width: 900px) {
   .footer #itens_footer {
