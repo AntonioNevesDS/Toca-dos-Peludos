@@ -84,7 +84,9 @@
   cursor: pointer;
   font-weight: 700;
 }
-.btn-accent:hover { transform: scale(1.05); }
+.btn-accent:hover { 
+  transform: scale(1.05); 
+}
 
 .actions {
   display: flex;
