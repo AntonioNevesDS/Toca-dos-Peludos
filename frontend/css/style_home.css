@@ -786,3 +786,102 @@ input::placeholder {
 .popup_form_pix h3{
   color: #333333;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- FUNDO ESCURO DO POP-UP DO PIX --- */
+.modalPixFundo {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+}
+
+
+/* CAIXA CENTRALIZADA */
+.modalPixConteudo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+/* ESTILOS DO FORMULÁRIO DO POP-UP */
+.popup_form_pix {
+  background: #ffffff; 
+  padding: 40px 30px;
+  width: 380px;
+  border-radius: 16px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  text-align: center;
+  z-index: 2;
+  margin-top: 108px;
+  position: relative;
+}
+
+.popup_form_pix h3{
+  color: #333; 
+  margin-bottom: 25px;
+  font-size: 25px;
+  font-weight: 0px;
+}
+
+
+/* BOTÃO DE GERAR QR CODE */
+.btn-pix {
+  width: 100%;
+  padding: 12px 0;
+  background: linear-gradient(90deg, var(--secondary), #7956a6);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 25px;
+}
+
+.btn_login:hover {
+  background: linear-gradient(90deg, #7956a6, #6A1B9A);
+  transform: translateY(-2px);
+}
+
+/* BOTÃO FECHAR (O X) */
+.fecharModalDoacaoDez {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+  
+}
+
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .popup_form_pix {
+    width: 90vw;
+  }
+}
+
+
+

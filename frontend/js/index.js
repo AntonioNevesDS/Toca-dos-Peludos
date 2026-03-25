@@ -253,6 +253,8 @@ const btnNext = document.getElementById('nextSlide')
       setCurrentDot();
    }
 
+// Gerar QRcode de valor qualquer
+
    function abrirModalPix() {
     document.getElementById('popupPix').style.display = 'block';
   }
@@ -261,7 +263,6 @@ const btnNext = document.getElementById('nextSlide')
     document.getElementById('popupPix').style.display = 'none';
   }
  
-  // Gerar QRcode de valor qualquer
   function calcularCRC16(payload) {
     let resultado = 0xFFFF;
     let polinomio = 0x1021;
@@ -320,4 +321,54 @@ const btnNext = document.getElementById('nextSlide')
         width: 200,
         height: 200
     });
+}
+
+//Gerar QRcode de 10 reais
+
+function enviarDoacaoDezReais(){
+  document.getElementById('popupPixDez').style.display = 'block';
+};
+
+function fecharModalDoacaoDez(){
+  document.getElementById('popupPixDez').style.display = 'none'
+}
+
+function gerarPixDezReais() {
+  let valor = 10.00;  // Valor fixo de R$10,00
+
+  const chavePix = "48712800805";
+  const nome = "TIAGO OLIVEIRA DOS SANTOS";
+  const cidade = "SAO PAULO";
+
+  const formatField = (id, value) => {
+    let size = String(value.length).padStart(2, '0');
+    return id + size + value;
+  };
+
+  const merchantAccountInfo = formatField("26",
+    formatField("00", "br.gov.bcb.pix") + formatField("01", chavePix)
+  );
+
+  const additionalDataFieldTemplate = formatField("62", formatField("05", "doacao-20260323-001"));
+
+  let payloadBase = "000201" +
+                    merchantAccountInfo +
+                    formatField("52", "0000") +
+                    formatField("53", "986") +
+                    formatField("54", valor.toFixed(2)) +  // Aqui usamos o valor de 10.00 formatado
+                    formatField("58", "BR") +
+                    formatField("59", nome) +
+                    formatField("60", cidade) +
+                    additionalDataFieldTemplate +
+                    "6304";
+
+  const payloadFinal = payloadBase + calcularCRC16(payloadBase); // Calculando o CRC16 para o payload
+
+  document.getElementById('qrcodeDez').innerHTML = ""; // Limpa o conteúdo anterior do QR Code
+
+  new QRCode(document.getElementById('qrcodeDez'), {
+    text: payloadFinal,
+    width: 200,
+    height: 200
+  });
 }

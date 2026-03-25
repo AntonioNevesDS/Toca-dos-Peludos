@@ -117,8 +117,25 @@
             <div class="doacao-grid">
                 <div class="doacao-card">
                     <span>Doe R$10,00</span>
-                    <button onclick="enviarDoacao(10)">Doar</button>
+                    <button onclick="enviarDoacaoDezReais()">Doar</button>
                 </div>
+
+                <div id="popupPixDez" class="modalPixFundo">
+                  
+                  <div class="modalPixConteudo">
+
+                    <span class="fecharModalPix" onclick="fecharModalDoacaoDez()">&times;</span>
+
+                    <div class="popup_form_pix">
+                      <h3>Doe R$10,00</h3>
+                      <button class="btn-pix" onclick="gerarPixDezReais()">Gerar QR Code</button>
+                      <div id="qrcodeDez" style="margin-top:20px; display:flex; justify-content:center;"></div>
+                    </div>
+
+                  </div>
+
+                </div>
+
                 <div class="doacao-card">
                     <span>Doe R$20,00</span>
                     <button onclick="enviarDoacao(20)">Doar</button>
