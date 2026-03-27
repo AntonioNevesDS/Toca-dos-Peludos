@@ -1,23 +1,39 @@
-  // MODAL SENHA
+ function travarScroll() {
+  document.body.classList.add("no-scroll");
+}
+
+function liberarScroll() {
+  document.body.classList.remove("no-scroll");
+}
+ 
+ // MODAL SENHA
 function abrirRecuperação() {
   document.getElementById("modalSenha").style.display = "block";
   document.getElementById("telaEmail").style.display = "block";
   document.getElementById("telaCodigo").style.display = "none";
   document.getElementById("telaRedefinirSenha").style.display = "none";
+
+  travarScroll();
 }
 
 function fecharRecuperacao() {
   document.getElementById("modalSenha").style.display = "none";
+
+  liberarScroll();
 }
 
 function irCodigo() {
   document.getElementById("telaEmail").style.display = "none";
   document.getElementById("telaCodigo").style.display = "block";
+
+  travarScroll();
 }
 
 function irRedefinirSenha() {
   document.getElementById("telaCodigo").style.display = "none";
   document.getElementById("telaRedefinirSenha").style.display = "block";
+
+  travarScroll();
 }
 
 // MODAL EMAIL
@@ -26,20 +42,28 @@ function abrirTelefone() {
   document.getElementById("telaTelefoneCadastrado").style.display = "block";
   document.getElementById("telaCodigoSms").style.display = "none";
   document.getElementById("telaRedefinirEmail").style.display = "none";
+  
+  travarScroll();
 }
 
 function fecharTelefone() {
   document.getElementById("modalEmail").style.display = "none";
+
+  liberarScroll();
 }
 
 function irCodigoSms() {
   document.getElementById("telaTelefoneCadastrado").style.display = "none";
   document.getElementById("telaCodigoSms").style.display = "block";
+
+  travarScroll();
 }
 
 function irRedefinirEmail() {
   document.getElementById("telaCodigoSms").style.display = "none";
   document.getElementById("telaRedefinirEmail").style.display = "block";
+
+  travarScroll();
 }
 
 function irCodigo(){
@@ -53,6 +77,7 @@ function irCodigo(){
   document.getElementById("telaEmail").style.display = "none";
   document.getElementById("telaCodigo").style.display = "block";
 
+  travarScroll();
 }
 
 function irCodigoSms(){
@@ -66,4 +91,5 @@ function irCodigoSms(){
   document.getElementById("telaTelefoneCadastrado").style.display = "none";
   document.getElementById("telaCodigoSms").style.display = "block";
 
+  travarScroll();
 }

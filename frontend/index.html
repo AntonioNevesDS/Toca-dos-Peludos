@@ -125,9 +125,9 @@
                   
                   <div class="modalPixConteudo">
 
-                    <span class="fecharModalPix" onclick="fecharModalDoacaoDez()">&times;</span>
-
                     <div class="popup_form_pix">
+
+                      <span class="fecharModalPix" onclick="fecharModalDoacaoDez()">&times;</span>
                       <h3>Doe R$10,00</h3>
                       <button class="btn-pix" onclick="gerarPixDezReais()">Gerar QR Code</button>
                       <div id="qrcodeDez" style="margin-top:20px; display:flex; justify-content:center;"></div>
@@ -139,12 +139,46 @@
 
                 <div class="doacao-card">
                     <span>Doe R$20,00</span>
-                    <button onclick="enviarDoacao(20)">Doar</button>
+                    <button onclick="enviarDoacaoVinteReais()">Doar</button>
                 </div>
+
+                <div id="popupPixVinte" class="modalPixFundo">
+                  
+                  <div class="modalPixConteudo">
+
+                    <div class="popup_form_pix">
+
+                      <span class="fecharModalPix" onclick="fecharModalDoacaoVinte()">&times;</span>
+                      <h3>Doe R$20,00</h3>
+                      <button class="btn-pix" onclick="gerarPixVinteReais()">Gerar QR Code</button>
+                      <div id="qrcodeVinte" style="margin-top:20px; display:flex; justify-content:center;"></div>
+                    </div>
+
+                  </div>
+
+                </div>
+
                 <div class="doacao-card">
                     <span>Doe R$50,00</span>
-                    <button onclick="enviarDoacao(50)">Doar</button>
+                    <button onclick="enviarDoacaoCinquentaReais()">Doar</button>
                 </div>
+
+                <div id="popupPixCinquenta" class="modalPixFundo">
+                  
+                  <div class="modalPixConteudo">
+
+                    <div class="popup_form_pix">
+
+                      <span class="fecharModalPix" onclick="fecharModalDoacaoCinquenta()">&times;</span>
+                      <h3>Doe R$50,00</h3>
+                      <button class="btn-pix" onclick="gerarPixCinquentaReais()">Gerar QR Code</button>
+                      <div id="qrcodeCinquenta" style="margin-top:20px; display:flex; justify-content:center;"></div>
+                    </div>
+
+                  </div>
+
+                </div>
+
                 <div class="doacao-card">
                   <span>Doar via PIX</span>
                   <button onclick="abrirModalPix()">Doar</button>
@@ -196,7 +230,7 @@
   </section>
 
     <section class="parceiros">
-        <h2>Nossas ONGs Parceiras</h2>
+        <h2 style="margin-bottom: 15px;">Nossas ONGs Parceiras</h2>
 
         <div class="grid-parceiros">
             <div class="logo-ong"><img src="img/logo-teste.png" alt=""></div>

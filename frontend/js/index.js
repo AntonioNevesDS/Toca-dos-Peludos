@@ -257,10 +257,12 @@ const btnNext = document.getElementById('nextSlide')
 
    function abrirModalPix() {
     document.getElementById('popupPix').style.display = 'block';
+document.body.classList.add("no-scroll");
   }
  
   function fecharModalDoacao() {
     document.getElementById('popupPix').style.display = 'none';
+document.body.classList.remove("no-scroll");
   }
  
   function calcularCRC16(payload) {
@@ -327,10 +329,12 @@ const btnNext = document.getElementById('nextSlide')
 
 function enviarDoacaoDezReais(){
   document.getElementById('popupPixDez').style.display = 'block';
+document.body.classList.add("no-scroll");
 };
 
 function fecharModalDoacaoDez(){
   document.getElementById('popupPixDez').style.display = 'none'
+document.body.classList.remove("no-scroll");
 }
 
 function gerarPixDezReais() {
@@ -367,6 +371,111 @@ function gerarPixDezReais() {
   document.getElementById('qrcodeDez').innerHTML = ""; // Limpa o conteúdo anterior do QR Code
 
   new QRCode(document.getElementById('qrcodeDez'), {
+    text: payloadFinal,
+    width: 200,
+    height: 200
+  });
+}
+
+
+//Gerar QRcode de 20 reais
+
+function enviarDoacaoVinteReais(){
+  document.getElementById('popupPixVinte').style.display = 'block';
+document.body.classList.add("no-scroll");
+};
+
+function fecharModalDoacaoVinte(){
+  document.getElementById('popupPixVinte').style.display = 'none'
+document.body.classList.remove("no-scroll");  
+}
+
+function gerarPixVinteReais() {
+  let valor = 20.00;  // Valor fixo de R$20,00
+
+  const chavePix = "48712800805";
+  const nome = "TIAGO OLIVEIRA DOS SANTOS";
+  const cidade = "SAO PAULO";
+
+  const formatField = (id, value) => {
+    let size = String(value.length).padStart(2, '0');
+    return id + size + value;
+  };
+
+  const merchantAccountInfo = formatField("26",
+    formatField("00", "br.gov.bcb.pix") + formatField("01", chavePix)
+  );
+
+  const additionalDataFieldTemplate = formatField("62", formatField("05", "doacao-20260323-001"));
+
+  let payloadBase = "000201" +
+                    merchantAccountInfo +
+                    formatField("52", "0000") +
+                    formatField("53", "986") +
+                    formatField("54", valor.toFixed(2)) +  // Aqui usamos o valor de 20.00 formatado
+                    formatField("58", "BR") +
+                    formatField("59", nome) +
+                    formatField("60", cidade) +
+                    additionalDataFieldTemplate +
+                    "6304";
+
+  const payloadFinal = payloadBase + calcularCRC16(payloadBase); // Calculando o CRC16 para o payload
+
+  document.getElementById('qrcodeVinte').innerHTML = ""; // Limpa o conteúdo anterior do QR Code
+
+  new QRCode(document.getElementById('qrcodeVinte'), {
+    text: payloadFinal,
+    width: 200,
+    height: 200
+  });
+}
+
+//Gerar QRcode de 50 reais
+
+function enviarDoacaoCinquentaReais(){
+  document.getElementById('popupPixCinquenta').style.display = 'block';
+document.body.classList.add("no-scroll");
+};
+
+function fecharModalDoacaoCinquenta(){
+  document.getElementById('popupPixCinquenta').style.display = 'none'
+document.body.classList.remove("no-scroll");
+}
+
+function gerarPixCinquentaReais() {
+  let valor = 50.00;  // Valor fixo de R$50,00
+
+  const chavePix = "48712800805";
+  const nome = "TIAGO OLIVEIRA DOS SANTOS";
+  const cidade = "SAO PAULO";
+
+  const formatField = (id, value) => {
+    let size = String(value.length).padStart(2, '0');
+    return id + size + value;
+  };
+
+  const merchantAccountInfo = formatField("26",
+    formatField("00", "br.gov.bcb.pix") + formatField("01", chavePix)
+  );
+
+  const additionalDataFieldTemplate = formatField("62", formatField("05", "doacao-20260323-001"));
+
+  let payloadBase = "000201" +
+                    merchantAccountInfo +
+                    formatField("52", "0000") +
+                    formatField("53", "986") +
+                    formatField("54", valor.toFixed(2)) +  // Aqui usamos o valor de 50.00 formatado
+                    formatField("58", "BR") +
+                    formatField("59", nome) +
+                    formatField("60", cidade) +
+                    additionalDataFieldTemplate +
+                    "6304";
+
+  const payloadFinal = payloadBase + calcularCRC16(payloadBase); // Calculando o CRC16 para o payload
+
+  document.getElementById('qrcodeCinquenta').innerHTML = ""; // Limpa o conteúdo anterior do QR Code
+
+  new QRCode(document.getElementById('qrcodeCinquenta'), {
     text: payloadFinal,
     width: 200,
     height: 200

@@ -868,13 +868,13 @@ input::placeholder {
   margin-top: 25px;
 }
 
-.btn_login:hover {
+.btn-login:hover {
   background: linear-gradient(90deg, #7956a6, #6A1B9A);
   transform: translateY(-2px);
 }
 
 /* BOTÃO FECHAR (O X) */
-.fecharModalDoacaoDez {
+.fecharModalPix {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -882,7 +882,7 @@ input::placeholder {
   font-weight: bold;
   cursor: pointer;
   color: #333;
-  
+  z-index: 999;
 }
 
 
@@ -893,5 +893,10 @@ input::placeholder {
   }
 }
 
+.no-scroll {
+  overflow: hidden;
+  height: 100%;
+  touch-action: none;
+}
 
 
