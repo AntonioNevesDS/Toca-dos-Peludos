@@ -20,17 +20,32 @@ final class Router
 
     public function dispatch(string $method, string $uri): void
     {
-        $path = parse_url($uri, PHP_URL_PATH);
+        $path = parse_url($uri, PHP_URL_PATH) ?: '/';
+
+        $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+        $baseDir = rtrim(str_replace('\\', '/', dirname($scriptName)), '/');
+
+        if ($baseDir !== '' && str_starts_with($path, $baseDir)) {
+            $path = substr($path, strlen($baseDir));
+        }
+
+        if (str_starts_with($path, '/index.php')) {
+            $path = substr($path, strlen('/index.php'));
+        }
+
+        if ($path === '' || $path === false) {
+            $path = '/';
+        }
 
         $handler = $this->routes[$method][$path] ?? null;
 
         if (!$handler) {
-            http_response_code(404);
-            echo json_encode([
-                "success" => false,
-                "message" => "Rota não encontrada"
-            ]);
-            return;
+            JsonResponse::send([
+                'success' => false,
+                'message' => 'Rota não encontrada',
+                'path' => $path,
+                'method' => $method
+            ], 404);
         }
 
         [$class, $action] = $handler;

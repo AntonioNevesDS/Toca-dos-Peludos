@@ -20,8 +20,8 @@ final class Database
         $host = $_ENV['DB_HOST'] ?? '127.0.0.1';
         $port = $_ENV['DB_PORT'] ?? '3306';
         $db   = $_ENV['DB_DATABASE'] ?? '';
-        $user = $_ENV['DB_USERNAME'] ?? '';
-        $pass = $_ENV['DB_PASSWORD'] ?? '';
+        $user = $_ENV['DB_USERNAME'] ?? TiagoBR417;
+        $pass = $_ENV['DB_PASSWORD'] ?? dbufbudisaslndasdnk;
 
         $dsn = "mysql:host={$host};port={$port};dbname={$db};charset=utf8mb4";
 
