@@ -1,32 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Support;
 
-final class Request
+class Request
 {
-    public static function json(): array
+    public static function method(): string
     {
-        $raw = file_get_contents('php://input');
-
-        if (!$raw) {
-            return [];
-        }
-
-        $data = json_decode($raw, true);
-
-        return is_array($data) ? $data : [];
+        return $_SERVER['REQUEST_METHOD'] ?? 'GET';
     }
 
-    public static function bearerToken(): ?string
+    public static function requireMethod(string $expectedMethod): void
     {
-        $header = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+        if (self::method() !== strtoupper($expectedMethod)) {
+            JsonResponse::send(false, "Método não permitido. Use {$expectedMethod}.", null, 405);
+        }
+    }
 
-        if (preg_match('/Bearer\s+(.+)/i', $header, $matches)) {
-            return trim($matches[1]);
+    public static function json(): array
+    {
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        if (!is_array($input)) {
+            JsonResponse::send(false, "JSON inválido ou ausente", null, 400);
         }
 
-        return null;
+        return $input;
     }
 }

@@ -1,55 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Repositories;
 
 use App\Config\Database;
-use PDO;
+use mysqli;
 
-final class UserRepository
+class EventoRepository
 {
-    private PDO $pdo;
+    private mysqli $conn;
 
     public function __construct()
     {
-        $this->pdo = Database::connection();
+        $this->conn = Database::getConnection();
     }
 
-    public function findByEmail(string $email): ?array
+    public function all(): array
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE email = :email LIMIT 1');
-        $stmt->execute(['email' => $email]);
+        $sql = "SELECT * FROM eventos";
+        $result = $this->conn->query($sql);
 
-        $user = $stmt->fetch();
+        $eventos = [];
 
-        return $user ?: null;
-    }
+        while ($row = $result->fetch_assoc()) {
+            $eventos[] = $row;
+        }
 
-    public function findById(int $id): ?array
-    {
-        $stmt = $this->pdo->prepare(
-            'SELECT id, name, email, role, created_at FROM users WHERE id = :id LIMIT 1'
-        );
-        $stmt->execute(['id' => $id]);
-
-        $user = $stmt->fetch();
-
-        return $user ?: null;
-    }
-
-    public function create(string $name, string $email, string $passwordHash): int
-    {
-        $stmt = $this->pdo->prepare(
-            'INSERT INTO users (name, email, password_hash) VALUES (:name, :email, :password_hash)'
-        );
-
-        $stmt->execute([
-            'name' => $name,
-            'email' => $email,
-            'password_hash' => $passwordHash,
-        ]);
-
-        return (int) $this->pdo->lastInsertId();
+        return $eventos;
     }
 }
