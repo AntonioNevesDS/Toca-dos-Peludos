@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Aguarda o carregamento completo do HTML para rodar o script
 document.addEventListener("DOMContentLoaded", function() {
     const menuSanduiche = document.querySelector('.menu-sanduiche');
@@ -16,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   
   
-=======
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const eventoId = params.get("evento_id");
@@ -70,4 +68,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
->>>>>>> 47e002fc9bb3ea79abad500a33d59f0a4c6a8f30

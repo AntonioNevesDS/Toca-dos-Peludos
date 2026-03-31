@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Aguarda o carregamento completo do HTML para rodar o script
 document.addEventListener("DOMContentLoaded", function() {
   const menuSanduiche = document.querySelector('.menu-sanduiche');
@@ -30,12 +29,10 @@ const btnNext = document.getElementById('nextSlide')
    const { width: slideWidth } = window.getComputedStyle(slider)
    const { width: contentWidth } = window.getComputedStyle(content)
    const contentLength = content.children.length;
-=======
 document.addEventListener("DOMContentLoaded", () => {
   iniciarCarrossel();
   carregarEventos();
 });
->>>>>>> 47e002fc9bb3ea79abad500a33d59f0a4c6a8f30
 
 function iniciarCarrossel() {
   const btnNext = document.getElementById("nextSlide");
