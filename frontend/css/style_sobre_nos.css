@@ -39,8 +39,8 @@ body {
   height: 60px;
 }
 .logo {
-  border-radius: 12px; /* controla a curvatura */
-  object-fit: cover; /* mantém proporção da imagem */
+  border-radius: 12px; 
+  object-fit: cover; 
 }
 .brand {
   display: flex;
@@ -103,11 +103,10 @@ body {
   margin: 0; 
 }
 
-/* =========================================
-   MENU SANDUÍCHE (Invisível no Desktop)
-========================================= */
+/*Menu Sanduíche*/
+
 .nav-content {
-  position: relative; /* Segura o menu dropdown no lugar certo */
+  position: relative; 
 }
 
 
@@ -116,41 +115,35 @@ body {
   cursor: pointer;
   flex-direction: column;
   gap: 5px;
-  z-index: 1000; /* Garante que o clique funcione por cima de tudo */
+  z-index: 1000; 
 }
 
 
 .menu-sanduiche .linha {
   width: 30px;
   height: 4px;
-  background-color: #333; /* Cor dos tracinhos - mude se precisar */
+  background-color: #333; 
   border-radius: 5px;
   transition: all 0.3s ease;
 }
 
-
-/* =========================================
-   REGRAS PARA CELULAR (Até 600px)
-   ========================================= */
 @media screen and (max-width: 600px) {
-  /* Mostra o ícone do sanduíche */
+  
   .menu-sanduiche {
     display: flex;
   }
 
-
-  /* Transforma a barra de links em um menu que cai da tela */
   .nav .links {
-    display: none; /* Escondido por padrão */
+    display: none; 
     position: absolute;
-    top: 100%; /* Gruda logo abaixo do header */
+    top: 100%; 
     left: 0;
     width: 100%;
-    background-color: #7956a6; /* Fundo branco */
+    background-color: #7956a6; 
     flex-direction: column;
     align-items: center;
     padding: 20px 0;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1); /* Sombrinha para destacar */
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
     z-index: 999;
   }
 
@@ -183,8 +176,6 @@ body {
     color: #fff;
   }
 
-
-  /* A classe 'ativo' que o JavaScript vai ligar e desligar */
   .nav .links.ativo {
     display: flex !important;
   }
@@ -418,11 +409,11 @@ body {
 }
 
 #copyright p {
-  margin: 0;              /* REMOVE o espaço invisível */
+  margin: 0;              
   font-size: 13px;
   color: #222;
   font-weight: 500;
-  line-height: 1.2;       /* deixa mais compacto */
+  line-height: 1.2;       
 }
 
 @media (max-width: 900px) {

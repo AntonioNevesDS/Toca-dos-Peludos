@@ -1,13 +1,11 @@
-// Aguarda o carregamento completo do HTML para rodar o script
+//Menu Sanduíche
 document.addEventListener("DOMContentLoaded", function() {
     const menuSanduiche = document.querySelector('.menu-sanduiche');
     const navLinks = document.querySelector('.links');
-    const actionsBtn = document.querySelector('.btn-accent')
   
   
-    if (menuSanduiche && navLinks && actionsBtn ) {
+    if (menuSanduiche && navLinks) {
       menuSanduiche.addEventListener('click', () => {
-        // Liga e desliga a classe 'ativo' nos links
         navLinks.classList.toggle('ativo');
       });
     } else {
