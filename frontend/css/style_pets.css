@@ -49,8 +49,8 @@ body {
 }
 
 .logo {
-  border-radius: 12px; /* controla a curvatura */
-  object-fit: cover; /* mantém proporção da imagem */
+  border-radius: 12px; 
+  object-fit: cover; 
 }
 
 .brand {
@@ -128,13 +128,13 @@ body {
   cursor: pointer;
   flex-direction: column;
   gap: 5px;
-  z-index: 1000; /* Garante que o clique funcione por cima de tudo */
+  z-index: 1000; 
 }
 
 .menu-sanduiche .linha {
   width: 30px;
   height: 4px;
-  background-color: #333; /* Cor dos tracinhos - mude se precisar */
+  background-color: #333; 
   border-radius: 5px;
   transition: all 0.3s ease;
 }
@@ -143,23 +143,23 @@ body {
    REGRAS PARA CELULAR (Até 600px)
    ========================================= */
 @media screen and (max-width: 600px) {
-  /* Mostra o ícone do sanduíche */
+  
   .menu-sanduiche {
     display: flex;
   }
 
   /* Transforma a barra de links em um menu que cai da tela */
   .nav .links {
-    display: none; /* Escondido por padrão */
+    display: none; 
     position: absolute;
-    top: 100%; /* Gruda logo abaixo do header */
+    top: 100%; 
     left: 0;
     width: 100%;
-    background-color: #7956a6; /* Fundo branco */
+    background-color: #7956a6; 
     flex-direction: column;
     align-items: center;
     padding: 20px 0;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1); /* Sombrinha para destacar */
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1); 
     z-index: 999;
   }
 
@@ -302,15 +302,15 @@ body {
 #copyright {
   background-color: var(--primary);
   text-align: center;
-  padding: 8px 0; /* bem fino */
+  padding: 8px 0; 
 }
 
 #copyright p {
-  margin: 0;              /* REMOVE o espaço invisível */
+  margin: 0;             
   font-size: 13px;
   color: #222;
   font-weight: 500;
-  line-height: 1.2;       /* deixa mais compacto */
+  line-height: 1.2;    
 }
 
 @media (max-width: 900px) {
@@ -487,13 +487,6 @@ body {
   box-shadow: 0 8px 16px rgba(121, 86, 166, 0.25);
 }
 
-/* grid dos pets */
-.grid-pets {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-  padding: 0;
-}
 
 /* responsivo */
 @media (max-width: 768px) {
@@ -521,84 +514,90 @@ body {
   }
 }
 
-/*cards */
+/* ======================
+   GRID DE PETS
+====================== */
 .grid-pets {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
     padding: 40px 5%;
 }
 
+/* ======================
+   CARD
+====================== */
 .card-pet {
-    background: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
+    background: #ffffff;
+    border-radius: 18px;
     overflow: hidden;
-    transition: transform 0.3s ease;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     display: flex;
     flex-direction: column;
+    min-height: 460px;
 }
 
 .card-pet:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
 }
 
-.card-pet img {
+/* ======================
+   IMAGEM
+====================== */
+.card-pet-image-wrapper {
+    position: relative;
     width: 100%;
-    height: 250px;
+    height: 230px;
+    overflow: hidden;
+    background: #f1f1f1;
+}
+
+.card-pet-image-wrapper img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
 .card-pet-content {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .card-pet-content h3 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    color: #333;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem;
-    margin-bottom: 8px;
 }
 
-.card-pet-content p {
-    color: #777;
-    margin: 4px 0;
+/* TAGS */
+.pet-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
 }
 
-.link-ver-mais {
-    display: block;
-    margin-top: 15px;
-    color: #111;
-    font-weight: 700;
-    text-decoration: none;
+.pet-meta span {
+    background: #f3e9ff;
+    color: #6A1B9A;
+    padding: 6px 12px;
+    border-radius: 999px;
     font-size: 0.9rem;
-}
-
-/*filtro*/
-.filtro-secao {
-    padding: 20px 5%;
-    background: #f9f9f9;
-}
-
-.btn-filtrar {
-    background: #8854d0; 
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 8px;
-    cursor: pointer;
     font-weight: 600;
 }
 
-/*barra de busca*/
-.campo-busca {
-    padding: 10px 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    outline: none;
-    width: 250px;
-    font-family: 'Roboto', sans-serif;
-    transition: border-color 0.3s;
+/* TEXTOS */
+.pet-raca,
+.pet-local,
+.pet-descricao {
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 10px;
 }
 
 .campo-busca:focus {
