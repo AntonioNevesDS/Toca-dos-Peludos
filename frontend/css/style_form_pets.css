@@ -101,9 +101,7 @@
       margin: 0; 
     }
 
-    /* =========================================
-   MENU SANDUÍCHE (Invisível no Desktop)
-========================================= */
+    /*MENU SANDUÍCHE*/
 .nav-content {
   position: relative; /* Segura o menu dropdown no lugar certo */
 }

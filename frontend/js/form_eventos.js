@@ -2,9 +2,10 @@
 document.addEventListener("DOMContentLoaded", function() {
     const menuSanduiche = document.querySelector('.menu-sanduiche');
     const navLinks = document.querySelector('.links');
+    const actionsBtn = document.querySelector('.btn-accent')
   
   
-    if (menuSanduiche && navLinks) {
+    if (menuSanduiche && navLinks && actionsBtn ) {
       menuSanduiche.addEventListener('click', () => {
         // Liga e desliga a classe 'ativo' nos links
         navLinks.classList.toggle('ativo');
