@@ -1,22 +1,28 @@
 :root {
---primary: #ffcc33;
+  --primary: #ffcc33;
   --secondary: #6A1B9A;
   --accent: #7956a6;
   --bg: #F5F5F5;
   --text: #333333;
   --radius: 12px;
 }
+
 html {
   overflow-y: scroll;
 }
-* { box-sizing: border-box; }
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Roboto', system-ui, -apple-system, sans-serif;
   color: var(--text);
   background: var(--bg);
 }
-/*cabecalho*/
+
+/* Cabecalho */
 .nav {
   background: var(--primary);
   color: #18212f;
@@ -25,6 +31,7 @@ body {
   z-index: 20;
   border-radius: 0 0 12px 12px;
 }
+
 .nav-content {
   max-width: 1100px;
   margin: 0 auto;
@@ -33,15 +40,19 @@ body {
   align-items: center;
   gap: 20px;
   justify-content: space-between;
+  position: relative; /* Para o menu sanduíche */
 }
+
 .nav img {
   width: 60px;
   height: 60px;
 }
+
 .logo {
-  border-radius: 12px; /* controla a curvatura */
-  object-fit: cover; /* mantém proporção da imagem */
+  border-radius: 12px; 
+  object-fit: cover; 
 }
+
 .brand {
   display: flex;
   align-items: center;
@@ -49,6 +60,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
 }
+
 .links a {
   position: relative;
   color: #7956a6;
@@ -71,6 +83,7 @@ body {
 .links a:hover::after {
   width: 100%;
 }
+
 .links a.active {
   color: var(--accent);
 }
@@ -78,9 +91,11 @@ body {
 .links a.active::after {
   width: 100%;
 }
+
 .links a:hover {
   color: var(--accent);
 }
+
 .btn-accent {
   background: var(--accent);
   color: #fff;
@@ -90,7 +105,10 @@ body {
   cursor: pointer;
   font-weight: 700;
 }
-.btn-accent:hover { transform: scale(1.05); }
+
+.btn-accent:hover {
+  transform: scale(1.05);
+}
 
 .actions {
   display: flex;
@@ -105,54 +123,45 @@ body {
 /* =========================================
    MENU SANDUÍCHE (Invisível no Desktop)
 ========================================= */
-.nav-content {
-  position: relative; /* Segura o menu dropdown no lugar certo */
-}
-
-
 .menu-sanduiche {
   display: none;
   cursor: pointer;
   flex-direction: column;
   gap: 5px;
-  z-index: 1000; /* Garante que o clique funcione por cima de tudo */
+  z-index: 1000; 
 }
-
 
 .menu-sanduiche .linha {
   width: 30px;
   height: 4px;
-  background-color: #333; /* Cor dos tracinhos - mude se precisar */
+  background-color: #333; 
   border-radius: 5px;
   transition: all 0.3s ease;
 }
-
 
 /* =========================================
    REGRAS PARA CELULAR (Até 600px)
    ========================================= */
 @media screen and (max-width: 600px) {
-  /* Mostra o ícone do sanduíche */
+  
   .menu-sanduiche {
     display: flex;
   }
 
-
   /* Transforma a barra de links em um menu que cai da tela */
   .nav .links {
-    display: none; /* Escondido por padrão */
+    display: none; 
     position: absolute;
-    top: 100%; /* Gruda logo abaixo do header */
+    top: 100%; 
     left: 0;
     width: 100%;
-    background-color: #7956a6; /* Fundo branco */
+    background-color: #7956a6; 
     flex-direction: column;
     align-items: center;
     padding: 20px 0;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1); /* Sombrinha para destacar */
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1); 
     z-index: 999;
   }
-
 
   .nav .links a {
     margin: 15px 0;
@@ -182,15 +191,11 @@ body {
     color: #fff;
   }
 
-
   /* A classe 'ativo' que o JavaScript vai ligar e desligar */
   .nav .links.ativo {
     display: flex !important;
   }
 }
-
-
-
 
 /* Rodapé */
 .footer {
@@ -204,7 +209,6 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px 5% 15px;
-
   display: grid;
   grid-template-columns: repeat(4, auto);
   justify-content: space-between;
@@ -240,6 +244,7 @@ body {
   line-height: 1.4;
   max-width: 260px;
 }
+
 /* Títulos */
 .footer h3 {
   color: var(--primary);
@@ -294,21 +299,19 @@ body {
   display: block;
 }
 
-
 #copyright {
   background-color: var(--primary);
   text-align: center;
-  padding: 8px 0; /* bem fino */
+  padding: 8px 0; 
 }
 
 #copyright p {
-  margin: 0;              /* REMOVE o espaço invisível */
+  margin: 0;             
   font-size: 13px;
   color: #222;
   font-weight: 500;
-  line-height: 1.2;       /* deixa mais compacto */
+  line-height: 1.2;    
 }
-
 
 @media (max-width: 900px) {
   .footer #itens_footer {
@@ -420,7 +423,7 @@ body {
 .filtro-container {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 15px;
   flex-wrap: wrap;
 }
 
@@ -557,37 +560,6 @@ body {
     object-fit: cover;
 }
 
-/* ======================
-   BADGE
-====================== */
-.badge-status {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: capitalize;
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-.status-disponivel {
-    background: #2e7d32;
-}
-
-.status-adotado {
-    background: #c62828;
-}
-
-.status-indisponivel {
-    background: #616161;
-}
-
-/* ======================
-   CONTEÚDO
-====================== */
 .card-pet-content {
     padding: 20px;
     display: flex;
@@ -628,25 +600,6 @@ body {
     margin-bottom: 10px;
 }
 
-.pet-descricao {
-    flex-grow: 1;
+.campo-busca:focus {
+    border-color: #8854d0; /* Roxo padrão do seu site */
 }
-
-/* BOTÃO */
-.btn-ver-mais {
-    display: inline-block;
-    align-self: flex-start;
-    background: var(--secondary);
-    color: #fff;
-    text-decoration: none;
-    padding: 12px 18px;
-    border-radius: 10px;
-    font-weight: 700;
-    transition: 0.25s ease;
-}
-
-.btn-ver-mais:hover {
-    background: var(--accent);
-    transform: scale(1.03);
-}
-/*filtro*/

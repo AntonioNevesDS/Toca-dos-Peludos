@@ -1,4 +1,4 @@
- :root {
+:root {
   --primary: #ffcc33;
   --secondary: #6A1B9A;
   --accent: #7956a6;
@@ -6,14 +6,19 @@
   --text: #333333;
   --radius: 12px;
 }
-* { box-sizing: border-box; }
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Roboto', system-ui, -apple-system, sans-serif;
   color: var(--text);
   background: var(--bg);
 }
-/*cabecalho*/
+
+/* Cabeçalho*/
 .nav {
   background: var(--primary);
   color: #18212f;
@@ -22,6 +27,7 @@ body {
   z-index: 20;
   border-radius: 0 0 12px 12px;
 }
+
 .nav-content {
   max-width: 1100px;
   margin: 0 auto;
@@ -31,14 +37,17 @@ body {
   gap: 20px;
   justify-content: space-between;
 }
+
 .nav img {
   width: 60px;
   height: 60px;
 }
+
 .logo {
   border-radius: 12px; /* controla a curvatura */
   object-fit: cover; /* mantém proporção da imagem */
 }
+
 .brand {
   display: flex;
   align-items: center;
@@ -46,6 +55,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
 }
+
 .links a {
   position: relative;
   color: #7956a6;
@@ -72,6 +82,7 @@ body {
 .links a:hover {
   color: var(--accent);
 }
+
 .btn-accent {
   background: var(--accent);
   color: #fff;
@@ -81,7 +92,10 @@ body {
   cursor: pointer;
   font-weight: 700;
 }
-.btn-accent:hover { transform: scale(1.05); }
+
+.btn-accent:hover {
+  transform: scale(1.05);
+}
 
 .actions {
   display: flex;
@@ -93,16 +107,12 @@ body {
   margin: 0; 
 }
 
-
-
-
-/* =========================================
-   MENU SANDUÍCHE (Invisível no Desktop)
-========================================= */
+/* =====================================
+  MENU SANDUÍCHE (Invisível no Desktop)
+===================================== */
 .nav-content {
   position: relative; /* Segura o menu dropdown no lugar certo */
 }
-
 
 .menu-sanduiche {
   display: none;
@@ -112,7 +122,6 @@ body {
   z-index: 1000; /* Garante que o clique funcione por cima de tudo */
 }
 
-
 .menu-sanduiche .linha {
   width: 30px;
   height: 4px;
@@ -121,16 +130,14 @@ body {
   transition: all 0.3s ease;
 }
 
-
-/* =========================================
-   REGRAS PARA CELULAR (Até 600px)
-   ========================================= */
+/* ===============================
+  REGRAS PARA CELULAR (Até 600px)
+=============================== */
 @media screen and (max-width: 600px) {
   /* Mostra o ícone do sanduíche */
   .menu-sanduiche {
     display: flex;
   }
-
 
   /* Transforma a barra de links em um menu que cai da tela */
   .nav .links {
@@ -146,7 +153,6 @@ body {
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1); /* Sombrinha para destacar */
     z-index: 999;
   }
-
 
   .nav .links a {
     margin: 15px 0;
@@ -176,26 +182,20 @@ body {
     color: #fff;
   }
 
-
   /* A classe 'ativo' que o JavaScript vai ligar e desligar */
   .nav .links.ativo {
     display: flex !important;
   }
 }
 
-
-
-
-
-
-.login_form h3{
+.login_form h3 {
   color: black; 
   margin-bottom: 25px;
   font-size: 25px;
   font-weight: none;
 }
 
-.login_container{
+.login_container {
   position: relative; 
   min-height: calc(100vh - 70px);
   display: flex;
@@ -232,7 +232,6 @@ body {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
 
 .login_form {
   background: #ffffff; 
@@ -276,9 +275,15 @@ input {
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); 
 }
 
-input:focus{
+<<<<<<< HEAD
+input:focus {
   border-color: #7956a6;               /* roxo de destaque */
   box-shadow: 0 0 8px rgba(121,86,166,0.3); /* glow suave */
+=======
+input:focus{
+  border-color: #7956a6;             
+  box-shadow: 0 0 8px rgba(121,86,166,0.3); 
+>>>>>>> c220ed41920b5a47cb90ff69c811dd7296239796
   background-color: #fdfdfd;
 }
 
@@ -292,228 +297,22 @@ input::placeholder {
   font-size: 12px;
 }
 
-.login_form a:hover{
+.login_form a:hover {
   transform: translateY(-2px);
 }
 
-.btn-email-cadastro{
+.btn-email-cadastro {
   margin-right: 15px;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-:root {
-    --primary: #FFCC00;
-    --secondary: #6A1B9A;
-    --accent: #7956a6;
-    --bg: #F5F5F5;
-    --text: #333333;
-    --radius: 12px;
-  }
-  * { box-sizing: border-box; }
-
-  /*rodape*/
-/* Rodapé */
-.footer {
-  width: 100%;
-  background-color: var(--accent);
-  border-radius: 12px 12px 0 0;
-}
-
-/* Container principal */
-.footer #itens_footer {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px 5% 15px;
-
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  justify-content: space-between;
-  align-items: start;
-  gap: 40px;
-}
-
-/* Todas as colunas */
-#logo_footer,
-#redes_footer,
-#links_footer,
-#contato_footer {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* Logo / texto */
-#logo_footer {
-  max-width: 260px;
-  align-items: center;
-  text-align: center;
-}
-
-#img_logo_footer {
-  width: 70px;
-  height: auto;
-}
-
-#logo_footer p {
-  color: #fff;
-  font-size: 13px;
-  line-height: 1.4;
-  max-width: 260px;
-}
-/* Títulos */
-.footer h3 {
-  color: var(--primary);
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-/* Links */
-.footer a,
-.footer span {
-  color: #fff;
-  font-size: 14px;
-  text-decoration: none;
-}
-
-.footer a:hover {
-  text-decoration: underline;
-}
-
-/* ===================== */
-/*   REDES SOCIAIS       */
-/* ===================== */
-
-#redes_footer {
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-}
-
-#icons_redes {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 16px;
-}
-
-#icons_redes a {
-  background: rgba(255,255,255,0.15);
-  padding: 6px;
-  border-radius: 8px;
-  transition: 0.3s;
-}
-
-#icons_redes a:hover {
-  background: rgba(255,255,255,0.3);
-}
-
-#icons_redes img {
-  width: 26px;
-  height: 26px;
-  display: block;
-}
-
-
-#copyright {
-  background-color: var(--primary);
-  text-align: center;
-  padding: 8px 0; 
-}
-
-#copyright p {
-  margin: 0;              /* REMOVE o espaço invisível */
-  font-size: 13px;
-  color: #222;
-  font-weight: 500;
-  line-height: 1.2;       /* deixa mais compacto */
-}
-
-
-@media (max-width: 900px) {
-  .footer #itens_footer {
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-  }
-
-  #logo_footer {
-    grid-column: 1 / -1;
-    max-width: 100%;
-    align-items: center;
-    text-align: center;
-  }
-
-  #logo_footer p {
-    max-width: 520px;
-  }
-
-  #redes_footer,
-  #links_footer,
-  #contato_footer {
-    align-items: center;
-    text-align: center;
-  }
-
-  #icons_redes {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 600px) {
-  .footer #itens_footer {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: 14px 20px 12px;
-    gap: 16px;
-  }
-
-  #logo_footer,
-  #redes_footer,
-  #links_footer,
-  #contato_footer {
-    max-width: 100%;
-    align-items: center;
-    text-align: center;
-  }
-
-  #logo_footer p {
-    max-width: 100%;
-    font-size: 13px;
-  }
-
-  .footer h3 {
-    font-size: 16px;
-  }
-
-  .footer a,
-  .footer span,
-  #copyright p {
-    font-size: 13px;
-  }
-
-  #img_logo_footer {
-    width: 90px;
-  }
-
-  #icons_redes {
-    justify-content: center;
-    gap: 10px;
-  }
-
-  #icons_redes a img {
-    width: 24px;
-    height: 24px;
-  }
-
-  #copyright {
-    padding: 8px;
-  }
-}
+<<<<<<< HEAD
+=======
 /* FUNDO ESCURO DO POP-UP */
 
 .modalEsqueceuSenha{
@@ -631,6 +430,362 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 input:focus{
+  border-color: #7956a6;               
+  box-shadow: 0 0 8px rgba(121,86,166,0.3); 
+  background-color: #fdfdfd;
+}
+
+input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* BOTÃO FECHAR (O X) */
+.fecharModal {
+  position: absolute;
+  top: 110px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+  z-index: 999;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .popup_form {
+    width: 90vw; /* Usavw para não estourar a tela em mobile */
+  }
+}
+
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+  touch-action: none;
+}
+
+
+:root {
+    --primary: #FFCC00;
+    --secondary: #6A1B9A;
+    --accent: #7956a6;
+    --bg: #F5F5F5;
+    --text: #333333;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; }
+
+>>>>>>> c220ed41920b5a47cb90ff69c811dd7296239796
+/* Rodapé */
+.footer {
+  width: 100%;
+  background-color: var(--accent);
+  border-radius: 12px 12px 0 0;
+}
+
+/* Container principal */
+.footer #itens_footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 5% 15px;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: space-between;
+  align-items: start;
+  gap: 40px;
+}
+
+/* Todas as colunas */
+#logo_footer,
+#redes_footer,
+#links_footer,
+#contato_footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Logo / texto */
+#logo_footer {
+  max-width: 260px;
+  align-items: center;
+  text-align: center;
+}
+
+#img_logo_footer {
+  width: 70px;
+  height: auto;
+}
+
+#logo_footer p {
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.4;
+  max-width: 260px;
+}
+
+/* Títulos */
+.footer h3 {
+  color: var(--primary);
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+/* Links */
+.footer a,
+.footer span {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ============== 
+  REDES SOCIAIS       
+============== */
+#redes_footer {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+#icons_redes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+#icons_redes a {
+  background: rgba(255,255,255,0.15);
+  padding: 6px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+#icons_redes a:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+#icons_redes img {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+#copyright {
+  background-color: var(--primary);
+  text-align: center;
+  padding: 8px 0; 
+}
+
+#copyright p {
+  margin: 0;              /* REMOVE o espaço invisível */
+  font-size: 13px;
+  color: #222;
+  font-weight: 500;
+  line-height: 1.2;       /* deixa mais compacto */
+}
+
+@media (max-width: 900px) {
+  .footer #itens_footer {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  #logo_footer {
+    grid-column: 1 / -1;
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  #logo_footer p {
+    max-width: 520px;
+  }
+
+  #redes_footer,
+  #links_footer,
+  #contato_footer {
+    align-items: center;
+    text-align: center;
+  }
+
+  #icons_redes {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer #itens_footer {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 14px 20px 12px;
+    gap: 16px;
+  }
+
+  #logo_footer,
+  #redes_footer,
+  #links_footer,
+  #contato_footer {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  #logo_footer p {
+    max-width: 100%;
+    font-size: 13px;
+  }
+
+  .footer h3 {
+    font-size: 16px;
+  }
+
+  .footer a,
+  .footer span,
+  #copyright p {
+    font-size: 13px;
+  }
+
+  #img_logo_footer {
+    width: 90px;
+  }
+
+  #icons_redes {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  #icons_redes a img {
+    width: 24px;
+    height: 24px;
+  }
+
+  #copyright {
+    padding: 8px;
+  }
+}
+<<<<<<< HEAD
+
+/* FUNDO ESCURO DO POP-UP */
+.modalEsqueceuSenha {
+  transition: opacity 0.3s ease;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CAIXA DO POP-UP */
+.modalContentEsqueceuSenha {
+  display: flex;
+}
+
+/* RESPONSIVO */
+@media (max-width:768px) {
+  .popup_form{
+    width: 90%;
+  }
+}
+
+/* --- FUNDO ESCURO DO POP-UP (CONFIGURAÇÃO GERAL) --- */
+.modalEsqueceuSenha,
+.modalEsqueceuEmail {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+}
+
+/* CAIXA DO POP-UP */
+.modalContentEsqueceuSenha,
+.modalContentEsqueceuEmail {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* OCULTA AS TELAS SECUNDÁRIAS POR PADRÃO */
+#telaCodigo,
+#telaRedefinirSenha,
+#telaCodigoSms,
+#telaRedefinirEmail {
+  display: none;
+}
+
+/* ESTILOS DO FORMULÁRIO DO POP-UP */
+.popup_form {
+  background: #ffffff; 
+  padding: 40px 30px;
+  width: 380px;
+  border-radius: 16px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  text-align: center;
+  z-index: 2;
+  margin-top: 108px;
+  position: relative;
+}
+
+.popup_form h3 {
+  color: black; 
+  margin-bottom: 25px;
+  font-size: 25px;
+  font-weight: 0px;
+}
+
+/* BOTÕES */
+.btn-login {
+  width: 100%;
+  padding: 12px 0;
+  background: linear-gradient(90deg, var(--secondary), #7956a6);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 25px;
+}
+
+.btn_login:hover {
+  background: linear-gradient(90deg, #7956a6, #6A1B9A);
+  transform: translateY(-2px);
+}
+
+/* INPUTS */
+.popup_form input {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 1.5px solid #ccc;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  outline: none;
+  background-color: #fafafa;             
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); 
+}
+
+input:focus {
   border-color: #7956a6;               /* roxo de destaque */
   box-shadow: 0 0 8px rgba(121,86,166,0.3); /* glow suave */
   background-color: #fdfdfd;
@@ -665,3 +820,5 @@ input::placeholder {
   height: 100vh;
   touch-action: none;
 }
+=======
+>>>>>>> c220ed41920b5a47cb90ff69c811dd7296239796
