@@ -1,20 +1,3 @@
-// Aguarda o carregamento completo do HTML para rodar o script
-document.addEventListener("DOMContentLoaded", function() {
-    const menuSanduiche = document.querySelector('.menu-sanduiche');
-    const navLinks = document.querySelector('.links');
-  
-  
-    if (menuSanduiche && navLinks) {
-      menuSanduiche.addEventListener('click', () => {
-        // Liga e desliga a classe 'ativo' nos links
-        navLinks.classList.toggle('ativo');
-      });
-    } else {
-      console.error("Erro: Não encontrei o menu ou os links no HTML.");
-    }
-  });
-  
-  
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const petId = params.get("id");
@@ -47,16 +30,51 @@ async function carregarDetalhesPet(petId) {
       return;
     }
 
+    const nome = valorSeguro(pet.nome, "Pet sem nome");
+    const tipo = valorSeguro(pet.tipo, "tipo não informado");
+    const raca = valorSeguro(pet.raca, "Não informada");
+    const porte = valorSeguro(pet.porte, "Não informado");
+    const cor = valorSeguro(pet.cor, "Não informada");
+    const idade = valorSeguro(pet.idade, "Não informada");
+    const descricao = valorSeguro(
+      pet.descricao,
+      "Esse pet está esperando por um novo lar cheio de amor."
+    );
+
+    const local = montarLocalizacao(pet.bairro, pet.cidade);
+
+    const imagem =
+      pet.imagem_url && pet.imagem_url.trim() !== ""
+        ? pet.imagem_url
+        : "https://placehold.co/800x500?text=Sem+Foto";
+
     container.innerHTML = `
-      <div class="card-detalhes-pet">
-        <img src="${pet.imagem_url || "https://placehold.co/400x300?text=Sem+Foto"}" alt="${pet.nome}">
-        <h1>${pet.nome}</h1>
-        <p><strong>Tipo:</strong> ${pet.tipo}</p>
-        <p><strong>Raça:</strong> ${pet.raca || "Não informada"}</p>
-        <p><strong>Porte:</strong> ${pet.porte || "Não informado"}</p>
-        <p><strong>Cor:</strong> ${pet.cor || "Não informada"}</p>
-        <p><strong>Idade:</strong> ${pet.idade ?? "Não informada"}</p>
-        <p><strong>Descrição:</strong> ${pet.descricao || "Sem descrição"}</p>
+      <img 
+        src="${imagem}" 
+        alt="${nome}" 
+        class="detalhes-pet-imagem"
+        onerror="this.src='https://placehold.co/800x500?text=Sem+Foto'"
+      >
+
+      <div class="detalhes-pet-conteudo">
+        <h1>${nome}</h1>
+
+        <div class="detalhes-tags">
+          <span>${tipo}</span>
+          <span>${porte}</span>
+          <span>${pet.status || "disponível"}</span>
+        </div>
+
+        <div class="detalhes-info">
+          <p><strong>Raça:</strong> ${raca}</p>
+          <p><strong>Cor:</strong> ${cor}</p>
+          <p><strong>Idade:</strong> ${idade}</p>
+          <p><strong>Local:</strong> ${local}</p>
+        </div>
+
+        <p class="detalhes-descricao">
+          <strong>Descrição:</strong> ${descricao}
+        </p>
       </div>
     `;
   } catch (error) {
@@ -67,10 +85,15 @@ async function carregarDetalhesPet(petId) {
 
 function configurarFormularioAgendamento(petId) {
   const form = document.getElementById("formAgendamento");
+  const mensagem = document.getElementById("mensagemAgendamento");
+
   if (!form) return;
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+
+    mensagem.textContent = "";
+    mensagem.className = "mensagem-agendamento";
 
     const horario = document.getElementById("horarioVisita").value;
     const horarioCompleto = horario.length === 5 ? `${horario}:00` : horario;
@@ -97,15 +120,44 @@ function configurarFormularioAgendamento(petId) {
       const resultado = await response.json();
 
       if (!resultado.success) {
-        alert(resultado.message);
+        mensagem.textContent = resultado.message;
+        mensagem.classList.add("erro");
         return;
       }
 
-      alert("Agendamento realizado com sucesso!");
+      mensagem.textContent = "Agendamento realizado com sucesso!";
+      mensagem.classList.add("sucesso");
       form.reset();
     } catch (error) {
       console.error("Erro ao agendar visita:", error);
-      alert("Erro ao agendar visita.");
+      mensagem.textContent = "Erro ao agendar visita.";
+      mensagem.classList.add("erro");
     }
   });
+}
+
+function valorSeguro(valor, fallback) {
+  if (valor === null || valor === undefined) return fallback;
+
+  const texto = String(valor).trim();
+  return texto !== "" ? texto : fallback;
+}
+
+function montarLocalizacao(bairro, cidade) {
+  const bairroSeguro = bairro ? String(bairro).trim() : "";
+  const cidadeSegura = cidade ? String(cidade).trim() : "";
+
+  if (bairroSeguro && cidadeSegura) {
+    return `${bairroSeguro}, ${cidadeSegura}`;
+  }
+
+  if (bairroSeguro) {
+    return bairroSeguro;
+  }
+
+  if (cidadeSegura) {
+    return cidadeSegura;
+  }
+
+  return "Local não informado";
 }

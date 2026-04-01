@@ -13,9 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap">
 
-
 </head>
-
 
 <body>
  <header class="nav">
@@ -54,20 +52,36 @@
     </div>
   </header>
 
-    <main class="container-principal">
-      <section id="detalhesPet"></section>
+   <main class="container-detalhes">
+      <section id="detalhesPet" class="detalhes-pet-card"></section>
 
-      <section class="form-container">
+      <section class="agendamento-card">
         <h2>Agendar visita</h2>
-        <form id="formAgendamento">
-          <input type="text" id="nomeInteressado" placeholder="Seu nome" required>
-          <input type="email" id="emailInteressado" placeholder="Seu email" required>
-          <input type="tel" id="telefoneInteressado" placeholder="Seu telefone" required>
-          <input type="date" id="dataVisita" required>
-          <input type="time" id="horarioVisita" required>
+        <p class="agendamento-subtitulo">
+          Preencha os dados abaixo para solicitar uma visita e conhecer esse pet de perto.
+        </p>
+
+        <form id="formAgendamento" class="form-agendamento">
+          <div class="grupo-campos">
+            <input type="text" id="nomeInteressado" placeholder="Seu nome" required>
+            <input type="email" id="emailInteressado" placeholder="Seu e-mail" required>
+          </div>
+
+          <div class="grupo-campos">
+            <input type="tel" id="telefoneInteressado" placeholder="Seu telefone" required>
+            <input type="date" id="dataVisita" required>
+          </div>
+
+          <div class="grupo-campos">
+            <input type="time" id="horarioVisita" required>
+          </div>
+
           <textarea id="observacoesAgendamento" placeholder="Observações (opcional)"></textarea>
-          <button type="submit" class="btn-accent">Agendar visita</button>
+
+          <button type="submit" class="btn-agendar">Agendar visita</button>
         </form>
+
+        <p id="mensagemAgendamento" class="mensagem-agendamento"></p>
       </section>
     </main>
 

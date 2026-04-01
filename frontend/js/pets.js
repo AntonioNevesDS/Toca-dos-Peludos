@@ -65,53 +65,95 @@ function renderizarPets(pets) {
     const card = document.createElement("div");
     card.className = "card-pet";
 
-    const imagem = pet.imagem_url && pet.imagem_url.trim() !== ""
-      ? pet.imagem_url
-      : "https://placehold.co/400x260?text=Sem+Foto";
-
-    const statusTexto = pet.status ? pet.status : "disponivel";
+    const nome = valorSeguro(pet.nome, "Pet sem nome");
+    const tipo = valorSeguro(pet.tipo, "tipo não informado");
+    const porte = valorSeguro(pet.porte, "porte não informado");
+    const raca = valorSeguro(pet.raca, "Não informada");
+    const descricao = valorSeguro(
+      pet.descricao,
+      "Esse pet está esperando por um novo lar cheio de amor."
+    );
+    const statusTexto = valorSeguro(pet.status, "disponivel");
     const statusClasse = `status-${statusTexto.toLowerCase()}`;
 
+    const imagem =
+      pet.imagem_url && pet.imagem_url.trim() !== ""
+        ? pet.imagem_url
+        : "https://placehold.co/400x260?text=Sem+Foto";
+
+    const local = montarLocalizacao(pet.bairro, pet.cidade);
+
     card.innerHTML = `
-  <div class="card-pet-image-wrapper">
-    <img 
-      src="${imagem}" 
-      alt="${pet.nome}"
-      onerror="this.src='https://placehold.co/400x260?text=Sem+Foto'"
-    >
-    <span class="badge-status ${statusClasse}">
-      ${statusTexto}
-    </span>
-  </div>
+      <div class="card-pet-image-wrapper">
+        <img 
+          src="${imagem}" 
+          alt="${nome}"
+          onerror="this.src='https://placehold.co/400x260?text=Sem+Foto'"
+        >
+        <span class="badge-status ${statusClasse}">
+          ${statusTexto}
+        </span>
+      </div>
 
-  <div class="card-pet-content">
-    <h3>${pet.nome}</h3>
+      <div class="card-pet-content">
+        <h3>${nome}</h3>
 
-    <div class="pet-meta">
-      <span>${pet.tipo}</span>
-      <span>${pet.porte}</span>
-    </div>
+        <div class="pet-meta">
+          <span>${tipo}</span>
+          <span>${porte}</span>
+        </div>
 
-    <p class="pet-raca">
-      <strong>Raça:</strong> ${pet.raca}
-    </p>
+        <p class="pet-raca">
+          <strong>Raça:</strong> ${raca}
+        </p>
 
-    <p class="pet-local">
-      <strong>Local:</strong> ${pet.bairro}, ${pet.cidade}
-    </p>
+        <p class="pet-local">
+          <strong>Local:</strong> ${local}
+        </p>
 
-    <p class="pet-descricao">
-      ${pet.descricao}
-    </p>
+        <p class="pet-descricao">
+          ${limitarTexto(descricao, 95)}
+        </p>
 
-    <a href="detalhes.html?id=${pet.id}" class="btn-ver-mais">
-      Ver detalhes
-    </a>
-  </div>
-`;
+        <a href="detalhes.html?id=${pet.id}" class="btn-ver-mais">
+          Ver detalhes
+        </a>
+      </div>
+    `;
 
     container.appendChild(card);
   });
+}
+
+function limitarTexto(texto, limite) {
+  if (texto.length <= limite) return texto;
+  return texto.slice(0, limite).trim() + "...";
+}
+
+function valorSeguro(valor, fallback) {
+  if (valor === null || valor === undefined) return fallback;
+
+  const texto = String(valor).trim();
+  return texto !== "" ? texto : fallback;
+}
+
+function montarLocalizacao(bairro, cidade) {
+  const bairroSeguro = bairro ? String(bairro).trim() : "";
+  const cidadeSegura = cidade ? String(cidade).trim() : "";
+
+  if (bairroSeguro && cidadeSegura) {
+    return `${bairroSeguro}, ${cidadeSegura}`;
+  }
+
+  if (bairroSeguro) {
+    return bairroSeguro;
+  }
+
+  if (cidadeSegura) {
+    return cidadeSegura;
+  }
+
+  return "Local não informado";
 }
 
 function limitarTexto(texto, limite) {
