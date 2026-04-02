@@ -142,20 +142,9 @@ body {
   transition: all 0.3s ease;
 }
 
-<<<<<<< HEAD
 /* ===============================
   REGRAS PARA CELULAR (Até 600px)
 =============================== */
-=======
-.links {
-  display: flex;
-  align-items: center;
-}
-
-
-
-
->>>>>>> c220ed41920b5a47cb90ff69c811dd7296239796
 @media screen and (max-width: 600px) {
 
   .nav {
@@ -168,10 +157,7 @@ body {
     display: flex;
   }
 
-<<<<<<< HEAD
   /* Transforma a barra de links em um menu que cai da tela */
-=======
->>>>>>> c220ed41920b5a47cb90ff69c811dd7296239796
   .nav .links {
     display: none;
     position: absolute;
@@ -185,7 +171,6 @@ body {
     z-index: 9999;
   }
 
-<<<<<<< HEAD
   .nav .links a {
     margin: 15px 0;
     font-size: 18px;
@@ -215,16 +200,10 @@ body {
   }
 
   /* A classe 'ativo' que o JavaScript vai ligar e desligar */
-=======
->>>>>>> c220ed41920b5a47cb90ff69c811dd7296239796
   .nav .links.ativo {
     display: flex !important;
   }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> c220ed41920b5a47cb90ff69c811dd7296239796
  
 .container-cabecalho {
   position: relative;

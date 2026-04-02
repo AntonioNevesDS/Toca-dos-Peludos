@@ -115,14 +115,9 @@ body {
   margin: 0; 
 }
 
-<<<<<<< HEAD
 /* =====================================
   MENU SANDUÍCHE (Invisível no Desktop)
 ===================================== */
-=======
-/*Menu Sanduíche*/
-
->>>>>>> c220ed41920b5a47cb90ff69c811dd7296239796
 .nav-content {
   position: relative; 
 }
@@ -143,23 +138,16 @@ body {
   transition: all 0.3s ease;
 }
 
-<<<<<<< HEAD
 /* ===============================
   REGRAS PARA CELULAR (Até 600px)
 =============================== */
-=======
-
->>>>>>> c220ed41920b5a47cb90ff69c811dd7296239796
 @media screen and (max-width: 600px) {
   
   .menu-sanduiche {
     display: flex;
   }
 
-<<<<<<< HEAD
   /* Transforma a barra de links em um menu que cai da tela */
-=======
->>>>>>> c220ed41920b5a47cb90ff69c811dd7296239796
   .nav .links {
     display: none; 
     position: absolute;
@@ -202,10 +190,7 @@ body {
     color: #fff;
   }
 
-<<<<<<< HEAD
   /* A classe 'ativo' que o JavaScript vai ligar e desligar */
-=======
->>>>>>> c220ed41920b5a47cb90ff69c811dd7296239796
   .nav .links.ativo {
     display: flex !important;
   }
