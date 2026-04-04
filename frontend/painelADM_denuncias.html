@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel Administrativo - Toca dos Peludos</title>
+  <title>Painel Administrativo - Denúncias - Toca dos Peludos</title>
   <link rel="icon" type="image/png" href="img/logo-tdp ícone.png">
-  <link rel="stylesheet" href="css/style_adm.css">
+  <link rel="stylesheet" href="css/style_adm_denuncia.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@
       </div>
     </div>
   </header>
-    <!--Painel Principal-->
+    <!--Painel de Denúncias-->
   <div class="dashboard">
     <h2>Painel Administrativo</h2>
     <p>Gerencie pets, adoções, voluntariados e mais.</p>
@@ -74,13 +74,29 @@
         </div>
       </a>
 
-      <a href="painelADM_denuncias.html" class="card" onclick="mostrarSecao('denuncias')">
+      <a href="painelADM_denuncias.html" class="card active" onclick="mostrarSecao('denuncias')">
         <div class="icon">⚠️</div>
         <div class="info">
           <span class="numero">8</span>
           <span class="label">Denúncias Recebidas</span>
         </div>
       </a>
+    </div>
+
+    <div id="tabela-container" class="secao-detalhes">
+        <h3>Denúncias</h3>
+        
+        <table class="tabela-adm">
+          <thead>
+            <tr>
+              <th>Nome</th> <th>Data</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody id="corpo-tabela">
+            </tbody>
+        </table>
+      </div>
     </div>
 
 <footer class="footer">
