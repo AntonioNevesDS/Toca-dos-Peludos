@@ -30,16 +30,17 @@ async function carregarDetalhesPet(petId) {
       return;
     }
 
-    const imagem = pet.imagem_url && pet.imagem_url.trim() !== ""
-      ? pet.imagem_url
-      : "https://placehold.co/800x500?text=Sem+Foto";
+    const imagem =
+      pet.imagem_url && pet.imagem_url.trim() !== ""
+        ? pet.imagem_url
+        : "https://placehold.co/800x500?text=Sem+Foto";
 
     const local = montarLocalizacao(pet.bairro, pet.cidade);
 
     container.innerHTML = `
       <img 
         src="${imagem}" 
-        alt="${pet.nome}" 
+        alt="${valorSeguro(pet.nome, "Pet sem nome")}" 
         class="detalhes-pet-imagem"
         onerror="this.src='https://placehold.co/800x500?text=Sem+Foto'"
       >
@@ -77,6 +78,7 @@ async function carregarDetalhesPet(petId) {
 function configurarFormularioAgendamento(petId) {
   const form = document.getElementById("formAgendamento");
   const mensagem = document.getElementById("mensagemAgendamento");
+  const btn = form?.querySelector("button[type='submit']");
 
   if (!form) return;
 
@@ -85,6 +87,11 @@ function configurarFormularioAgendamento(petId) {
 
     mensagem.textContent = "";
     mensagem.className = "mensagem-agendamento";
+
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Agendando...";
+    }
 
     const horario = document.getElementById("horarioVisita").value;
     const horarioCompleto = horario.length === 5 ? `${horario}:00` : horario;
@@ -111,7 +118,7 @@ function configurarFormularioAgendamento(petId) {
       const resultado = await response.json();
 
       if (!resultado.success) {
-        mensagem.textContent = resultado.message;
+        mensagem.textContent = resultado.message || "Erro ao agendar visita.";
         mensagem.classList.add("erro");
         return;
       }
@@ -123,12 +130,18 @@ function configurarFormularioAgendamento(petId) {
       console.error("Erro ao agendar visita:", error);
       mensagem.textContent = "Erro ao agendar visita.";
       mensagem.classList.add("erro");
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = "Agendar visita";
+      }
     }
   });
 }
 
 function valorSeguro(valor, fallback) {
   if (valor === null || valor === undefined) return fallback;
+
   const texto = String(valor).trim();
   return texto !== "" ? texto : fallback;
 }

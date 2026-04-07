@@ -56,33 +56,37 @@
     <section id="detalhesPet" class="detalhes-pet-card"></section>
 
     <aside class="agendamento-card">
-      <h2>Agendar visita</h2>
-      <p class="agendamento-subtitulo">
-        Preencha os dados abaixo para solicitar uma visita e conhecer esse pet.
-      </p>
+  <div class="agendamento-form-container">
+    <h2>Agendar visita</h2>
+    <p class="agendamento-subtitulo">
+      Preencha os dados abaixo para solicitar uma visita e conhecer esse pet.
+    </p>
 
-      <form id="formAgendamento" class="form-agendamento">
-        <div class="grupo-campos">
-          <input type="text" id="nomeInteressado" placeholder="Seu nome" required>
-          <input type="email" id="emailInteressado" placeholder="Seu e-mail" required>
-        </div>
+    <form id="formAgendamento" class="form-agendamento">
+      <label for="nomeInteressado" class="label_text">Nome *</label>
+      <input type="text" id="nomeInteressado" placeholder="Nome completo" required>
 
-        <div class="grupo-campos">
-          <input type="tel" id="telefoneInteressado" placeholder="Seu telefone" required>
-          <input type="date" id="dataVisita" required>
-        </div>
+      <label for="emailInteressado" class="label_text">Email *</label>
+      <input type="email" id="emailInteressado" placeholder="E-mail" required>
 
-        <div class="grupo-campos grupo-unico">
-          <input type="time" id="horarioVisita" required>
-        </div>
+      <label for="telefoneInteressado" class="label_text">Telefone *</label>
+      <input type="tel" id="telefoneInteressado" placeholder="Telefone" required>
 
-        <textarea id="observacoesAgendamento" placeholder="Observações (opcional)"></textarea>
+      <label for="dataVisita" class="label_text">Data da visita *</label>
+      <input type="date" id="dataVisita" required>
 
-        <button type="submit" class="btn-agendar">Agendar visita</button>
-      </form>
+      <label for="horarioVisita" class="label_text">Horário da visita *</label>
+      <input type="time" id="horarioVisita" required>
 
-      <p id="mensagemAgendamento" class="mensagem-agendamento"></p>
-    </aside>
+      <label for="observacoesAgendamento" class="label_text">Observações</label>
+      <textarea id="observacoesAgendamento" placeholder="Observações adicionais (opcional)"></textarea>
+
+      <button type="submit" class="btn-agendar">Agendar visita</button>
+    </form>
+
+    <p id="mensagemAgendamento" class="mensagem-agendamento"></p>
+  </div>
+</aside>
   </main>
 
   <footer class="footer">

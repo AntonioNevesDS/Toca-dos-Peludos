@@ -4,6 +4,7 @@ const API_PETS_URL = `${BASE_URL}/pets.php`;
 const API_EVENTOS_URL = `${BASE_URL}/eventos.php`;
 const API_INSCRICOES_URL = `${BASE_URL}/inscricoes.php`;
 const API_AGENDAMENTOS_URL = `${BASE_URL}/agendamentos.php`;
+const API_DENUNCIAS_URL = `${BASE_URL}/denuncias.php`;
 
 document.addEventListener("DOMContentLoaded", () => {
   verificarSessao();

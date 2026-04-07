@@ -102,6 +102,39 @@ if ($pet['status'] !== 'disponivel') {
     ], 400);
 }
 
+$sqlCheck = "
+  SELECT COUNT(*) as total 
+  FROM agendamentos_visita 
+  WHERE pet_id = ? 
+  AND data_visita = ? 
+  AND horario_visita = ?
+";
+
+$stmtCheck = $conn->prepare($sqlCheck);
+$stmtCheck->bind_param("iss", $pet_id, $data_visita, $horario_visita);
+$stmtCheck->execute();
+
+$resultCheck = $stmtCheck->get_result()->fetch_assoc();
+
+if ($resultCheck['total'] > 0) {
+    JsonResponse::send([
+        'success' => false,
+        'message' => 'Este horário já está reservado para este pet.',
+        'data' => null,
+    ], 409);
+}
+
+$hoje = date('Y-m-d');
+
+if ($data_visita < $hoje) {
+    JsonResponse::send([
+        'success' => false,
+        'message' => 'Não é possível agendar para datas passadas.',
+        'data' => null,
+    ], 400);
+}
+
+
 $stmt = $conn->prepare("
     INSERT INTO agendamentos_visita
     (pet_id, nome_interessado, email_interessado, telefone_interessado, data_visita, horario_visita, observacoes)
