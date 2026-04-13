@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     id BIGINT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(150) NOT NULL,
     sobrenome VARCHAR(150) NULL AFTER nome,
-    data_nascimento DATE NULL AFTER sobrenome,
+    data_nascimento DATE NULL AFTER sobrenome,git 
     genero VARCHAR(20) NULL AFTER telefone;
     email VARCHAR(150) NOT NULL,
     senha_hash VARCHAR(255) NOT NULL,
