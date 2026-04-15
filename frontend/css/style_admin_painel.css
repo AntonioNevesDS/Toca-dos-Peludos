@@ -2,26 +2,26 @@
   --primary: #ffcc33;
   --secondary: #6A1B9A;
   --accent: #7956a6;
-  --bg: #f5f5f5;
+  --bg: #F5F5F5;
   --text: #333333;
-  --white: #ffffff;
-  --border: #e3e3e3;
-  --success: #2e7d32;
-  --danger: #c62828;
-  --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  --radius: 12px;
 }
 
+
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
+
 
 body {
   margin: 0;
-  font-family: 'Roboto', system-ui, sans-serif;
-  background: var(--bg);
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
   color: var(--text);
+  background: var(--bg);
 }
 
+
+/* Cabeçalho */
 .nav {
   background: var(--primary);
   color: #18212f;
@@ -30,6 +30,8 @@ body {
   z-index: 20;
   border-radius: 0 0 12px 12px;
 }
+
+
 .nav-content {
   max-width: 1100px;
   margin: 0 auto;
@@ -39,14 +41,20 @@ body {
   gap: 20px;
   justify-content: space-between;
 }
+
+
 .nav img {
   width: 60px;
   height: 60px;
 }
+
+
 .logo {
-  border-radius: 12px; 
-  object-fit: cover; 
+  border-radius: 12px;
+  object-fit: cover;
 }
+
+
 .brand {
   display: flex;
   align-items: center;
@@ -54,6 +62,8 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
 }
+
+
 .links a {
   position: relative;
   color: #7956a6;
@@ -61,6 +71,7 @@ body {
   margin: 0 8px;
   font-weight: 600;
 }
+
 
 .links a::after {
   content: "";
@@ -73,13 +84,17 @@ body {
   transition: width 0.6s ease;
 }
 
+
 .links a:hover::after {
   width: 100%;
 }
 
+
 .links a:hover {
   color: var(--accent);
 }
+
+
 .btn-accent {
   background: var(--accent);
   color: #fff;
@@ -90,22 +105,28 @@ body {
   font-weight: 700;
   transition: 0.3s;
 }
+
+
 .btn-accent:hover { transform: scale(1.05); }
+
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 8px; 
+  gap: 8px;
 }
+
 
 .actions button {
-  margin: 0; 
+  margin: 0;
 }
 
-/*Menu Sanduíche*/
 
+/* =====================================
+  MENU SANDUÍCHE (Invisível no Desktop)
+===================================== */
 .nav-content {
-  position: relative; 
+  position: relative;
 }
 
 
@@ -114,35 +135,41 @@ body {
   cursor: pointer;
   flex-direction: column;
   gap: 5px;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 
 .menu-sanduiche .linha {
   width: 30px;
   height: 4px;
-  background-color: #333; 
+  background-color: #333;
   border-radius: 5px;
   transition: all 0.3s ease;
 }
 
+
+/* ===============================
+  REGRAS PARA CELULAR (Até 600px)
+=============================== */
 @media screen and (max-width: 600px) {
-  
+ 
   .menu-sanduiche {
     display: flex;
   }
 
+
+  /* Transforma a barra de links em um menu que cai da tela */
   .nav .links {
-    display: none; 
+    display: none;
     position: absolute;
-    top: 100%; 
+    top: 100%;
     left: 0;
     width: 100%;
-    background-color: #7956a6; 
+    background-color: #7956a6;
     flex-direction: column;
     align-items: center;
     padding: 20px 0;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
     z-index: 999;
   }
 
@@ -156,6 +183,7 @@ body {
     color: #fff;
   }
 
+
   .links a::after {
     content: "";
     position: absolute;
@@ -166,148 +194,389 @@ body {
     background-color: #fff;
     transition: width 0.6s ease;
   }
-  
+ 
   .links a:hover::after {
     width: 100%;
   }
-  
+ 
   .links a:hover {
     color: #fff;
   }
 
+
+  /* A classe 'ativo' que o JavaScript vai ligar e desligar */
   .nav .links.ativo {
     display: flex !important;
   }
 }
 
-/* MAIN */
-.admin-container {
+
+/* CSS do Painel Administrativo */
+/* CONTAINER PRINCIPAL */
+.dashboard {
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+}
+
+
+.banner{
+  background-color: var(--secondary);
+  padding: 8px;
+  margin-bottom: 30px;
+}
+
+
+/* TÍTULO */
+.dashboard h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: var(--primary);
+}
+
+
+.dashboard p {
+  font-size: 18px;
+  margin-bottom: 40px;
+  color: var(--primary);
+}
+
+
+/* CARDS */
+.cards-container {
+  padding: 60px 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+
+.card {
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 35px;
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  cursor: pointer;
+  /* efeito "neumorphism" */
+  box-shadow: 5px 5px 10px #cfcfcf,
+              -5px -5px 10px #ffffff;
+  transition: 0.3s;
+  text-decoration: none;
+  margin-bottom: 30px;
+}
+
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+
+.card.active {
+  border: 2px solid var(--secondary);
+}
+
+
+.icon {
+  font-size: 20px;
+  background: rgba(121, 86, 166, 0.1);
+  color: var(--secondary);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+.numero {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--secondary);
+}
+
+
+.label {
+  font-size: 15px;
+  opacity: 0.7;
+}
+
+
+@media (max-width: 900px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 600px) {
+
+
+  .dashboard h2 {
+    font-size: 22px;
+  }
+
+
+  .dashboard p {
+    font-size: 16px;
+  }
+
+
+  .cards-container {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 20px 16px;
+  }
+
+
+  .card {
+    width: 100%;
+    max-width: 320px;
+  }
+
+
+  .numero {
+    font-size: 20px;
+  }
+
+
+  .label {
+    font-size: 12px;
+  }
+}
+
+
+/* Rodapé */
+.footer {
+  width: 100%;
+  background-color: var(--accent);
+  border-radius: 12px 12px 0 0;
+}
+
+
+/* Container principal */
+.footer #itens_footer {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 36px 5% 60px;
+  padding: 20px 5% 15px;
+
+
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: space-between;
+  align-items: start;
+  gap: 40px;
 }
 
-.admin-header {
-  margin-bottom: 24px;
-}
 
-.admin-header h1 {
-  margin: 0 0 8px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2rem;
-  color: #222;
-}
-
-.admin-header p {
-  margin: 0;
-  color: #666;
-}
-
-/* TOOLBAR */
-.admin-toolbar {
+/* Todas as colunas */
+#logo_footer,
+#redes_footer,
+#links_footer,
+#contato_footer {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 24px;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.admin-tab {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 12px 18px;
-  cursor: pointer;
-  font-weight: 700;
-  transition: 0.25s ease;
+
+/* Logo / texto */
+#logo_footer {
+  max-width: 260px;
+  align-items: center;
+  text-align: center;
 }
 
-.admin-tab:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
+
+#img_logo_footer {
+  width: 70px;
+  height: auto;
 }
 
-.admin-tab.active {
-  background: var(--secondary);
+
+#logo_footer p {
   color: #fff;
-  border-color: var(--secondary);
+  font-size: 13px;
+  line-height: 1.4;
+  max-width: 260px;
+}
+/* Títulos */
+.footer h3 {
+  color: var(--primary);
+  font-size: 16px;
+  margin-bottom: 8px;
 }
 
-/* CONTENT */
-.admin-content {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  padding: 20px;
+
+/* Links */
+.footer a,
+.footer span {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
 }
 
-.admin-mensagem {
-  margin: 0 0 16px;
-  min-height: 24px;
-  font-weight: 600;
+
+.footer a:hover {
+  text-decoration: underline;
 }
 
-.admin-mensagem.erro {
-  color: var(--danger);
+
+/* =============
+  REDES SOCIAIS      
+============= */
+
+
+#redes_footer {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
-.admin-vazio {
-  margin: 0;
-  color: #666;
+
+#icons_redes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
 }
 
-/* TABLE */
-.admin-table-wrapper {
-  width: 100%;
-  overflow-x: auto;
+
+#icons_redes a {
+  background: rgba(255,255,255,0.15);
+  padding: 6px;
+  border-radius: 8px;
+  transition: 0.3s;
 }
 
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 800px;
+
+#icons_redes a:hover {
+  background: rgba(255,255,255,0.3);
 }
 
-.admin-table thead th {
-  background: #f3f0f8;
-  color: #333;
-  padding: 14px 12px;
-  text-align: left;
-  font-size: 0.95rem;
-  font-family: 'Montserrat', sans-serif;
-  border-bottom: 1px solid var(--border);
+
+#icons_redes img {
+  width: 26px;
+  height: 26px;
+  display: block;
 }
 
-.admin-table tbody td {
-  padding: 14px 12px;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.95rem;
-  vertical-align: top;
+
+
+
+#copyright {
+  background-color: var(--primary);
+  text-align: center;
+  padding: 8px;
 }
 
-.admin-table tbody tr:hover {
-  background: #faf8fd;
+
+#copyright p {
+  font-size: 13px;
+  color: #222;
+  font-weight: 500;
 }
 
-/* RESPONSIVO */
+
 @media (max-width: 900px) {
-  .links {
-    display: none;
-    position: absolute;
-    top: 72px;
-    right: 5%;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    padding: 16px;
-    flex-direction: column;
-    min-width: 180px;
+  .footer #itens_footer {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
   }
 
-  .links.ativo {
-    display: flex;
+
+  #logo_footer {
+    grid-column: 1 / -1;
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
   }
 
-  .menu-sanduiche {
-    display: flex;
+
+  #logo_footer p {
+    max-width: 520px;
+  }
+
+
+  #redes_footer,
+  #links_footer,
+  #contato_footer {
+    align-items: center;
+    text-align: center;
+  }
+
+
+  #icons_redes {
+    justify-content: center;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .footer #itens_footer {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 14px 20px 12px;
+    gap: 16px;
+  }
+
+
+  #logo_footer,
+  #redes_footer,
+  #links_footer,
+  #contato_footer {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+
+  #logo_footer p {
+    max-width: 100%;
+    font-size: 13px;
+  }
+
+
+  .footer h3 {
+    font-size: 16px;
+  }
+
+
+  .footer a,
+  .footer span,
+  #copyright p {
+    font-size: 13px;
+  }
+
+
+  #img_logo_footer {
+    width: 90px;
+  }
+
+
+  #icons_redes {
+    justify-content: center;
+    gap: 10px;
+  }
+
+
+  #icons_redes a img {
+    width: 24px;
+    height: 24px;
+  }
+
+
+  #copyright {
+    padding: 8px;
   }
 }
