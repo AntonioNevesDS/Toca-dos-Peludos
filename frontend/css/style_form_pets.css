@@ -25,7 +25,6 @@ body {
   position: sticky;
   top: 0;
   z-index: 20;
-  border-radius: 0 0 12px 12px;
 }
 
 .nav-content {
@@ -242,7 +241,6 @@ form button {
 .footer {
   width: 100%;
   background-color: var(--accent);
-  border-radius: 12px 12px 0 0;
 }
     
 /* Container principal */
