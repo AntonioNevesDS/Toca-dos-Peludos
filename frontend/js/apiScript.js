@@ -18,13 +18,26 @@ function verificarSessao() {
 
   if (usuarioString && areaAcoes) {
     const usuario = JSON.parse(usuarioString);
+
     areaAcoes.innerHTML = `
-      <span style="margin-right: 15px; font-weight: 600; color: #333;">Olá, ${usuario.nome}!</span>
-      <button onclick="fazerLogout()" class="btn-accent" style="background-color: #e74c3c; border: none;">Sair</button>
+      <span style="margin-right: 15px; font-weight: 600; color: #333;">
+        Olá, ${usuario.nome}!
+      </span>
+
+      ${
+        usuario.tipo === "admin"
+          ? `<a href="painel_admin.html">
+               <button class="btn-accent">Painel Admin</button>
+             </a>`
+          : ""
+      }
+
+      <button onclick="fazerLogout()" class="btn-accent" style="background-color: #e74c3c; border: none;">
+        Sair
+      </button>
     `;
   }
 }
-
 window.fazerLogout = function () {
   localStorage.removeItem("usuarioLogado");
   window.location.reload();

@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const email = document.getElementById("emailLogin").value.trim();
       const senha = document.getElementById("senhaLogin").value.trim();
 
+        console.log("Enviando login...", { email, senha });
+
       const payload = { email, senha };
 
       try {
@@ -35,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         const resultado = await response.json();
+        console.log("Resposta da API:", resultado);
 
         if (!resultado.success) {
           mensagem.textContent = resultado.message;
@@ -132,3 +135,5 @@ function irRedefinirEmail() {
   document.getElementById("telaRedefinirEmail").style.display = "block";
   travarScroll();
 }
+
+

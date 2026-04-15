@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin - Toca dos Peludos</title>
+  <link rel="icon" type="image/png" href="img/logo-tdp ícone.png">
+  <link rel="stylesheet" href="css/style_admin_painel.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-content">
+      <div class="brand">
+        <a href="index.html">
+          <img src="img/logo-tdp.jpg" class="logo" alt="Logo Toca dos Peludos">
+        </a>
+        <span>Toca dos Peludos</span>
+      </div>
+
+      <nav class="links">
+        <a href="index.html">Início</a>
+        <a href="pets.html">Pets</a>
+        <a href="eventos.html">Eventos</a>
+        <a href="denuncias.html">Denúncias</a>
+        <a href="contatos.html">Contatos</a>
+      </nav>
+
+      <div class="menu-sanduiche">
+        <div class="linha"></div>
+        <div class="linha"></div>
+        <div class="linha"></div>
+      </div>
+
+      <div class="actions"></div>
+    </div>
+  </header>
+
+  <main class="admin-container">
+    <section class="admin-header">
+      <h1>Painel Administrativo</h1>
+      <p>Visualize e acompanhe os dados do sistema em um único lugar.</p>
+    </section>
+
+    <section class="admin-toolbar">
+      <button class="admin-tab active" data-section="pets">Pets</button>
+      <button class="admin-tab" data-section="eventos">Eventos</button>
+      <button class="admin-tab" data-section="denuncias">Denúncias</button>
+      <button class="admin-tab" data-section="agendamentos">Agendamentos</button>
+      <button class="admin-tab" data-section="inscricoes">Inscrições</button>
+    </section>
+
+    <section class="admin-content">
+      <p id="adminMensagem" class="admin-mensagem"></p>
+      <div id="adminTabela"></div>
+    </section>
+  </main>
+
+  <script src="js/apiScript.js"></script>
+  <script src="js/painel_admin.js"></script>
+</body>
+</html>
