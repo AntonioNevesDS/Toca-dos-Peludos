@@ -25,7 +25,6 @@ body {
   position: sticky;
   top: 0;
   z-index: 20;
-  border-radius: 0 0 12px 12px;
 }
 
 .nav-content {
@@ -36,6 +35,7 @@ body {
   align-items: center;
   gap: 20px;
   justify-content: space-between;
+  position: relative;
 }
 
 .nav img {
@@ -44,8 +44,8 @@ body {
 }
 
 .logo {
-  border-radius: 12px; /* controla a curvatura */
-  object-fit: cover; /* mantém proporção da imagem */
+  border-radius: 12px; /* Controla a curvatura */
+  object-fit: cover; /* Mantém proporção da imagem */
 }
 
 .brand {
@@ -116,13 +116,7 @@ body {
   margin: 0; 
 }
 
-/* ===================================
-MENU SANDUÍCHE (Invisível no Desktop)
-=================================== */
-.nav-content {
-  position: relative; /* Segura o menu dropdown no lugar certo */
-}
-
+/* MENU SANDUÍCHE (Invisível no Desktop) */
 .menu-sanduiche {
   display: none;
   cursor: pointer;
@@ -139,9 +133,7 @@ MENU SANDUÍCHE (Invisível no Desktop)
   transition: all 0.3s ease;
 }
 
-/* =========================================
-   REGRAS PARA CELULAR (Até 600px)
-   ========================================= */
+/* REGRAS PARA CELULAR (Até 600px) */
 @media screen and (max-width: 600px) {
   /* Mostra o ícone do sanduíche */
   .menu-sanduiche {
@@ -249,7 +241,6 @@ form button {
 .footer {
   width: 100%;
   background-color: var(--accent);
-  border-radius: 12px 12px 0 0;
 }
     
 /* Container principal */
@@ -312,9 +303,7 @@ form button {
   text-decoration: underline;
 }
     
-/* ============= 
-  REDES SOCIAIS       
-============= */
+/* REDES SOCIAIS */
 #redes_footer {
   align-items: center;
   text-align: center;
@@ -353,13 +342,14 @@ form button {
 }
     
 #copyright p {
-  margin: 0;              /* REMOVE o espaço invisível */
+  margin: 0;        /* REMOVE o espaço invisível */
   font-size: 13px;
   color: #222;
   font-weight: 500;
-  line-height: 1.2;       /* deixa mais compacto */
+  line-height: 1.2; /* deixa mais compacto */
 }
-        
+
+/* TABLET */
 @media (max-width: 900px) {
   .footer #itens_footer {
     grid-template-columns: 1fr 1fr;
@@ -388,7 +378,8 @@ form button {
     justify-content: center;
   }
 }
-    
+
+/* CELULAR */
 @media (max-width: 600px) {
   .footer #itens_footer {
     grid-template-columns: 1fr;
