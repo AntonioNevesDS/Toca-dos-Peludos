@@ -48,14 +48,26 @@ function configurarTabs() {
     });
   });
 }
-
 async function carregarSecao(secao) {
   const container = document.getElementById("adminTabela");
   const mensagem = document.getElementById("adminMensagem");
+  const tabelaAntiga = container.querySelector('.admin-table-wrapper');
 
-  container.innerHTML = "";
-  mensagem.textContent = "";
-  mensagem.className = "admin-mensagem";
+  // Função interna para limpar e mostrar o loader
+  const mostrarLoader = () => {
+    container.innerHTML = '<div class="loader-suave">Buscando dados...</div>';
+    mensagem.textContent = "";
+    mensagem.className = "admin-mensagem";
+  };
+
+  // Se já houver uma tabela, fazemos a saída suave antes de mostrar o loader
+  if (tabelaAntiga) {
+    tabelaAntiga.classList.add('fadeOut');
+    // Esperamos 300ms (tempo da animação no CSS) antes de trocar o conteúdo
+    await new Promise(resolve => setTimeout(resolve, 300));
+  }
+  
+  mostrarLoader();
 
   const endpoint = ADMIN_ENDPOINTS[secao];
 
@@ -83,14 +95,33 @@ async function carregarSecao(secao) {
   }
 }
 
-// Variável global para guardar os dados da tabela atual e facilitar o modal
-let dadosTabelaAtual = [];
-let secaoAtual = "";
+function abrirModalPet(idPet) {
+  const pet = dadosTabelaAtual.find(p => Number(p.id) === Number(idPet));
+  
+  if(pet) {
+    document.getElementById("editPetId").value = pet.id;
+    document.getElementById("editPetNome").value = pet.nome;
+    document.getElementById("editPetStatus").value = pet.status;
+    
+    // Preenche o campo de consulta (cinza) e o de edição
+    const desc = pet.descricao || "Sem descrição cadastrada.";
+    document.getElementById("consultarPetDescricao").value = desc;
+    document.getElementById("editPetDescricao").value = desc; 
+    
+    document.getElementById("modalPet").style.display = "block";
+    document.body.classList.add("no-scroll");
+  }
+}
+
+// ==========================================
+// LÓGICA DA TABELA E DO MODAL DE DETALHES
+// ==========================================
+
+let dadosTabelaAtual = []; // Variável para armazenar os dados e o Modal poder ler
 
 function renderizarTabela(secao, dados) {
   const container = document.getElementById("adminTabela");
-  dadosTabelaAtual = dados; // Salva os dados para o modal usar
-  secaoAtual = secao;
+  dadosTabelaAtual = dados; // Guarda os dados globalmente
 
   if (!dados || !dados.length) {
     container.innerHTML = `<p class="admin-vazio">Nenhum registro encontrado em ${secao}.</p>`;
@@ -109,54 +140,46 @@ function renderizarTabela(secao, dados) {
   colunas.forEach((coluna) => {
     html += `<th>${formatarTitulo(coluna)}</th>`;
   });
-  
-  // Adiciona a coluna de Ações
+
+  // Adicionando a coluna de Ações extra no cabeçalho
   html += `<th>Ações</th></tr></thead><tbody>`;
 
   dados.forEach((item) => {
     html += `<tr>`;
+
     colunas.forEach((coluna) => {
       const valor = item[coluna] ?? "";
       html += `<td>${escapeHtml(String(valor))}</td>`;
     });
 
-    // Adiciona o botão de detalhes que chama o Modal passando o ID do item
-    if(secao === 'pets') {
-        html += `<td><button class="btn-accent" style="padding: 6px 12px; font-size: 12px;" onclick="abrirModalPet(${item.id})">Detalhes</button></td>`;
+// Renderiza botões de ação dinâmicos dependendo da aba
+    if (secao === 'pets') {
+      html += `<td><button class="btn-accent" style="padding: 6px 12px; font-size: 12px;" onclick="abrirModalPet(${item.id})">Detalhes</button></td>`;
+    } else if (secao === 'eventos') { // <--- ADICIONADO AQUI
+      html += `<td><button class="btn-accent" style="padding: 6px 12px; font-size: 12px; background-color: #9C27B0;" onclick="abrirModalEvento(${item.id})">Gerenciar</button></td>`;
+    } else if (secao === 'agendamentos') {
+      html += `<td><button class="btn-accent" style="padding: 6px 12px; font-size: 12px; background-color: #2196F3;" onclick="abrirModalAgendamento(${item.id})">Gerenciar</button></td>`;
+    } else if (secao === 'inscricoes') {
+      html += `<td><button class="btn-accent" style="padding: 6px 12px; font-size: 12px; background-color: #4CAF50;" onclick="abrirModalInscricao(${item.id})">Gerenciar</button></td>`;
+    } else if (secao === 'denuncias') {
+      html += `<td><button class="btn-accent" style="padding: 6px 12px; font-size: 12px; background-color: #e74c3c;" onclick="abrirModalDenuncia(${item.id})">Ver Caso</button></td>`;
     } else {
-        html += `<td>-</td>`; // Para as outras abas, deixamos um traço por enquanto
+      html += `<td>-</td>`;
     }
-
-    html += `</tr>`;
   });
 
   html += `</tbody></table></div>`;
   container.innerHTML = html;
 }
 
-// --- FUNÇÕES DO MODAL ---
-function abrirModalPet(idPet) {
-  // Procura o pet nos dados que já baixamos do banco
-  const pet = dadosTabelaAtual.find(p => Number(p.id) === Number(idPet));
-  
-  if(pet) {
-    document.getElementById("editPetId").value = pet.id;
-    document.getElementById("editPetNome").value = pet.nome;
-    document.getElementById("editPetStatus").value = pet.status;
-    document.getElementById("editPetDescricao").value = pet.descricao || "";
-    
-    document.getElementById("modalPet").style.display = "block";
-    document.body.classList.add("no-scroll");
-  }
-}
-
+// FECHAR O MODAL
 function fecharModalPet() {
   document.getElementById("modalPet").style.display = "none";
   document.body.classList.remove("no-scroll");
   document.getElementById("msgEditPet").textContent = "";
 }
 
-// Interceptar o envio do formulário de edição
+// SALVAR O PET NO BANCO (Enviando pro PHP)
 document.getElementById("formEditarPet")?.addEventListener("submit", async (e) => {
   e.preventDefault();
   
@@ -172,7 +195,6 @@ document.getElementById("formEditarPet")?.addEventListener("submit", async (e) =
   };
 
   try {
-    // Vamos criar esse arquivo PHP no próximo passo!
     const response = await fetch(`${BASE_URL}/admin/atualizar_pet.php`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -186,7 +208,6 @@ document.getElementById("formEditarPet")?.addEventListener("submit", async (e) =
       msg.classList.add("sucesso");
       msg.style.color = "green";
       
-      // Recarrega a tabela para mostrar os dados novos
       setTimeout(() => {
         fecharModalPet();
         carregarSecao("pets"); 
@@ -233,4 +254,191 @@ async function carregarResumoDashboard() {
     console.error("Erro ao carregar o resumo do dashboard:", error);
   }
 }
+
+// ==========================================
+// MODAL DE AGENDAMENTOS
+// ==========================================
+
+function abrirModalAgendamento(idAgendamento) {
+  const agendamento = dadosTabelaAtual.find(a => Number(a.id) === Number(idAgendamento));
+  
+  if(agendamento) {
+    document.getElementById("editAgendId").value = agendamento.id;
+    document.getElementById("infoAgendNome").textContent = agendamento.nome_interessado;
+    document.getElementById("infoAgendPet").textContent = agendamento.nome_pet || "Pet Excluído/Não encontrado";
+    
+    // Formata a data para visualização
+    const dataObj = new Date(agendamento.data_visita);
+    const dataFormatada = dataObj.toLocaleDateString('pt-BR');
+    document.getElementById("infoAgendData").textContent = `${dataFormatada} às ${agendamento.horario_visita}`;
+    
+    document.getElementById("editAgendStatus").value = agendamento.status;
+    
+    document.getElementById("modalAgendamento").style.display = "block";
+    document.body.classList.add("no-scroll");
+  }
+}
+
+function fecharModalAgendamento() {
+  document.getElementById("modalAgendamento").style.display = "none";
+  document.body.classList.remove("no-scroll");
+  document.getElementById("msgEditAgendamento").textContent = "";
+}
+
+document.getElementById("formEditarAgendamento")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  const msg = document.getElementById("msgEditAgendamento");
+  msg.textContent = "Atualizando...";
+  msg.className = "admin-mensagem";
+
+  const payload = {
+    id: document.getElementById("editAgendId").value,
+    status: document.getElementById("editAgendStatus").value
+  };
+
+  try {
+    const response = await fetch(`${BASE_URL}/admin/atualizar_agendamento.php`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const resultado = await response.json();
+
+    if (resultado.success) {
+      msg.textContent = "Status atualizado!";
+      msg.classList.add("sucesso");
+      msg.style.color = "green";
+      
+      setTimeout(() => {
+        fecharModalAgendamento();
+        carregarSecao("agendamentos"); 
+      }, 1000);
+    } else {
+      msg.textContent = resultado.message;
+      msg.classList.add("erro");
+    }
+  } catch (error) {
+    msg.textContent = "Erro ao conectar com o servidor.";
+    msg.classList.add("erro");
+  }
+});
+
+// CONTROLO INSCRIÇÕES
+function abrirModalInscricao(id) {
+  const item = dadosTabelaAtual.find(i => Number(i.id) === Number(id));
+  if(item) {
+    document.getElementById("editInscId").value = item.id;
+    document.getElementById("inscEvento").textContent = item.evento;
+    document.getElementById("inscNome").textContent = item.nome;
+    document.getElementById("editInscStatus").value = item.status;
+    document.getElementById("modalInscricao").style.display = "block";
+    document.body.classList.add("no-scroll");
+  }
+}
+function fecharModalInscricao() { document.getElementById("modalInscricao").style.display = "none"; document.body.classList.remove("no-scroll"); }
+
+document.getElementById("formEditarInscricao")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const payload = { id: document.getElementById("editInscId").value, status: document.getElementById("editInscStatus").value };
+  const response = await fetch(`${BASE_URL}/admin/atualizar_inscricao.php`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+  const res = await response.json();
+  if(res.success) { carregarSecao("inscricoes"); fecharModalInscricao(); }
+});
+
+// CONTROLO DENÚNCIAS
+function abrirModalDenuncia(id) {
+  const item = dadosTabelaAtual.find(i => Number(i.id) === Number(id));
+  if(item) {
+    document.getElementById("editDenId").value = item.id;
+    document.getElementById("denTipo").textContent = item.tipo;
+    document.getElementById("denLocal").textContent = item.localizacao;
+    document.getElementById("denRelato").textContent = item.descricao;
+    document.getElementById("editDenStatus").value = item.status;
+    document.getElementById("modalDenuncia").style.display = "block";
+    document.body.classList.add("no-scroll");
+  }
+}
+function fecharModalDenuncia() { document.getElementById("modalDenuncia").style.display = "none"; document.body.classList.remove("no-scroll"); }
+
+document.getElementById("formEditarDenuncia")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const payload = { id: document.getElementById("editDenId").value, status: document.getElementById("editDenStatus").value };
+  const response = await fetch(`${BASE_URL}/admin/atualizar_denuncia.php`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+  const res = await response.json();
+  if(res.success) { carregarSecao("denuncias"); fecharModalDenuncia(); }
+});
+
+// ==========================================
+// MODAL DE EVENTOS
+// ==========================================
+
+function abrirModalEvento(id) {
+  const evento = dadosTabelaAtual.find(e => Number(e.id) === Number(id));
+  
+  if(evento) {
+    document.getElementById("editEventoId").value = evento.id;
+    document.getElementById("infoEventoTitulo").textContent = evento.titulo;
+    
+    // Formatar a data
+    const dataObj = new Date(evento.data_evento);
+    // Para evitar fuso horário puxando 1 dia para trás, usamos getUTC
+    const dataFormatada = `${String(dataObj.getUTCDate()).padStart(2, '0')}/${String(dataObj.getUTCMonth() + 1).padStart(2, '0')}/${dataObj.getUTCFullYear()}`;
+    
+    document.getElementById("infoEventoData").textContent = dataFormatada;
+    document.getElementById("infoEventoLocal").textContent = `${evento.local} (${evento.cidade})`;
+    
+    document.getElementById("editEventoStatus").value = evento.status;
+    
+    document.getElementById("modalEvento").style.display = "block";
+    document.body.classList.add("no-scroll");
+  }
+}
+
+function fecharModalEvento() {
+  document.getElementById("modalEvento").style.display = "none";
+  document.body.classList.remove("no-scroll");
+  document.getElementById("msgEditEvento").textContent = "";
+}
+
+document.getElementById("formEditarEvento")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  const msg = document.getElementById("msgEditEvento");
+  msg.textContent = "Atualizando...";
+  msg.className = "admin-mensagem";
+
+  const payload = {
+    id: document.getElementById("editEventoId").value,
+    status: document.getElementById("editEventoStatus").value
+  };
+
+  try {
+    const response = await fetch(`${BASE_URL}/admin/atualizar_evento.php`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const resultado = await response.json();
+
+    if (resultado.success) {
+      msg.textContent = "Evento atualizado!";
+      msg.classList.add("sucesso");
+      msg.style.color = "green";
+      
+      setTimeout(() => {
+        fecharModalEvento();
+        carregarSecao("eventos"); 
+      }, 1000);
+    } else {
+      msg.textContent = resultado.message;
+      msg.classList.add("erro");
+    }
+  } catch (error) {
+    msg.textContent = "Erro ao conectar com o servidor.";
+    msg.classList.add("erro");
+  }
+});
   

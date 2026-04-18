@@ -19,17 +19,9 @@ $conn = Database::getConnection();
 
 $result = $conn->query("
     SELECT 
-        id,
-        nome,
-        tipo,
-        raca,
-        porte,
-        cor,
-        idade,
-        cidade,
-        bairro,
-        status,
-        created_at
+        id, nome, tipo, raca, porte, cor, 
+        idade, cidade, bairro, status, 
+        descricao, created_at
     FROM pets
     ORDER BY id DESC
 ");
