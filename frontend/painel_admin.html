@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style_global.css">
+  <script src="js/css.js" defer></script>
 </head>
 <body>
  <header class="nav">
@@ -27,15 +29,11 @@
         <a href="denuncias.html">Denúncias</a>
         <a href="contatos.html">Contatos</a>
       </nav>
-
-
       <div class="menu-sanduiche">
         <div class="linha"></div>
         <div class="linha"></div>
         <div class="linha"></div>
       </div>
-
-
       <div class="actions">
         <a href="login.html">
             <button class="btn-accent">Entrar</button>
@@ -52,8 +50,6 @@
       <h2>Painel Administrativo</h2>
       <p>Gerencie pets, adoções, voluntariados e mais.</p>
     </div>
- 
- 
     <div class="cards-container">
       <div class="card admin-tab" data-section="pets">
         <div class="icon">🐾</div>
@@ -62,9 +58,6 @@
           <span class="label">Pets disponíveis</span>
         </div>
       </div>
- 
-
-
   <div class="card admin-tab" data-section="eventos">
     <div class="icon">🎪</div>
     <div class="info">
@@ -72,7 +65,6 @@
       <span class="label">Eventos</span>
     </div>
   </div>
-
   <div class="card admin-tab" data-section="denuncias">
     <div class="icon">⚠️</div>
     <div class="info">
@@ -80,7 +72,6 @@
       <span class="label">Denúncias</span>
     </div>
   </div>
-
   <div class="card admin-tab" data-section="inscricoes">
     <div class="icon">📝</div>
     <div class="info">
@@ -88,7 +79,6 @@
       <span class="label">Inscrições</span>
     </div>
   </div>
-
   <div class="card admin-tab" data-section="agendamentos">
     <div class="icon">📅</div>
     <div class="info">
@@ -97,55 +87,41 @@
     </div>
   </div>
 </div>
-
 <div id="adminMensagem" class="admin-mensagem"></div>
 <div id="adminTabela"></div>
-
-
-
 <div id="modalPet" class="modal-admin">
   <div class="modal-conteudo">
     <span class="fechar-modal" onclick="fecharModalPet()">&times;</span>
     <h3 id="modalPetTitulo">Detalhes do Pet</h3>
-    
     <form id="formEditarPet">
       <input type="hidden" id="editPetId">
-      
       <label class="label_text">Nome:</label>
       <input type="text" id="editPetNome" required>
-      
       <label class="label_text">Status:</label>
       <select id="editPetStatus" required>
         <option value="disponivel">Disponível</option>
         <option value="adotado">Adotado</option>
       </select>
-      
       <label class="label_text" style="color: #666; font-size: 0.9rem;">Descrição Atual (Consulta):</label>
       <textarea id="consultarPetDescricao" rows="3" style="background-color: #f0f0f0; color: #777; cursor: not-allowed;" readonly></textarea>
-
       <label class="label_text">Nova Descrição:</label>
       <textarea id="editPetDescricao" rows="5" required placeholder="Digite a nova descrição aqui..."></textarea>
-      
       <button type="submit" class="btn-accent" style="width: 100%; margin-top: 15px;">Salvar Alterações</button>
     </form>
     <p id="msgEditPet" class="admin-mensagem"></p>
   </div>
 </div>
-
 <div id="modalAgendamento" class="modal-admin">
   <div class="modal-conteudo" style="max-width: 400px;">
     <span class="fechar-modal" onclick="fecharModalAgendamento()">&times;</span>
     <h3>Gerenciar Visita</h3>
-    
     <div style="margin: 15px 0; padding: 15px; background: #f9f9f9; border-radius: 8px;">
       <p style="margin-bottom: 8px; color: #333;"><strong style="color: #6A1B9A;">Adotante:</strong> <span id="infoAgendNome" style="color: #333;"></span></p>
       <p style="margin-bottom: 8px; color: #333;"><strong style="color: #6A1B9A;">Pet:</strong> <span id="infoAgendPet" style="color: #333;"></span></p>
       <p style="margin-bottom: 0; color: #333;"><strong style="color: #6A1B9A;">Data:</strong> <span id="infoAgendData" style="color: #333;"></span></p>
     </div>
-
     <form id="formEditarAgendamento">
       <input type="hidden" id="editAgendId">
-      
       <label class="label_text">Alterar Status:</label>
       <select id="editAgendStatus" required>
         <option value="agendado">Agendado (Pendente)</option>
@@ -153,13 +129,11 @@
         <option value="concluida">Visita Concluída</option>
         <option value="cancelada">Cancelada</option>
       </select>
-      
       <button type="submit" class="btn-accent" style="width: 100%; margin-top: 15px; background-color: #2196F3;">Atualizar Status</button>
     </form>
     <p id="msgEditAgendamento" class="admin-mensagem"></p>
   </div>
 </div>
-
 <div id="modalInscricao" class="modal-admin">
   <div class="modal-conteudo" style="max-width: 450px;">
     <span class="fechar-modal" onclick="fecharModalInscricao()">&times;</span>
@@ -181,7 +155,6 @@
     <p id="msgEditInsc" class="admin-mensagem"></p>
   </div>
 </div>
-
 <div id="modalDenuncia" class="modal-admin">
   <div class="modal-conteudo" style="max-width: 500px;">
     <span class="fechar-modal" onclick="fecharModalDenuncia()">&times;</span>
@@ -205,37 +178,29 @@
     <p id="msgEditDen" class="admin-mensagem"></p>
   </div>
 </div>
-
 <div id="modalEvento" class="modal-admin">
   <div class="modal-conteudo" style="max-width: 450px;">
     <span class="fechar-modal" onclick="fecharModalEvento()">&times;</span>
     <h3>Gerenciar Evento</h3>
-    
     <div style="margin: 15px 0; padding: 15px; background: #f9f9f9; border-radius: 8px;">
       <p style="margin-bottom: 8px; color: #333;"><strong style="color: #6A1B9A;">Título:</strong> <span id="infoEventoTitulo" style="color: #333;"></span></p>
       <p style="margin-bottom: 8px; color: #333;"><strong style="color: #6A1B9A;">Data:</strong> <span id="infoEventoData" style="color: #333;"></span></p>
       <p style="margin-bottom: 0; color: #333;"><strong style="color: #6A1B9A;">Local:</strong> <span id="infoEventoLocal" style="color: #333;"></span></p>
     </div>
-
     <form id="formEditarEvento">
       <input type="hidden" id="editEventoId">
-      
       <label class="label_text">Alterar Status:</label>
       <select id="editEventoStatus" required>
         <option value="ativo">Ativo (Em andamento)</option>
         <option value="encerrado">Encerrado</option>
         <option value="cancelado">Cancelado</option>
       </select>
-      
       <button type="submit" class="btn-accent" style="width: 100%; margin-top: 15px; background-color: #9C27B0;">Atualizar Evento</button>
     </form>
     <p id="msgEditEvento" class="admin-mensagem"></p>
   </div>
 </div>
-
 <script src="js/apiScript.js"></script>
 <script src="js/painel_admin.js"></script>
-
 </body>
 </html>
-
