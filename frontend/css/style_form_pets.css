@@ -25,6 +25,12 @@ label {
 .label_text {
   margin-top: 20px;
 }
+
+.required-label::after {
+  content: " *";
+  color: red;
+  font-weight: bold;
+}
     
 input, select, textarea {
   width: 100%;

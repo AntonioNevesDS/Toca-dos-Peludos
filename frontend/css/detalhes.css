@@ -119,6 +119,12 @@
   color: #333;
 }
 
+.required-label::after {
+  content: " *";
+  color: red;
+  font-weight: bold;
+}
+
 .form-agendamento input,
 .form-agendamento textarea {
   width: 100%;

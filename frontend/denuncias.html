@@ -80,7 +80,7 @@
         <div class="form-container">
             <h2>Formulário de Denúncia</h2>
             <form id="formDenuncia">
-                <label class="label_text">Tipo de Denúncia *</label>
+                <label class="label_text required-label">Tipo de Denúncia</label>
                 <select id="tipoDenuncia" required>
                     <option value="seleciona_tipo">Selecione o tipo</option>
                     <option>Maus-tratos</option>
@@ -88,9 +88,9 @@
                     <option>Desmatamento</option>
                     <option value="outros">Outros</option>
                 </select>
-                <label class="label_text">Descreva a Situação *</label>
+                <label class="label_text required-label">Descreva a Situação</label>
                 <textarea id="descricaoDenuncia" placeholder="Forneça o máximo de detalhes possível sobre a situação." required></textarea>
-                <label class="label_text">Local da Ocorrência</label>
+                <label class="label_text required-label">Local da Ocorrência</label>
                 <input id="localDenuncia" type="text" placeholder="Endereço ou ponto de referência">
                 <div id="options_container">
                   <label for="anonimo">Fazer denúncia anônima</label>
