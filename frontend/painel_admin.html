@@ -1,206 +1,250 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel Administrativo - Toca dos Peludos</title>
-  <link rel="icon" type="image/png" href="img/logo-tdp ícone.png">
-  <link rel="stylesheet" href="css/style_admin_painel.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style_global.css">
-  <script src="js/css.js" defer></script>
-</head>
-<body>
- <header class="nav">
-    <div class="nav-content">
-      <div class="brand">
-        <a href="index.html">
-          <img src="img/logo-tdp.jpg" class="logo" alt="Logo Toca dos Peludos">
-        </a>
-        <span>Toca dos Peludos</span>
-      </div>
-      <nav class="links">
-        <a href="index.html">Início</a>
-        <a href="sobre_nos.html">Sobre</a>
-        <a href="pets.html">Pets</a>
-        <a href="eventos.html">Eventos</a>
-        <a href="denuncias.html">Denúncias</a>
-        <a href="contatos.html">Contatos</a>
-      </nav>
-      <div class="menu-sanduiche">
-        <div class="linha"></div>
-        <div class="linha"></div>
-        <div class="linha"></div>
-      </div>
-      <div class="actions">
-        <a href="login.html">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Toca dos Peludos</title>
+    <link rel="icon" type="image/png" href="img/logo-tdp ícone.png">
+    <link rel="stylesheet" href="css/style_admin_painel.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_global.css">
+  </head>
+  <body>
+    <header class="nav">
+      <div class="nav-content">
+        <div class="brand">
+          <a href="index.html">
+            <img src="img/logo-tdp.jpg" class="logo" alt="Logo Toca dos Peludos">
+          </a>
+          <span>Toca dos Peludos</span>
+        </div>
+        <nav class="links">
+          <a href="index.html">Início</a>
+          <a href="sobre_nos.html">Sobre</a>
+          <a href="pets.html">Pets</a>
+          <a href="eventos.html">Eventos</a>
+          <a href="denuncias.html">Denúncias</a>
+          <a href="contatos.html">Contatos</a>
+        </nav>
+        <div class="menu-sanduiche">
+          <div class="linha"></div>
+          <div class="linha"></div>
+          <div class="linha"></div>
+        </div>
+        <div class="actions">
+          <a href="login.html">
             <button class="btn-accent">Entrar</button>
-        </a>
-        <a href="index.html#ajude">
-          <button class="btn-accent">Doar</button>
-        </a>
-      </div>
-    </div>
-  </header>
-    <!--Painel Principal-->
-  <div class="dashboard">
-    <div class="banner">
-      <h2>Painel Administrativo</h2>
-      <p>Gerencie pets, adoções, voluntariados e mais.</p>
-    </div>
-    <div class="cards-container">
-      <div class="card admin-tab" data-section="pets">
-        <div class="icon">🐾</div>
-        <div class="info">
-          <span class="numero">4</span>
-          <span class="label">Pets disponíveis</span>
+          </a>
+          <a href="index.html#ajude">
+            <button class="btn-accent">Doar</button>
+          </a>
         </div>
       </div>
-  <div class="card admin-tab" data-section="eventos">
-    <div class="icon">🎪</div>
-    <div class="info">
-      <span class="numero">8</span>
-      <span class="label">Eventos</span>
-    </div>
-  </div>
-  <div class="card admin-tab" data-section="denuncias">
-    <div class="icon">⚠️</div>
-    <div class="info">
-      <span class="numero">8</span>
-      <span class="label">Denúncias</span>
-    </div>
-  </div>
-  <div class="card admin-tab" data-section="inscricoes">
-    <div class="icon">📝</div>
-    <div class="info">
-      <span class="numero">67</span>
-      <span class="label">Inscrições</span>
-    </div>
-  </div>
-  <div class="card admin-tab" data-section="agendamentos">
-    <div class="icon">📅</div>
-    <div class="info">
-      <span class="numero">12</span>
-      <span class="label">Agendamentos</span>
-    </div>
-  </div>
-</div>
-<div id="adminMensagem" class="admin-mensagem"></div>
-<div id="adminTabela"></div>
-<div id="modalPet" class="modal-admin">
-  <div class="modal-conteudo">
-    <span class="fechar-modal" onclick="fecharModalPet()">&times;</span>
-    <h3 id="modalPetTitulo">Detalhes do Pet</h3>
-    <form id="formEditarPet">
-      <input type="hidden" id="editPetId">
-      <label class="label_text">Nome:</label>
-      <input type="text" id="editPetNome" required>
-      <label class="label_text">Status:</label>
-      <select id="editPetStatus" required>
-        <option value="disponivel">Disponível</option>
-        <option value="adotado">Adotado</option>
-      </select>
-      <label class="label_text" style="color: #666; font-size: 0.9rem;">Descrição Atual (Consulta):</label>
-      <textarea id="consultarPetDescricao" rows="3" style="background-color: #f0f0f0; color: #777; cursor: not-allowed;" readonly></textarea>
-      <label class="label_text">Nova Descrição:</label>
-      <textarea id="editPetDescricao" rows="5" required placeholder="Digite a nova descrição aqui..."></textarea>
-      <button type="submit" class="btn-accent" style="width: 100%; margin-top: 15px;">Salvar Alterações</button>
-    </form>
-    <p id="msgEditPet" class="admin-mensagem"></p>
-  </div>
-</div>
-<div id="modalAgendamento" class="modal-admin">
-  <div class="modal-conteudo" style="max-width: 400px;">
-    <span class="fechar-modal" onclick="fecharModalAgendamento()">&times;</span>
-    <h3>Gerenciar Visita</h3>
-    <div style="margin: 15px 0; padding: 15px; background: #f9f9f9; border-radius: 8px;">
-      <p style="margin-bottom: 8px; color: #333;"><strong style="color: #6A1B9A;">Adotante:</strong> <span id="infoAgendNome" style="color: #333;"></span></p>
-      <p style="margin-bottom: 8px; color: #333;"><strong style="color: #6A1B9A;">Pet:</strong> <span id="infoAgendPet" style="color: #333;"></span></p>
-      <p style="margin-bottom: 0; color: #333;"><strong style="color: #6A1B9A;">Data:</strong> <span id="infoAgendData" style="color: #333;"></span></p>
-    </div>
-    <form id="formEditarAgendamento">
-      <input type="hidden" id="editAgendId">
-      <label class="label_text">Alterar Status:</label>
-      <select id="editAgendStatus" required>
-        <option value="agendado">Agendado (Pendente)</option>
-        <option value="confirmada">Visita Confirmada</option>
-        <option value="concluida">Visita Concluída</option>
-        <option value="cancelada">Cancelada</option>
-      </select>
-      <button type="submit" class="btn-accent" style="width: 100%; margin-top: 15px; background-color: #2196F3;">Atualizar Status</button>
-    </form>
-    <p id="msgEditAgendamento" class="admin-mensagem"></p>
-  </div>
-</div>
-<div id="modalInscricao" class="modal-admin">
-  <div class="modal-conteudo" style="max-width: 450px;">
-    <span class="fechar-modal" onclick="fecharModalInscricao()">&times;</span>
-    <h3>Gerenciar Inscrição</h3>
-    <div id="infoInscricaoBox" style="margin: 15px 0; padding: 15px; background: #f9f9f9; border-radius: 8px; color: #333;">
-      <p><strong>Evento:</strong> <span id="inscEvento"></span></p>
-      <p><strong>Participante:</strong> <span id="inscNome"></span></p>
-    </div>
-    <form id="formEditarInscricao">
-      <input type="hidden" id="editInscId">
-      <label class="label_text">Status:</label>
-      <select id="editInscStatus">
-        <option value="confirmada">Confirmada</option>
-        <option value="cancelada">Cancelada</option>
-        <option value="pendente">Pendente</option>
-      </select>
-      <button type="submit" class="btn-accent" style="width: 100%; margin-top: 10px;">Atualizar Inscrição</button>
-    </form>
-    <p id="msgEditInsc" class="admin-mensagem"></p>
-  </div>
-</div>
-<div id="modalDenuncia" class="modal-admin">
-  <div class="modal-conteudo" style="max-width: 500px;">
-    <span class="fechar-modal" onclick="fecharModalDenuncia()">&times;</span>
-    <h3>Detalhes da Denúncia</h3>
-    <div style="margin: 15px 0; padding: 15px; background: #fff5f5; border-radius: 8px; color: #333; font-size: 0.9rem;">
-      <p><strong>Tipo:</strong> <span id="denTipo"></span></p>
-      <p><strong>Local:</strong> <span id="denLocal"></span></p>
-      <p><strong>Relato:</strong> <br><i id="denRelato"></i></p>
-    </div>
-    <form id="formEditarDenuncia">
-      <input type="hidden" id="editDenId">
-      <label class="label_text">Alterar Status:</label>
-      <select id="editDenStatus">
-        <option value="pendente">Pendente</option>
-        <option value="em_analise">Em Análise</option>
-        <option value="resolvido">Resolvido</option>
-        <option value="arquivado">Arquivado / Falso</option>
-      </select>
-      <button type="submit" class="btn-accent" style="width: 100%; margin-top: 10px; background-color: #e74c3c;">Atualizar Status</button>
-    </form>
-    <p id="msgEditDen" class="admin-mensagem"></p>
-  </div>
-</div>
-<div id="modalEvento" class="modal-admin">
-  <div class="modal-conteudo" style="max-width: 450px;">
-    <span class="fechar-modal" onclick="fecharModalEvento()">&times;</span>
-    <h3>Gerenciar Evento</h3>
-    <div style="margin: 15px 0; padding: 15px; background: #f9f9f9; border-radius: 8px;">
-      <p style="margin-bottom: 8px; color: #333;"><strong style="color: #6A1B9A;">Título:</strong> <span id="infoEventoTitulo" style="color: #333;"></span></p>
-      <p style="margin-bottom: 8px; color: #333;"><strong style="color: #6A1B9A;">Data:</strong> <span id="infoEventoData" style="color: #333;"></span></p>
-      <p style="margin-bottom: 0; color: #333;"><strong style="color: #6A1B9A;">Local:</strong> <span id="infoEventoLocal" style="color: #333;"></span></p>
-    </div>
-    <form id="formEditarEvento">
-      <input type="hidden" id="editEventoId">
-      <label class="label_text">Alterar Status:</label>
-      <select id="editEventoStatus" required>
-        <option value="ativo">Ativo (Em andamento)</option>
-        <option value="encerrado">Encerrado</option>
-        <option value="cancelado">Cancelado</option>
-      </select>
-      <button type="submit" class="btn-accent" style="width: 100%; margin-top: 15px; background-color: #9C27B0;">Atualizar Evento</button>
-    </form>
-    <p id="msgEditEvento" class="admin-mensagem"></p>
-  </div>
-</div>
-<script src="js/apiScript.js"></script>
-<script src="js/painel_admin.js"></script>
-</body>
+    </header>
+    <!--Painel Principal-->
+    <div class="dashboard">
+      <div class="banner">
+        <h2>Painel Administrativo</h2>
+        <p>Gerencie pets, adoções, voluntariados e mais.</p>
+      </div>
+      <div class="cards-container">
+        <div class="card admin-tab" data-section="pets">
+          <div class="icon">🐾</div>
+          <div class="info">
+            <span class="numero">4</span>
+            <span class="label">Pets disponíveis</span>
+          </div>
+        </div>
+        <div class="card admin-tab" data-section="eventos">
+          <div class="icon">🎪</div>
+          <div class="info">
+            <span class="numero">8</span>
+            <span class="label">Eventos</span>
+          </div>
+        </div>
+        <div class="card admin-tab" data-section="denuncias">
+          <div class="icon">⚠️</div>
+          <div class="info">
+            <span class="numero">8</span>
+            <span class="label">Denúncias</span>
+          </div>
+        </div>
+        <div class="card admin-tab" data-section="inscricoes">
+          <div class="icon">📝</div>
+          <div class="info">
+            <span class="numero">67</span>
+            <span class="label">Inscrições</span>
+          </div>
+        </div>
+        <div class="card admin-tab" data-section="agendamentos">
+          <div class="icon">📅</div>
+          <div class="info">
+            <span class="numero">12</span>
+            <span class="label">Agendamentos</span>
+          </div>
+        </div>
+      </div>
+      <div id="adminMensagem" class="admin-mensagem"></div>
+      <div id="adminTabela"></div>
+      <div id="modalPet" class="modal-admin">
+        <div class="modal-conteudo">
+          <span class="fechar-modal" onclick="fecharModalPet()">&times;</span>
+          <h3 id="modalPetTitulo">Detalhes do Pet</h3>
+          <form id="formEditarPet">
+            <input type="hidden" id="editPetId">
+            <label class="label_text">Nome:</label>
+            <input type="text" id="editPetNome" required>
+            <label class="label_text">Status:</label>
+            <select id="editPetStatus" required>
+              <option value="disponivel">Disponível</option>
+              <option value="adotado">Adotado</option>
+            </select>
+            <label class="label_text" style="color: #666; font-size: 0.9rem;">Descrição Atual (Consulta):</label>
+            <textarea id="consultarPetDescricao" rows="3" style="background-color: #f0f0f0; color: #777; cursor: not-allowed;" readonly></textarea>
+            <label class="label_text">Nova Descrição:</label>
+            <textarea id="editPetDescricao" rows="5" required placeholder="Digite a nova descrição aqui..."></textarea>
+            <button type="submit" class="btn-accent" style="width: 100%; margin-top: 15px;">Salvar Alterações</button>
+          </form>
+          <p id="msgEditPet" class="admin-mensagem"></p>
+        </div>
+      </div>
+      <div id="modalAgendamento" class="modal-admin">
+        <div class="modal-conteudo" style="max-width: 400px;">
+          <span class="fechar-modal" onclick="fecharModalAgendamento()">&times;</span>
+          <h3>Gerenciar Visita</h3>
+          <div style="margin: 15px 0; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+            <p style="margin-bottom: 8px; color: #333;"><strong style="color: #6A1B9A;">Adotante:</strong> <span id="infoAgendNome" style="color: #333;"></span></p>
+            <p style="margin-bottom: 8px; color: #333;"><strong style="color: #6A1B9A;">Pet:</strong> <span id="infoAgendPet" style="color: #333;"></span></p>
+            <p style="margin-bottom: 0; color: #333;"><strong style="color: #6A1B9A;">Data:</strong> <span id="infoAgendData" style="color: #333;"></span></p>
+          </div>
+          <form id="formEditarAgendamento">
+            <input type="hidden" id="editAgendId">
+            <label class="label_text">Alterar Status:</label>
+            <select id="editAgendStatus" required>
+              <option value="agendado">Agendado (Pendente)</option>
+              <option value="confirmada">Visita Confirmada</option>
+              <option value="concluida">Visita Concluída</option>
+              <option value="cancelada">Cancelada</option>
+            </select>
+            <button type="submit" class="btn-accent" style="width: 100%; margin-top: 15px; background-color: #2196F3;">Atualizar Status</button>
+          </form>
+          <p id="msgEditAgendamento" class="admin-mensagem"></p>
+        </div>
+      </div>
+      <div id="modalInscricao" class="modal-admin">
+        <div class="modal-conteudo" style="max-width: 450px;">
+          <span class="fechar-modal" onclick="fecharModalInscricao()">&times;</span>
+          <h3>Gerenciar Inscrição</h3>
+          <div id="infoInscricaoBox" style="margin: 15px 0; padding: 15px; background: #f9f9f9; border-radius: 8px; color: #333;">
+            <p><strong>Evento:</strong> <span id="inscEvento"></span></p>
+            <p><strong>Participante:</strong> <span id="inscNome"></span></p>
+          </div>
+          <form id="formEditarInscricao">
+            <input type="hidden" id="editInscId">
+            <label class="label_text">Status:</label>
+            <select id="editInscStatus">
+              <option value="confirmada">Confirmada</option>
+              <option value="cancelada">Cancelada</option>
+              <option value="pendente">Pendente</option>
+            </select>
+            <button type="submit" class="btn-accent" style="width: 100%; margin-top: 10px;">Atualizar Inscrição</button>
+          </form>
+          <p id="msgEditInsc" class="admin-mensagem"></p>
+        </div>
+      </div>
+      <div id="modalDenuncia" class="modal-admin">
+        <div class="modal-conteudo" style="max-width: 500px;">
+          <span class="fechar-modal" onclick="fecharModalDenuncia()">&times;</span>
+          <h3>Detalhes da Denúncia</h3>
+          <div style="margin: 15px 0; padding: 15px; background: #fff5f5; border-radius: 8px; color: #333; font-size: 0.9rem;">
+            <p><strong>Tipo:</strong> <span id="denTipo"></span></p>
+            <p><strong>Local:</strong> <span id="denLocal"></span></p>
+            <p><strong>Relato:</strong> <br><i id="denRelato"></i></p>
+          </div>
+          <form id="formEditarDenuncia">
+            <input type="hidden" id="editDenId">
+            <label class="label_text">Alterar Status:</label>
+            <select id="editDenStatus">
+              <option value="pendente">Pendente</option>
+              <option value="em_analise">Em Análise</option>
+              <option value="resolvido">Resolvido</option>
+              <option value="arquivado">Arquivado / Falso</option>
+            </select>
+            <button type="submit" class="btn-accent" style="width: 100%; margin-top: 10px; background-color: #e74c3c;">Atualizar Status</button>
+          </form>
+          <p id="msgEditDen" class="admin-mensagem"></p>
+        </div>
+      </div>
+      <div id="modalEvento" class="modal-admin">
+        <div class="modal-conteudo" style="max-width: 450px;">
+          <span class="fechar-modal" onclick="fecharModalEvento()">&times;</span>
+          <h3>Gerenciar Evento</h3>
+          <div style="margin: 15px 0; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+            <p style="margin-bottom: 8px; color: #333;"><strong style="color: #6A1B9A;">Título:</strong> <span id="infoEventoTitulo" style="color: #333;"></span></p>
+            <p style="margin-bottom: 8px; color: #333;"><strong style="color: #6A1B9A;">Data:</strong> <span id="infoEventoData" style="color: #333;"></span></p>
+            <p style="margin-bottom: 0; color: #333;"><strong style="color: #6A1B9A;">Local:</strong> <span id="infoEventoLocal" style="color: #333;"></span></p>
+          </div>
+          <form id="formEditarEvento">
+            <input type="hidden" id="editEventoId">
+            <label class="label_text">Alterar Status:</label>
+            <select id="editEventoStatus" required>
+              <option value="ativo">Ativo (Em andamento)</option>
+              <option value="encerrado">Encerrado</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+            <button type="submit" class="btn-accent" style="width: 100%; margin-top: 15px; background-color: #9C27B0;">Atualizar Evento</button>
+          </form>
+          <p id="msgEditEvento" class="admin-mensagem"></p>
+        </div>
+      </div>
+      <footer class="footer">
+        <div id="itens_footer">
+          <div id="logo_footer">
+            <img src="img/logo-tdp.jpg" class="logo" alt="Logo Toca dos Peludos" id="img_logo_footer">
+            <p>
+            Somos uma ONG dedicada ao resgate, cuidado e adoção responsável de animais.
+            Nossa missão é dar uma segunda chance para cada peludo encontrar um lar cheio de amor.
+            </p>
+          </div>
+          <div id="redes_footer">
+            <h3>Redes Sociais</h3>
+            <div id="icons_redes">
+              <a href="https://www.instagram.com/toca_dos_peludos/" target="_blank" rel="noopener noreferrer">
+                <img src="img/icons8-instagram-50.svg" alt="Instagram">
+              </a>
+              <a href="https://www.tiktok.com/@toca_dos_peludos" target="_blank" rel="noopener noreferrer">
+                <img src="img/icons8-tiktok-50.svg" alt="TikTok">
+              </a>
+              <a href="#" target="_blank" rel="noopener noreferrer">
+                <img src="img/icons8-whatsapp-50.svg" alt="WhatsApp">
+              </a>
+              <a href="https://www.facebook.com/tocadospeludos/?locale=pt_BR" target="_blank" rel="noopener noreferrer">
+                <img src="img/icons8-facebook-50.svg" alt="Facebook">
+              </a>
+            </div>
+          </div>
+          <div id="links_footer">
+            <h3>Links Rápidos</h3>
+            <a href="pets.html">Adotar um Pet</a>
+            <a href="index.html#ajude">Fazer Doação</a>
+            <a href="denuncias.html">Fazer uma denúncia</a>
+            <a href="eventos.html">Eventos</a>
+          </div>
+          <div id="contato_footer">
+            <h3>Contatos</h3>
+            <a href="mailto:contato@tocadospeludos.org">contato@tocadospeludos.org</a>
+            <a href="tel:+5511999999999">(11) 99999 - 9999</a>
+            <span>São Paulo, SP</span>
+          </div>
+        </div>
+        <div id="copyright">
+          <p>© 2026 Toca dos Peludos. Feito com ❤️ para os animais.</p>
+        </div>
+    </footer>
+    <script src="js/apiScript.js"></script>
+    <script src="js/painel_admin.js"></script>
+    <script src="js/global.js" defer></script>
+  </body>
 </html>

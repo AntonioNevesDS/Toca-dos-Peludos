@@ -1,16 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-  const menuSanduiche = document.querySelector(".menu-sanduiche");
-  const navLinks = document.querySelector(".links");
-
-  if (menuSanduiche && navLinks) {
-    menuSanduiche.addEventListener("click", () => {
-      navLinks.classList.toggle("ativo");
-    });
-  } else {
-    console.error("Erro: Não encontrei o menu ou os links no HTML.");
-  }
-});
-
 // Animação do depoimentos
 const elemento = document.getElementById('texto-animado');
 const frases = [
@@ -94,65 +81,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (cards.length > 0 && secaoDetalhes) {      
     
-      cards.forEach(card => {
-          card.addEventListener('click', () => {
-              const tipo = card.getAttribute('data-tipo'); 
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const tipo = card.getAttribute('data-tipo'); 
               
-              secaoDetalhes.style.display = 'block';
-              corpoTabela.innerHTML = '<tr><td colspan="6" style="text-align:center;">Carregando dados...</td></tr>';
+        secaoDetalhes.style.display = 'block';
+        corpoTabela.innerHTML = '<tr><td colspan="6" style="text-align:center;">Carregando dados...</td></tr>';
 
-              if (tipo === 'denuncias') {
-                  tituloSecao.innerText = 'Gerenciar Denúncias';
-                  carregarTabelaDenunciasPainel(cabecalhoTabela, corpoTabela);
-              } 
-              else if (tipo === 'pets') {
-                  tituloSecao.innerText = 'Gerenciar Pets';
-                  carregarTabelaPetsPainel(cabecalhoTabela, corpoTabela);
-              }
-              else {
-                  tituloSecao.innerText = `Gerenciar ${tipo}`;
-                  cabecalhoTabela.innerHTML = '<th>Aviso</th>';
-                  corpoTabela.innerHTML = '<tr><td>Módulo ainda em desenvolvimento.</td></tr>';
-              }
-          });
+        if (tipo === 'denuncias') {
+          tituloSecao.innerText = 'Gerenciar Denúncias';
+          carregarTabelaDenunciasPainel(cabecalhoTabela, corpoTabela);
+        } 
+        else if (tipo === 'pets') {
+          tituloSecao.innerText = 'Gerenciar Pets';
+          carregarTabelaPetsPainel(cabecalhoTabela, corpoTabela);
+        }
+        else {
+          tituloSecao.innerText = `Gerenciar ${tipo}`;
+          cabecalhoTabela.innerHTML = '<th>Aviso</th>';
+          corpoTabela.innerHTML = '<tr><td>Módulo ainda em desenvolvimento.</td></tr>';
+        }
       });
+    });
   }
 });
 
 async function carregarTabelaDenunciasPainel(cabecalho, corpo) {
 
   cabecalho.innerHTML = `
-      <th>ID</th>
-      <th>Tipo</th>
-      <th>Descrição</th>
-      <th>Local</th>
-      <th>Contato</th>
-      <th>Data</th>
+    <th>ID</th>
+    <th>Tipo</th>
+    <th>Descrição</th>
+    <th>Local</th>
+    <th>Contato</th>
+    <th>Data</th>
   `;
 
   try {
-      const response = await fetch('http://localhost/Toca-dos-Peludos/api/denuncias.php');
-      const denuncias = await response.json();
+    const response = await fetch('http://localhost/Toca-dos-Peludos/api/denuncias.php');
+    const denuncias = await response.json();
       
-      corpo.innerHTML = ''; // Limpa o "Carregando..."
+    corpo.innerHTML = ''; // Limpa o "Carregando..."
       
-      denuncias.forEach(d => {
-          const contato = d.anonimo == 1 ? '<span style="color:#e74c3c; font-weight:bold;">Anônimo</span>' : (d.contato || '-');
-          const dataFormatada = new Date(d.data_denuncia).toLocaleDateString('pt-BR');
+    denuncias.forEach(d => {
+      const contato = d.anonimo == 1 ? '<span style="color:#e74c3c; font-weight:bold;">Anônimo</span>' : (d.contato || '-');
+      const dataFormatada = new Date(d.data_denuncia).toLocaleDateString('pt-BR');
           
-          corpo.innerHTML += `
-              <tr>
-                  <td>#${d.id}</td>
-                  <td><strong>${d.tipo}</strong></td>
-                  <td>${d.descricao}</td>
-                  <td>${d.localizacao || '-'}</td>
-                  <td>${contato}</td>
-                  <td>${dataFormatada}</td>
-              </tr>
-          `;
-      });
+      corpo.innerHTML += `
+        <tr>
+          <td>#${d.id}</td>
+          <td><strong>${d.tipo}</strong></td>
+          <td>${d.descricao}</td>
+          <td>${d.localizacao || '-'}</td>
+          <td>${contato}</td>
+          <td>${dataFormatada}</td>
+        </tr>
+      `;
+    });
   } catch (e) {
-      corpo.innerHTML = '<tr><td colspan="6">Erro ao buscar denúncias.</td></tr>';
+    corpo.innerHTML = '<tr><td colspan="6">Erro ao buscar denúncias.</td></tr>';
   }
 }
 
@@ -160,37 +147,37 @@ async function carregarTabelaDenunciasPainel(cabecalho, corpo) {
 async function carregarTabelaPetsPainel(cabecalho, corpo) {
 
   cabecalho.innerHTML = `
-      <th>ID</th>
-      <th>Foto</th>
-      <th>Nome</th>
-      <th>Tipo</th>
-      <th>Porte</th>
-      <th>Status</th>
+    <th>ID</th>
+    <th>Foto</th>
+    <th>Nome</th>
+    <th>Tipo</th>
+    <th>Porte</th>
+    <th>Status</th>
   `;
 
   try {
-      const response = await fetch('http://localhost/Toca-dos-Peludos/api/pets.php');
-      const pets = await response.json();
+    const response = await fetch('http://localhost/Toca-dos-Peludos/api/pets.php');
+    const pets = await response.json();
       
-      corpo.innerHTML = ''; 
+    corpo.innerHTML = ''; 
       
-      pets.forEach(p => {
-          // Estilo dinâmico pro status ficar bonito
-          const corStatus = p.status === 'DISPONÍVEL' ? 'green' : 'orange';
+    pets.forEach(p => {
+      // Estilo dinâmico pro status ficar bonito
+      const corStatus = p.status === 'DISPONÍVEL' ? 'green' : 'orange';
           
-          corpo.innerHTML += `
-              <tr>
-                  <td>#${p.id}</td>
-                  <td><img src="${p.imagemUrl}" alt="foto" style="width: 40px; height: 40px; border-radius: 5px; object-fit: cover;"></td>
-                  <td><strong>${p.nome}</strong></td>
-                  <td>${p.tipo}</td>
-                  <td>${p.porte}</td>
-                  <td><span style="color: ${corStatus}; font-weight: 600;">${p.status}</span></td>
-              </tr>
-          `;
-      });
+      corpo.innerHTML += `
+        <tr>
+          <td>#${p.id}</td>
+          <td><img src="${p.imagemUrl}" alt="foto" style="width: 40px; height: 40px; border-radius: 5px; object-fit: cover;"></td>
+          <td><strong>${p.nome}</strong></td>
+          <td>${p.tipo}</td>
+          <td>${p.porte}</td>
+          <td><span style="color: ${corStatus}; font-weight: 600;">${p.status}</span></td>
+        </tr>
+      `;
+    });
   } catch (e) {
-      corpo.innerHTML = '<tr><td colspan="6">Erro ao buscar pets.</td></tr>';
+    corpo.innerHTML = '<tr><td colspan="6">Erro ao buscar pets.</td></tr>';
   }
 }
 
@@ -278,85 +265,85 @@ function iniciarCarrossel() {
 }
 
 // Gerar QRcode de valor qualquer
-   function abrirModalPix() {
-    document.getElementById('popupPix').style.display = 'block';
-document.body.classList.add("no-scroll");
-  }
+function abrirModalPix() {
+  document.getElementById('popupPix').style.display = 'block';
+  document.body.classList.add("no-scroll");
+}
  
-  function fecharModalDoacao() {
-    document.getElementById('popupPix').style.display = 'none';
-document.body.classList.remove("no-scroll");
-  }
+function fecharModalDoacao() {
+  document.getElementById('popupPix').style.display = 'none';
+  document.body.classList.remove("no-scroll");
+}
  
-  function calcularCRC16(payload) {
-    let resultado = 0xFFFF;
-    let polinomio = 0x1021;
+function calcularCRC16(payload) {
+  let resultado = 0xFFFF;
+  let polinomio = 0x1021;
  
-    for (let i = 0; i < payload.length; i++) {
-      resultado ^= (payload.charCodeAt(i) << 8);
-      for (let bitwise = 0; bitwise < 8; bitwise++) {
-        if ((resultado <<= 1) & 0x10000) resultado ^= polinomio;
-        resultado &= 0xFFFF;
-      }
+  for (let i = 0; i < payload.length; i++) {
+    resultado ^= (payload.charCodeAt(i) << 8);
+    for (let bitwise = 0; bitwise < 8; bitwise++) {
+      if ((resultado <<= 1) & 0x10000) resultado ^= polinomio;
+      resultado &= 0xFFFF;
     }
-    return resultado.toString(16).toUpperCase().padStart(4, '0');
   }
+  return resultado.toString(16).toUpperCase().padStart(4, '0');
+}
  
-  function gerarPix() {
-    let valorInput = document.getElementById("valorDoacao").value.replace(',', '.');
-    let valor = parseFloat(valorInput).toFixed(2);
+function gerarPix() {
+  let valorInput = document.getElementById("valorDoacao").value.replace(',', '.');
+  let valor = parseFloat(valorInput).toFixed(2);
 
-    if (valor <= 0 || isNaN(valor)) {
-        alert("Digite um valor válido");
-        return;
-    }
+  if (valor <= 0 || isNaN(valor)) {
+    alert("Digite um valor válido");
+    return;
+  }
 
-    const chavePix = "48712800805";
-    const nome = "TIAGO OLIVEIRA DOS SANTOS";
-    const cidade = "SAO PAULO";
+  const chavePix = "48712800805";
+  const nome = "TIAGO OLIVEIRA DOS SANTOS";
+  const cidade = "SAO PAULO";
 
-    const formatField = (id, value) => {
-        let size = String(value.length).padStart(2, '0');
-        return id + size + value;
-    };
+  const formatField = (id, value) => {
+    let size = String(value.length).padStart(2, '0');
+    return id + size + value;
+  };
 
-    const merchantAccountInfo = formatField("26",
-        formatField("00", "br.gov.bcb.pix") + formatField("01", chavePix)
-    );
+  const merchantAccountInfo = formatField("26",
+  formatField("00", "br.gov.bcb.pix") + formatField("01", chavePix)
+  );
 
-    const additionalDataFieldTemplate = formatField("62", formatField("05", "doacao-20260323-001"));
+  const additionalDataFieldTemplate = formatField("62", formatField("05", "doacao-20260323-001"));
 
-    let payloadBase = "000201" +
-                      merchantAccountInfo +
-                      formatField("52", "0000") +
-                      formatField("53", "986") +
-                      formatField("54", valor) +
-                      formatField("58", "BR") +
-                      formatField("59", nome) +
-                      formatField("60", cidade) +
-                      additionalDataFieldTemplate +
-                      "6304";
+  let payloadBase = "000201" +
+  merchantAccountInfo +
+  formatField("52", "0000") +
+  formatField("53", "986") +
+  formatField("54", valor) +
+  formatField("58", "BR") +
+  formatField("59", nome) +
+  formatField("60", cidade) +
+  additionalDataFieldTemplate +
+  "6304";
 
-    const payloadFinal = payloadBase + calcularCRC16(payloadBase);
+  const payloadFinal = payloadBase + calcularCRC16(payloadBase);
 
-    document.getElementById("qrcode").innerHTML = "";
+  document.getElementById("qrcode").innerHTML = "";
 
-    new QRCode(document.getElementById("qrcode"), {
-        text: payloadFinal,
-        width: 200,
-        height: 200
-    });
+  new QRCode(document.getElementById("qrcode"), {
+    text: payloadFinal,
+    width: 200,
+    height: 200
+  });
 }
 
 //Gerar QRcode de 10 reais
 function enviarDoacaoDezReais(){
   document.getElementById('popupPixDez').style.display = 'block';
-document.body.classList.add("no-scroll");
+  document.body.classList.add("no-scroll");
 };
 
 function fecharModalDoacaoDez(){
   document.getElementById('popupPixDez').style.display = 'none'
-document.body.classList.remove("no-scroll");
+  document.body.classList.remove("no-scroll");
 }
 
 function gerarPixDezReais() {
@@ -378,15 +365,15 @@ function gerarPixDezReais() {
   const additionalDataFieldTemplate = formatField("62", formatField("05", "doacao-20260323-001"));
 
   let payloadBase = "000201" +
-                    merchantAccountInfo +
-                    formatField("52", "0000") +
-                    formatField("53", "986") +
-                    formatField("54", valor.toFixed(2)) +  // Aqui usamos o valor de 10.00 formatado
-                    formatField("58", "BR") +
-                    formatField("59", nome) +
-                    formatField("60", cidade) +
-                    additionalDataFieldTemplate +
-                    "6304";
+  merchantAccountInfo +
+  formatField("52", "0000") +
+  formatField("53", "986") +
+  formatField("54", valor.toFixed(2)) +  // Aqui usamos o valor de 10.00 formatado
+  formatField("58", "BR") +
+  formatField("59", nome) +
+  formatField("60", cidade) +
+  additionalDataFieldTemplate +
+  "6304";
 
   const payloadFinal = payloadBase + calcularCRC16(payloadBase); // Calculando o CRC16 para o payload
 
@@ -402,12 +389,12 @@ function gerarPixDezReais() {
 //Gerar QRcode de 20 reais
 function enviarDoacaoVinteReais(){
   document.getElementById('popupPixVinte').style.display = 'block';
-document.body.classList.add("no-scroll");
+  document.body.classList.add("no-scroll");
 };
 
 function fecharModalDoacaoVinte(){
   document.getElementById('popupPixVinte').style.display = 'none'
-document.body.classList.remove("no-scroll");  
+  document.body.classList.remove("no-scroll");  
 }
 
 function gerarPixVinteReais() {
@@ -429,15 +416,15 @@ function gerarPixVinteReais() {
   const additionalDataFieldTemplate = formatField("62", formatField("05", "doacao-20260323-001"));
 
   let payloadBase = "000201" +
-                    merchantAccountInfo +
-                    formatField("52", "0000") +
-                    formatField("53", "986") +
-                    formatField("54", valor.toFixed(2)) +  // Aqui usamos o valor de 20.00 formatado
-                    formatField("58", "BR") +
-                    formatField("59", nome) +
-                    formatField("60", cidade) +
-                    additionalDataFieldTemplate +
-                    "6304";
+  merchantAccountInfo +
+  formatField("52", "0000") +
+  formatField("53", "986") +
+  formatField("54", valor.toFixed(2)) +  // Aqui usamos o valor de 20.00 formatado
+  formatField("58", "BR") +
+  formatField("59", nome) +
+  formatField("60", cidade) +
+  additionalDataFieldTemplate +
+  "6304";
 
   const payloadFinal = payloadBase + calcularCRC16(payloadBase); // Calculando o CRC16 para o payload
 
@@ -454,12 +441,12 @@ function gerarPixVinteReais() {
 
 function enviarDoacaoCinquentaReais(){
   document.getElementById('popupPixCinquenta').style.display = 'block';
-document.body.classList.add("no-scroll");
+  document.body.classList.add("no-scroll");
 };
 
 function fecharModalDoacaoCinquenta(){
   document.getElementById('popupPixCinquenta').style.display = 'none'
-document.body.classList.remove("no-scroll");
+  document.body.classList.remove("no-scroll");
 }
 
 function gerarPixCinquentaReais() {
@@ -481,15 +468,15 @@ function gerarPixCinquentaReais() {
   const additionalDataFieldTemplate = formatField("62", formatField("05", "doacao-20260323-001"));
 
   let payloadBase = "000201" +
-                    merchantAccountInfo +
-                    formatField("52", "0000") +
-                    formatField("53", "986") +
-                    formatField("54", valor.toFixed(2)) +  // Aqui usamos o valor de 50.00 formatado
-                    formatField("58", "BR") +
-                    formatField("59", nome) +
-                    formatField("60", cidade) +
-                    additionalDataFieldTemplate +
-                    "6304";
+  merchantAccountInfo +
+  formatField("52", "0000") +
+  formatField("53", "986") +
+  formatField("54", valor.toFixed(2)) +  // Aqui usamos o valor de 50.00 formatado
+  formatField("58", "BR") +
+  formatField("59", nome) +
+  formatField("60", cidade) +
+  additionalDataFieldTemplate +
+  "6304";
 
   const payloadFinal = payloadBase + calcularCRC16(payloadBase); // Calculando o CRC16 para o payload
 

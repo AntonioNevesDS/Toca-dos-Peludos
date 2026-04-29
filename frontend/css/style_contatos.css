@@ -44,6 +44,10 @@
   color: #555;
 }
 
+.item-contato p {
+  margin: 5px -8px;
+}
+
 .item-contato a {
   color: #555;
   text-decoration: underline;

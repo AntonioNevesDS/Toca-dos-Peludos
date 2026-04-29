@@ -1,18 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const menuSanduiche = document.querySelector('.menu-sanduiche');
-    const navLinks = document.querySelector('.links');
-  
-  
-    if (menuSanduiche && navLinks) {
-      menuSanduiche.addEventListener('click', () => {
-        navLinks.classList.toggle('ativo');
-      });
-    } else {
-      console.error("Erro: Não encontrei o menu ou os links no HTML.");
-    }
-  });
-
- document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("formDenuncia");
   const mensagem = document.getElementById("mensagemDenuncia");
   const checkbox = document.getElementById("anonimoCheckbox");
@@ -76,4 +62,3 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
-  

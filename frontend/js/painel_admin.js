@@ -1,31 +1,20 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const menuSanduiche = document.querySelector(".menu-sanduiche");
-  const navLinks = document.querySelector(".links");
+const usuario = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
 
-  if (menuSanduiche && navLinks) {
-    menuSanduiche.addEventListener("click", () => {
-      navLinks.classList.toggle("ativo");
-    });
-  }
+if (!usuario) {
+  alert("Você precisa estar logado para acessar o painel.");
+  window.location.href = "login.html";
+  return;
+}
 
-  const usuario = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+if (usuario.tipo !== "admin") {
+  alert("Acesso restrito ao administrador.");
+  window.location.href = "index.html";
+  return;
+}
 
-  if (!usuario) {
-    alert("Você precisa estar logado para acessar o painel.");
-    window.location.href = "login.html";
-    return;
-  }
-
-  if (usuario.tipo !== "admin") {
-    alert("Acesso restrito ao administrador.");
-    window.location.href = "index.html";
-    return;
-  }
-
-  configurarTabs();
-  carregarSecao("pets");
-  carregarResumoDashboard();
-});
+configurarTabs();
+carregarSecao("pets");
+carregarResumoDashboard();
 
 const ADMIN_ENDPOINTS = {
   pets: `${BASE_URL}/admin/pets.php`,
