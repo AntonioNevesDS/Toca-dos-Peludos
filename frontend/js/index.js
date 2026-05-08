@@ -212,160 +212,309 @@ async function carregarTabelaPets(cabecalho, corpo) {
   }
 }
 
-// 💰 PIX (VERSÃO PROFISSIONAL)
+// =========================================
+// 💰 PIX COMPLETO
+// =========================================
+
 document.addEventListener("DOMContentLoaded", () => {
 
-  const modal = document.getElementById("popupPix");
-  const fecharModal = document.getElementById("fecharModal");
-  const botoesDoar = document.querySelectorAll(".btn-doar");
-  const btnOutroValor = document.getElementById("btnOutroValor");
+  iniciarCarrossel();
 
-  const inputValor = document.getElementById("valorDoacao");
-  const tituloModal = document.getElementById("tituloModal");
-  const btnGerarPix = document.getElementById("btnGerarPix");
+  initPainelADM();
+
+  const modal =
+    document.getElementById("popupPix");
+
+  const fecharModal =
+    document.getElementById("fecharModal");
+
+  const botoesDoar =
+    document.querySelectorAll(".btn-doar");
+
+  const btnOutroValor =
+    document.getElementById("btnOutroValor");
+
+  const inputValor =
+    document.getElementById("valorDoacao");
+
+  const tituloModal =
+    document.getElementById("tituloModal");
+
+  const btnGerarPix =
+    document.getElementById("btnGerarPix");
+
+  const btnCopiarPix =
+    document.getElementById("btnCopiarPix");
+
+  const qrCodeDiv =
+    document.getElementById("qrcode");
+
+  const codigoPixInput =
+    document.getElementById("codigoPix");
 
   let valorSelecionado = null;
 
-  // 👉 abrir modal com valor fixo
-  botoesDoar.forEach(btn => {
-    btn.addEventListener("click", () => {
-      valorSelecionado = parseFloat(btn.dataset.valor);
-      tituloModal.innerText = `Doe R$${valorSelecionado},00`;
-      inputValor.style.display = "none";
-      abrirModal();
-    });
-  });
-
-  // 👉 outro valor
-  btnOutroValor.addEventListener("click", () => {
-    valorSelecionado = null;
-    tituloModal.innerText = "Digite o valor da doação";
-    inputValor.style.display = "block";
-    abrirModal();
-  });
-
-  // 👉 gerar QR Code
-  btnGerarPix.addEventListener("click", () => {
-    let valorFinal = valorSelecionado;
-
-    if (!valorFinal) {
-      let valorInput = inputValor.value.replace(',', '.');
-      valorFinal = parseFloat(valorInput);
-    }
-
-    gerarPix(valorFinal);
-  });
-
-  // 👉 fechar modal
-  fecharModal.addEventListener("click", fechar);
-  window.addEventListener("click", (e) => {
-    if (e.target === modal) fechar();
-  });
+  // =========================
+  // ABRIR MODAL
+  // =========================
 
   function abrirModal() {
+
     modal.style.display = "block";
+
     document.body.classList.add("no-scroll");
-    document.getElementById("qrcode").innerHTML = "";
 
-  // 👉 resetar botão copiar
-  const btnCopiar = document.getElementById("btnCopiarPix");
-  btnCopiar.disabled = true;
-  btnCopiar.innerText = "Copiar";
+    qrCodeDiv.innerHTML = "";
 
-  // limpar código anterior
-  document.getElementById("codigoPix").value = "";
+    codigoPixInput.value = "";
+
+    btnCopiarPix.disabled = true;
+
+    btnCopiarPix.innerText = "Copiar";
   }
-  
-  function fechar() {
+
+  // =========================
+  // FECHAR MODAL
+  // =========================
+
+  function fecharModalPix() {
+
     modal.style.display = "none";
+
     document.body.classList.remove("no-scroll");
   }
 
-});
-
-function gerarPix(valor) {
-
-  if (!valor || valor <= 0 || isNaN(valor)) {
-    alert("Digite um valor válido");
-    return;
-  }
-
-  const chavePix = "48712800805";
-  const nome = "TIAGO OLIVEIRA";
-  const cidade = "SAO PAULO";
-
-  const formatField = (id, value) => {
-    let size = String(value.length).padStart(2, '0');
-    return id + size + value;
-  };
-
-  const merchantAccountInfo = formatField("26",
-    formatField("00", "br.gov.bcb.pix") +
-    formatField("01", chavePix)
+  fecharModal?.addEventListener(
+    "click",
+    fecharModalPix
   );
 
-  const additionalDataFieldTemplate = formatField("62",
-    formatField("05", "***")
-  );
+  window.addEventListener("click", (e) => {
 
-  let payloadBase = "000201" +
-    merchantAccountInfo +
-    formatField("52", "0000") +
-    formatField("53", "986") +
-    formatField("54", valor.toFixed(2)) +
-    formatField("58", "BR") +
-    formatField("59", nome) +
-    formatField("60", cidade) +
-    additionalDataFieldTemplate +
-    "6304";
+    if (e.target === modal) {
 
-  const payloadFinal = payloadBase + calcularCRC16(payloadBase);
-
-  // 👉 QR Code
-  const qr = document.getElementById("qrcode");
-  qr.innerHTML = "";
-
-  new QRCode(qr, {
-    text: payloadFinal,
-    width: 200,
-    height: 200
+      fecharModalPix();
+    }
   });
 
-  document.getElementById("codigoPix").value = payloadFinal;
-  document.getElementById("btnCopiarPix").disabled = false;
+  // =========================
+  // BOTÕES FIXOS
+  // =========================
+
+  botoesDoar.forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+      valorSelecionado =
+        parseFloat(btn.dataset.valor);
+
+      tituloModal.innerText =
+        `Doe R$ ${valorSelecionado.toFixed(2)}`;
+
+      inputValor.style.display = "none";
+
+      abrirModal();
+    });
+
+  });
+
+  // =========================
+  // OUTRO VALOR
+  // =========================
+
+  btnOutroValor?.addEventListener("click", () => {
+
+    valorSelecionado = null;
+
+    tituloModal.innerText =
+      "Digite o valor da doação";
+
+    inputValor.style.display = "block";
+
+    abrirModal();
+  });
+
+  // =========================
+  // GERAR PIX
+  // =========================
+
+  btnGerarPix?.addEventListener("click", async () => {
+
+    let valorFinal = valorSelecionado;
+
+    if (!valorFinal) {
+
+      valorFinal = parseFloat(
+        inputValor.value.replace(",", ".")
+      );
+    }
+
+    if (!valorFinal ||
+        valorFinal <= 0 ||
+        isNaN(valorFinal)) {
+
+      alert("Digite um valor válido");
+
+      return;
+    }
+
+    try {
+
+      const payload =
+        gerarPayloadPix(valorFinal);
+
+      qrCodeDiv.innerHTML = "";
+
+      const canvas =
+        document.createElement("canvas");
+
+      qrCodeDiv.appendChild(canvas);
+
+      await QRCode.toCanvas(
+        canvas,
+        payload,
+        {
+          width: 220,
+          margin: 2,
+          color: {
+            dark: "#000000",
+            light: "#ffffff"
+          }
+        }
+      );
+
+      codigoPixInput.value = payload;
+
+      btnCopiarPix.disabled = false;
+
+    } catch (err) {
+
+      console.error(err);
+
+      alert("Erro ao gerar QR Code");
+    }
+
+  });
+
+  // =========================
+  // COPIAR PIX
+  // =========================
+
+  btnCopiarPix?.addEventListener(
+    "click",
+    async () => {
+
+      try {
+
+        await navigator.clipboard.writeText(
+          codigoPixInput.value
+        );
+
+        btnCopiarPix.innerText = "Copiado!";
+
+        setTimeout(() => {
+
+          btnCopiarPix.innerText = "Copiar";
+
+        }, 2000);
+
+      } catch (err) {
+
+        console.error(err);
+
+        alert("Erro ao copiar código");
+      }
+
+    }
+  );
+
+});
+
+// =========================================
+// GERAR PAYLOAD PIX
+// =========================================
+
+function gerarPayloadPix(valor) {
+
+  const chavePix = "48712800805";
+
+  const nome = "TIAGO OLIVEIRA";
+
+  const cidade = "SAO PAULO";
+
+  const txid = "TOCADOSPELUDOS";
+
+  function format(id, value) {
+
+    const size =
+      value.length
+      .toString()
+      .padStart(2, "0");
+
+    return id + size + value;
+  }
+
+  const merchantAccount =
+    format(
+      "26",
+      format("00", "br.gov.bcb.pix") +
+      format("01", chavePix)
+    );
+
+  const additionalData =
+    format(
+      "62",
+      format("05", txid)
+    );
+
+  let payload =
+    format("00", "01") +
+    format("01", "12") +
+    merchantAccount +
+    format("52", "0000") +
+    format("53", "986") +
+    format("54", valor.toFixed(2)) +
+    format("58", "BR") +
+    format("59", nome.substring(0, 25)) +
+    format("60", cidade.substring(0, 15)) +
+    additionalData +
+    "6304";
+
+  payload += crc16(payload);
+
+  return payload;
 }
 
-// 🔢 CRC16
-function calcularCRC16(payload) {
-  let res = 0xFFFF;
-  const pol = 0x1021;
+// =========================================
+// CRC16 OFICIAL PIX
+// =========================================
 
-  for (let i = 0; i < payload.length; i++) {
-    res ^= payload.charCodeAt(i) << 8;
+function crc16(str) {
 
-    for (let j = 0; j < 8; j++) {
-      res = (res << 1) ^ ((res & 0x10000) ? pol : 0);
-      res &= 0xFFFF;
+  let crc = 0xFFFF;
+
+  for (let c = 0; c < str.length; c++) {
+
+    crc ^= str.charCodeAt(c) << 8;
+
+    for (let i = 0; i < 8; i++) {
+
+      if (crc & 0x8000) {
+
+        crc =
+          (crc << 1) ^ 0x1021;
+
+      } else {
+
+        crc = crc << 1;
+      }
+
+      crc &= 0xFFFF;
     }
   }
 
-  return res.toString(16).toUpperCase().padStart(4, '0');
+  return crc
+    .toString(16)
+    .toUpperCase()
+    .padStart(4, "0");
 }
-
-// 🚀 INIT GERAL
-document.addEventListener("DOMContentLoaded", () => {
-  iniciarCarrossel();
-  initPainelADM();
-});
-
-// Copia do pix
-document.getElementById("btnCopiarPix").addEventListener("click", () => {
-  const input = document.getElementById("codigoPix");
-
-  input.select();
-  input.setSelectionRange(0, 99999); // mobile
-
-  navigator.clipboard.writeText(input.value);
-
-  alert("Código PIX copiado!");
-});
