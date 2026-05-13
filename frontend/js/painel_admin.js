@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   carregarResumoDashboard();
-  carregarSecao(); 
+  carregarSecao('pets');
 
 // Eventos de clique nos cards do topo
   document.querySelectorAll(".card").forEach(card => {
