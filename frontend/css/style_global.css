@@ -1,28 +1,54 @@
+/* Inicio das configurações gerais */
 :root {
   --primary: #ffcc33;
   --secondary: #6A1B9A;
   --accent: #7956a6;
   --bg: #F5F5F5;
+  --card-bg: #f9f9f9;
   --text: #333333;
   --radius: 12px;
-}
-
-* {
-  box-sizing: border-box; 
 }
 
 html {
   overflow-y: scroll;
 }
 
-body {
+* {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
+}
+
+body {
   font-family: 'Roboto', system-ui, -apple-system, sans-serif;
   color: var(--text);
   background: var(--bg);
 }
+/* Fim das configurações gerais */
+/* Inicio da barra de rolagem personalizada */
+/* largura da barra */
+::-webkit-scrollbar {
+  width: 15px;
+}
 
-/* Cabeçalho */
+/* fundo da barra */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* "thumb" (parte que você arrasta) */
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 5px;
+}
+
+/* hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Fim da barra de rolagem personalizada */
+/* Inicio do Cabeçalho */
 .nav {
   background: var(--primary);
   color: #18212f;
@@ -30,7 +56,7 @@ body {
   top: 0;
   z-index: 20;
 }
-
+ 
 .nav-content {
   max-width: 1100px;
   margin: 0 auto;
@@ -41,17 +67,36 @@ body {
   justify-content: space-between;
   position: relative;
 }
-
+ 
 .nav img {
   width: 60px;
   height: 60px;
 }
 
-.logo {
-  border-radius: 12px; 
-  object-fit: cover; 
+.nav .links {
+  display: flex;
+  gap: 20px;
+  border-radius: 0 0 12px 12px;
 }
 
+.nav .links a {
+  margin: 12px 0;
+  font-size: 18px;
+  color: var(--text);
+  text-decoration: none;
+  position: relative;
+  transition: 0.3s;
+}
+
+.nav .links a:hover {
+  padding-left: 5px;
+}
+ 
+.logo {
+  border-radius: 12px; /* controla a curvatura */
+  object-fit: cover; /* mantém proporção da imagem */
+}
+ 
 .brand {
   display: flex;
   align-items: center;
@@ -59,7 +104,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
 }
-
+ 
 .links a {
   position: relative;
   color: #7956a6;
@@ -67,7 +112,7 @@ body {
   margin: 0 8px;
   font-weight: 600;
 }
-
+ 
 .links a::after {
   content: "";
   position: absolute;
@@ -78,15 +123,23 @@ body {
   background-color: #7956a6;
   transition: width 0.6s ease;
 }
-
+ 
 .links a:hover::after {
   width: 100%;
 }
-
+ 
 .links a:hover {
   color: var(--accent);
 }
-
+ 
+.links a.active {
+  color: var(--accent);
+}
+ 
+.links a.active::after {
+  width: 100%;
+}
+ 
 .btn-accent {
   background: var(--accent);
   color: #fff;
@@ -96,275 +149,88 @@ body {
   cursor: pointer;
   font-weight: 700;
   transition: 0.3s;
+  text-decoration: none;
 }
-
-.btn-accent:hover { 
-  transform: scale(1.05); 
+ 
+.btn-accent:hover {
+  transform: scale(1.05);
 }
-
+ 
 .actions {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
+ 
 .actions button {
   margin: 0;
 }
 
-/* Menu Sanduíche */
+/* Fim do Cabeçalho */
+/* Inicio do Menu Sanduiche */
 .menu-sanduiche {
   display: none;
   cursor: pointer;
   flex-direction: column;
-  gap: 5px;
-  z-index: 1000; 
+  justify-content: center;
+  gap: 6px;
+  z-index: 1000;
 }
 
 .menu-sanduiche .linha {
   width: 30px;
-  height: 4px;
-  background-color: #333; 
+  height: 3px;
+  background-color: #333;
   border-radius: 5px;
   transition: all 0.3s ease;
 }
 
-@media screen and (max-width: 600px) {  
+/* ANIMAÇÃO */
+.menu-sanduiche.ativo .linha:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 5px);
+}
+
+.menu-sanduiche.ativo .linha:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-sanduiche.ativo .linha:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+@media screen and (max-width: 674px) {
   .menu-sanduiche {
     display: flex;
   }
 
   .nav .links {
-    display: none; 
     position: absolute;
-    top: 100%; 
+    top: 100%;
     left: 0;
     width: 100%;
-    background-color: #7956a6; 
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
     flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1); 
-    z-index: 999;
+    align-items: flex-start;
+    padding: 20px;
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
   }
 
   .nav .links a {
-    margin: 15px 0;
-    font-size: 18px;
-    width: 100%;
-    margin-left: 10px;
-    text-align: start;
-    color: #fff;
+    color:#fff
   }
 
-  .links a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    width: 0%;
-    height: 2px;
-    background-color: #fff;
-    transition: width 0.6s ease;
-  }
-  
-  .links a:hover::after {
-    width: 100%;
-  }
-  
-  .links a:hover {
-    color: #fff;
-  }
-  
   .nav .links.ativo {
-    display: flex !important;
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 
-/* Container Principal */
-.container-detalhes {
-  max-width: 1250px;
-  margin: 0 auto;
-  padding: 50px 5%;
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.85fr);
-  gap: 36px;
-  align-items: start;
-}
-
-.detalhes-pet-card,
-.agendamento-card {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-}
-
-/* CARD DO PET (ESQUERDA) */
-.detalhes-pet-card {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  padding-bottom: 24px;
-}
-
-.detalhes-pet-imagem {
-  width: 100%;
-  height: 420px;
-  object-fit: cover;
-  display: block;
-  background: #f1f1f1;
-}
-
-.detalhes-pet-conteudo {
-  padding: 24px;
-}
-
-.detalhes-pet-conteudo h1 {
-  margin: 0 0 20px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2.5rem;
-  line-height: 1.1;
-  color: #2f2f2f;
-}
-
-.detalhes-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 22px;
-}
-
-.detalhes-tags span {
-  background: #f3e9ff;
-  color: var(--secondary);
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 0.95rem;
-  font-weight: 700;
-}
-
-.detalhes-info {
-  display: grid;
-  gap: 12px;
-  margin-bottom: 22px;
-}
-
-.detalhes-info p,
-.detalhes-descricao {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #333;
-}
-
-/* CARD DO FORMULÁRIO (DIREITA) */
-.agendamento-card {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  padding: 0;
-  position: sticky;
-  top: 100px;
-  overflow: hidden;
-}
-
-.agendamento-form-container {
-  padding: 30px;
-}
-
-.agendamento-card h2 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.8rem;
-  color: #2f2f2f;
-}
-
-.agendamento-subtitulo {
-  color: #666;
-  line-height: 1.5;
-  margin-bottom: 22px;
-}
-
-.form-agendamento {
-  display: flex;
-  flex-direction: column;
-}
-
-.label_text {
-  display: block;
-  font-weight: bold;
-  margin-top: 18px;
-  margin-bottom: 6px;
-  color: #333;
-}
-
-.form-agendamento input,
-.form-agendamento textarea {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  background: #fff;
-  outline: none;
-  transition: 0.25s ease;
-}
-
-.form-agendamento input:focus,
-.form-agendamento textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(121, 86, 166, 0.12);
-}
-
-.form-agendamento textarea {
-  resize: vertical;
-  min-height: 110px;
-}
-
-.btn-agendar {
-  width: 100%;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  padding: 12px 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 700;
-  margin-top: 24px;
-  font-size: 1rem;
-  transition: 0.25s ease;
-}
-
-.btn-agendar:hover {
-  background: var(--secondary);
-  transform: translateY(-2px);
-}
-
-.btn-agendar:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.mensagem-agendamento {
-  margin-top: 14px;
-  font-weight: 600;
-  min-height: 24px;
-}
-
-.mensagem-agendamento.sucesso {
-  color: #2e7d32;
-}
-
-.mensagem-agendamento.erro {
-  color: #c62828;
-}
-
-/* Rodapé */
+/* Fim do Menu Sanduiche */
+/* Começo do Rodapé */
 .footer {
   width: 100%;
   background-color: var(--accent);
@@ -465,41 +331,19 @@ body {
 #copyright {
   background-color: var(--primary);
   text-align: center;
-  padding: 8px;
+  padding: 8px 0;
 }
 
 #copyright p {
+  margin: 0;        /* REMOVE o espaço invisível */
   font-size: 13px;
   color: #222;
   font-weight: 500;
+  line-height: 1.2; /* Deixa mais compacto */
 }
 
-/* TABLET */
+/* Responsividade do footer do TABLET (900px) */
 @media (max-width: 900px) {
-  .grupo-campos {
-    grid-template-columns: 1fr;
-  }
-
-  .container-detalhes {
-    grid-template-columns: 1fr;
-  }
-
-  .agendamento-card {
-    position: static;
-  }
-
-  .detalhes-pet-imagem {
-    height: 280px;
-  }
-
-  .detalhes-pet-conteudo h1 {
-    font-size: 1.8rem;
-  }
-
-  .agendamento-form-container {
-    padding: 24px 20px;
-  }
-
   .footer #itens_footer {
     grid-template-columns: 1fr 1fr;
     gap: 18px;
@@ -528,7 +372,7 @@ body {
   }
 }
 
-/* CELULAR */
+/* Responsividade do footer do CELULAR (600px) */
 @media (max-width: 600px) {
   .footer #itens_footer {
     grid-template-columns: 1fr;
@@ -579,3 +423,4 @@ body {
     padding: 8px;
   }
 }
+/* Fim do Rodapé */

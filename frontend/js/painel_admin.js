@@ -1,17 +1,20 @@
-// VERIFICAÇÃO DE SEGURANÇA (JWT)
+const usuario = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
 
-const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
-
-if (!usuarioLogado || usuarioLogado.tipo !== 'admin' || !usuarioLogado.token) {
-  localStorage.removeItem("usuarioLogado");
-  window.location.replace("login.html");
-  throw new Error("Acesso negado. Parando a execução da página.");
+if (!usuario) {
+  alert("Você precisa estar logado para acessar o painel.");
+  window.location.href = "login.html";
+  return;
 }
 
-const TOKEN = usuarioLogado.token;
+if (usuario.tipo !== "admin") {
+  alert("Acesso restrito ao administrador.");
+  window.location.href = "index.html";
+  return;
+}
 
-
-// Certifique-se de que a BASE_URL está definida aqui ou no apiScript.js
+configurarTabs();
+carregarSecao("pets");
+carregarResumoDashboard();
 
 const ADMIN_ENDPOINTS = {
   pets: `${BASE_URL}/admin/pets.php`,

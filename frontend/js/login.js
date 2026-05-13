@@ -1,66 +1,53 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const menuSanduiche = document.querySelector(".menu-sanduiche");
-  const navLinks = document.querySelector(".links");
+const form = document.getElementById("formLogin");
+const mensagem = document.getElementById("mensagemLogin");
 
-  if (menuSanduiche && navLinks) {
-    menuSanduiche.addEventListener("click", () => {
-      navLinks.classList.toggle("ativo");
-    });
-  } else {
-    console.error("Erro: Não encontrei o menu ou os links no HTML.");
-  }
+if (form && mensagem) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  const form = document.getElementById("formLogin");
-  const mensagem = document.getElementById("mensagemLogin");
+    mensagem.textContent = "";
+    mensagem.className = "mensagem-feedback";
 
-  if (form && mensagem) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    const email = document.getElementById("emailLogin").value.trim();
+    const senha = document.getElementById("senhaLogin").value.trim();
 
-      mensagem.textContent = "";
-      mensagem.className = "mensagem-feedback";
+    console.log("Enviando login...", { email, senha });
 
-      const email = document.getElementById("emailLogin").value.trim();
-      const senha = document.getElementById("senhaLogin").value.trim();
+    const payload = { email, senha };
 
-        console.log("Enviando login...", { email, senha });
+    try {
+      const response = await fetch(API_LOGIN_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
 
-      const payload = { email, senha };
+      const resultado = await response.json();
+      console.log("Resposta da API:", resultado);
 
-      try {
-        const response = await fetch(API_LOGIN_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload)
-        });
-
-        const resultado = await response.json();
-        console.log("Resposta da API:", resultado);
-
-        if (!resultado.success) {
-          mensagem.textContent = resultado.message;
-          mensagem.classList.add("erro");
-          return;
-        }
-
-        localStorage.setItem("usuarioLogado", JSON.stringify(resultado.data));
-        mensagem.textContent = "Login realizado com sucesso! Redirecionando...";
-        mensagem.classList.add("sucesso");
-
-        setTimeout(() => {
-          window.location.href = "index.html";
-        }, 1200);
-
-      } catch (error) {
-        console.error("Erro ao fazer login:", error);
-        mensagem.textContent = "Erro ao fazer login.";
+      if (!resultado.success) {
+        mensagem.textContent = resultado.message;
         mensagem.classList.add("erro");
+        return;
       }
-    });
-  }
-});
+
+      localStorage.setItem("usuarioLogado", JSON.stringify(resultado.data));
+      mensagem.textContent = "Login realizado com sucesso! Redirecionando...";
+      mensagem.classList.add("sucesso");
+
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1200);
+
+    } catch (error) {
+      console.error("Erro ao fazer login:", error);
+      mensagem.textContent = "Erro ao fazer login.";
+      mensagem.classList.add("erro");
+    }
+  });
+}
 
 function travarScroll() {
   document.body.classList.add("no-scroll");
@@ -135,5 +122,3 @@ function irRedefinirEmail() {
   document.getElementById("telaRedefinirEmail").style.display = "block";
   travarScroll();
 }
-
-

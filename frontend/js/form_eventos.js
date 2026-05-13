@@ -1,14 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-  const menuSanduiche = document.querySelector('.menu-sanduiche');
-  const navLinks = document.querySelector('.links');
-
-  if (menuSanduiche && navLinks) {
-    menuSanduiche.addEventListener('click', () => {
-      navLinks.classList.toggle('ativo');
-    });
-  }
-});
-
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const eventoId = params.get("evento_id");

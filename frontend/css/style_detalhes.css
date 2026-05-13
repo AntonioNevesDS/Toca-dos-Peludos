@@ -1,3 +1,27 @@
+:root {
+  --primary: #ffcc33;
+  --secondary: #6A1B9A;
+  --accent: #7956a6;
+  --bg: #F5F5F5;
+  --text: #333333;
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box; 
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
 /* Container Principal */
 .container-detalhes {
   max-width: 1250px;
@@ -119,12 +143,6 @@
   color: #333;
 }
 
-.required-label::after {
-  content: " *";
-  color: red;
-  font-weight: bold;
-}
-
 .form-agendamento input,
 .form-agendamento textarea {
   width: 100%;
@@ -187,29 +205,3 @@
   color: #c62828;
 }
 
-/* TABLET */
-@media (max-width: 900px) {
-  .grupo-campos {
-    grid-template-columns: 1fr;
-  }
-
-  .container-detalhes {
-    grid-template-columns: 1fr;
-  }
-
-  .agendamento-card {
-    position: static;
-  }
-
-  .detalhes-pet-imagem {
-    height: 280px;
-  }
-
-  .detalhes-pet-conteudo h1 {
-    font-size: 1.8rem;
-  }
-
-  .agendamento-form-container {
-    padding: 24px 20px;
-  }
-}
