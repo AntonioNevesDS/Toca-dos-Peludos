@@ -5,7 +5,6 @@ declare(strict_types=1);
 use App\Support\JsonResponse;
 use App\Services\JwtService;
 
-// 1. O XAMPP gosta de esconder o cabeçalho. Vamos forçar a busca em todo o lado!
 $headers = null;
 if (function_exists('apache_request_headers')) {
     $headers = apache_request_headers();

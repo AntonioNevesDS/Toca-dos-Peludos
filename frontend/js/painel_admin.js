@@ -1,4 +1,3 @@
-
 // VERIFICAÇÃO DE SEGURANÇA (JWT)
 
 const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
@@ -12,7 +11,7 @@ if (!usuarioLogado || usuarioLogado.tipo !== 'admin' || !usuarioLogado.token) {
 const TOKEN = usuarioLogado.token;
 
 
-// CONFIGURAÇÕES GERAIS
+// Certifique-se de que a BASE_URL está definida aqui ou no apiScript.js
 
 const ADMIN_ENDPOINTS = {
   pets: `${BASE_URL}/admin/pets.php`,
@@ -129,7 +128,13 @@ async function carregarSecao(secao) {
       renderizarTabela(secao, resultado.data);
     } else {
       dadosTabelaAtual = [];
-      container.innerHTML = `<div class="admin-vazio">Nenhum registo encontrado para ${secao}.</div>`;
+      let htmlVazio = '';
+      if (secao === 'eventos') {
+         htmlVazio = `<div style="margin-bottom: 15px; text-align: right;">
+                        <button class="btn-accent" style="background-color: #4CAF50; padding: 10px 20px;" onclick="abrirModalCriarEvento()">+ Novo Evento</button>
+                      </div>`;
+      }
+      container.innerHTML = htmlVazio + `<div class="admin-vazio">Nenhum registo encontrado para ${secao}.</div>`;
     }
   } catch (error) {
     mensagem.textContent = "Erro ao carregar dados. Verifique a conexão.";
@@ -145,7 +150,16 @@ function renderizarTabela(secao, dados) {
 
   const colunas = Object.keys(dados[0]);
   
-  let html = `<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>`;
+  let html = '';
+  
+  // Se for a aba eventos, injeta o botão verde em cima da tabela
+  if (secao === 'eventos') {
+      html += `<div style="margin-bottom: 15px; text-align: right;">
+                 <button class="btn-accent" style="background-color: #4CAF50; padding: 10px 20px;" onclick="abrirModalCriarEvento()">+ Novo Evento</button>
+               </div>`;
+  }
+
+  html += `<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>`;
   
   colunas.forEach(col => {
     let nomeFormatado = col.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
@@ -172,7 +186,10 @@ function renderizarTabela(secao, dados) {
     } else if (secao === 'denuncias') {
       html += `<td><button class="btn-accent" style="padding: 6px 12px; font-size: 12px; background-color: #e74c3c;" onclick="abrirModalDenuncia(${item.id})">Ver Caso</button></td>`;
     } else if (secao === 'eventos') {
-      html += `<td><button class="btn-accent" style="padding: 6px 12px; font-size: 12px; background-color: #9C27B0;" onclick="abrirModalEvento(${item.id})">Gerenciar</button></td>`;
+      html += `<td>
+                <button class="btn-accent" style="padding: 6px 12px; font-size: 12px; background-color: #9C27B0; margin-right: 5px;" onclick="abrirModalEvento(${item.id})">Gerenciar</button>
+                <button class="btn-accent" style="padding: 6px 12px; font-size: 12px; background-color: #e74c3c;" onclick="excluirEvento(${item.id})">Excluir</button>
+               </td>`;
     } else {
       html += `<td>-</td>`;
     }
@@ -349,5 +366,61 @@ async function enviarAtualizacao(url, payload, idMensagem, funcFecharModal, nome
   } catch (error) {
     msg.textContent = "Erro de conexão.";
     msg.classList.add("erro");
+  }
+}
+
+// ==========================================
+// FUNÇÕES DE CRIAR E EXCLUIR EVENTOS (PITCH)
+// ==========================================
+
+// Abrir e Fechar Modal de Criação
+function abrirModalCriarEvento() {
+  document.getElementById("formCriarEvento").reset();
+  document.getElementById("msgCriarEvento").textContent = "";
+  document.getElementById("modalCriarEvento").style.display = "block";
+  document.body.classList.add("no-scroll");
+}
+
+function fecharModalCriarEvento() {
+  document.getElementById("modalCriarEvento").style.display = "none";
+  document.body.classList.remove("no-scroll");
+}
+
+// Lógica de Enviar Novo Evento
+document.getElementById("formCriarEvento")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const payload = {
+    titulo: document.getElementById("novoEventoTitulo").value,
+    data_evento: document.getElementById("novoEventoData").value,
+    local: document.getElementById("novoEventoLocal").value,
+    cidade: document.getElementById("novoEventoCidade").value
+  };
+  await enviarAtualizacao(`${BASE_URL}/admin/criar_evento.php`, payload, "msgCriarEvento", fecharModalCriarEvento, "eventos");
+});
+
+// Lógica de Excluir (Com alerta de confirmação nativo para ser rápido)
+async function excluirEvento(id) {
+  if (!confirm("Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.")) {
+    return; // Se o usuário clicar em "Cancelar", para tudo.
+  }
+
+  try {
+    const response = await fetch(`${BASE_URL}/admin/excluir_evento.php`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${TOKEN}` },
+      body: JSON.stringify({ id: id })
+    });
+
+    if (response.status === 401 || response.status === 403) { fazerLogout(); return; }
+    
+    const resultado = await response.json();
+    if (resultado.success) {
+      carregarSecao('eventos'); // Recarrega a tabela na hora!
+      carregarResumoDashboard(); // Atualiza os números no topo
+    } else {
+      alert(resultado.message); // Exibe erro se houver (ex: evento com inscritos)
+    }
+  } catch (error) {
+    alert("Erro de conexão ao tentar excluir.");
   }
 }

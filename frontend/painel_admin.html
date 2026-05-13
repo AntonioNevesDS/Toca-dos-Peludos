@@ -230,6 +230,30 @@
   </div>
 </div>
 
+<div id="modalCriarEvento" class="modal-admin">
+  <div class="modal-conteudo" style="max-width: 450px;">
+    <span class="fechar-modal" onclick="fecharModalCriarEvento()">&times;</span>
+    <h3>Criar Novo Evento</h3>
+    
+    <form id="formCriarEvento">
+      <label class="label_text">Título do Evento:</label>
+      <input type="text" id="novoEventoTitulo" placeholder="Ex: Feira de Adoção" required>
+      
+      <label class="label_text">Data do Evento:</label>
+      <input type="date" id="novoEventoData" required>
+      
+      <label class="label_text">Local:</label>
+      <input type="text" id="novoEventoLocal" placeholder="Ex: Praça Central" required>
+      
+      <label class="label_text">Cidade:</label>
+      <input type="text" id="novoEventoCidade" placeholder="Ex: São Paulo" required>
+      
+      <button type="submit" class="btn-accent" style="width: 100%; margin-top: 15px; background-color: #4CAF50;">Salvar Evento</button>
+    </form>
+    <p id="msgCriarEvento" class="admin-mensagem"></p>
+  </div>
+</div>
+
 <script src="js/apiScript.js"></script>
 <script src="js/painel_admin.js"></script>
 
