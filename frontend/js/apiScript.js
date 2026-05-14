@@ -8,37 +8,61 @@ const API_DENUNCIAS_URL = `${BASE_URL}/site/denuncias.php`;
 const API_CADASTRO_URL = `${BASE_URL}/site/cadastro.php`;
 const API_LOGIN_URL = `${BASE_URL}/site/login.php`;
 
+// Aguarda o HTML carregar para mexer no menu
 document.addEventListener("DOMContentLoaded", () => {
-  verificarSessao();
+    atualizarMenuNavegacao();
 });
 
-function verificarSessao() {
-  const usuarioString = localStorage.getItem("usuarioLogado");
-  const areaAcoes = document.querySelector(".actions");
+function atualizarMenuNavegacao() {
+    // 1. Procura o novo componente de cabeçalho na página
+    const cabecalhoGlobal = document.querySelector("global-header");
+    let areaAuth = null;
 
-  if (usuarioString && areaAcoes) {
-    const usuario = JSON.parse(usuarioString);
+    // 2. Se o componente existir, procuramos o areaAuth DENTRO do "campo de força" (Shadow DOM)
+    if (cabecalhoGlobal && cabecalhoGlobal.shadowRoot) {
+        areaAuth = cabecalhoGlobal.shadowRoot.getElementById("areaAuth");
+    } else {
+        // Se for uma página que ainda não atualizou para o componente, procura normalmente
+        areaAuth = document.getElementById("areaAuth");
+    }
+    
+    // Se a página não tiver essa área, o script para silenciosamente
+    if (!areaAuth) return; 
 
-    areaAcoes.innerHTML = `
-      <span style="margin-right: 15px; font-weight: 600; color: #333;">
-        Olá, ${usuario.nome}!
-      </span>
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
-      ${
-        usuario.tipo === "admin"
-          ? `<a href="painel_admin.html">
-               <button class="btn-accent">Painel Admin</button>
-             </a>`
-          : ""
-      }
+    if (usuarioLogado && usuarioLogado.token) {
+        // Pega apenas o primeiro nome
+        const primeiroNome = usuarioLogado.nome ? usuarioLogado.nome.split(' ')[0] : 'Usuário';
 
-      <button onclick="fazerLogout()" class="btn-accent" style="background-color: #e74c3c; border: none;">
-        Sair
-      </button>
-    `;
-  }
+        // Se for o Tiago (Admin)
+        if (usuarioLogado.tipo === 'admin') {
+            areaAuth.innerHTML = `
+                <span style="margin-right: 15px; font-weight: 500;">Olá, <strong>${primeiroNome}</strong>!</span>
+                <a href="painel_admin.html"><button class="btn-accent" style="border: none;">Painel Admin</button></a>
+                <button class="btn-accent" onclick="window.fazerLogoutPublico()" style="background-color: #e74c3c; border: none;">Sair</button>
+            `;
+        } 
+        // Se for um adotante normal
+        else {
+            areaAuth.innerHTML = `
+                <span style="margin-right: 15px; font-weight: 500;">Olá, <strong>${primeiroNome}</strong>!</span>
+                <a href="perfil.html"><button class="btn-accent" style="border: none;">Meu Perfil</button></a>
+                <a href="index.html#ajude"><button class="btn-accent" style="border: none;">Doar</button></a>
+                <button class="btn-accent" onclick="window.fazerLogoutPublico()" style="background-color: #e74c3c; border: none;">Sair</button>
+            `;
+        }
+    } else {
+        // Se for um visitante sem login, mostra o Entrar e o Doar originais
+        areaAuth.innerHTML = `
+            <a href="login.html"><button class="btn-accent">Entrar</button></a>
+            <a href="index.html#ajude"><button class="btn-accent">Doar</button></a>
+        `;
+    }
 }
-window.fazerLogout = function () {
-  localStorage.removeItem("usuarioLogado");
-  window.location.reload();
+
+// Função global para deslogar a partir do site público
+window.fazerLogoutPublico = function() {
+    localStorage.removeItem("usuarioLogado");
+    window.location.href = "index.html"; // Recarrega a página inicial
 };

@@ -208,10 +208,9 @@ class GlobalHeader extends HTMLElement {
             <div class="linha"></div>
             <div class="linha"></div>
           </div>
-          <div class="actions">
-            <a href="login.html" class="btn-accent">Entrar</a>
-            <a href="#ajude" class="btn-accent">Doar</a>
-          </div>
+            <div class="actions">
+              <span id="areaAuth" style="display: inline-flex; gap: 10px; align-items: center;"></span>
+            </div>
         </div>
       </header>
     `;

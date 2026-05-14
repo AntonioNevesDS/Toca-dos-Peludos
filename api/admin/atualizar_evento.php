@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../bootstrap/app.php';
+require_once __DIR__ . '/auth_middleware.php';
 
 use App\Config\Database;
 use App\Support\JsonResponse;
@@ -14,12 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $conn = Database::getConnection();
 $dados = Request::json();
-
 $id = (int)($dados['id'] ?? 0);
 $status = trim($dados['status'] ?? '');
-
 if ($id <= 0 || $status === '') {
     JsonResponse::send(['success' => false, 'message' => 'Campos obrigatórios ausentes.'], 400);
+}
+
+$statusPermitidos = ['ativo', 'encerrado', 'cancelado'];
+if (!in_array($status, $statusPermitidos)) {
+    JsonResponse::send(['success' => false, 'message' => 'Status inválido ou não permitido.'], 400);
 }
 
 $stmt = $conn->prepare("UPDATE eventos SET status = ? WHERE id = ?");
