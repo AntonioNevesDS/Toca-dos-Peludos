@@ -43,7 +43,7 @@
 }
 
 #moments {
-  background-color: var(--primary);
+  background-color: var(--accent);
   padding: 40px 0;
   text-align: center;
   display: flex;
@@ -54,7 +54,7 @@
 }
 
 #moments h2 {
-  color: var(--accent);
+  color: var(--primary);
   margin-bottom: 40px;
 }
 
@@ -109,7 +109,7 @@
 }
 
 #moments button:hover {
-  background-color: var(--secondary);
+  background-color: var(--primary);
 }
 
 .dot {
@@ -130,7 +130,7 @@
 }
 
 .dot.current {
-  background-color: var(--secondary);
+  background-color: var(--primary);
 }
 
 /* Inicio dos cards primários */
