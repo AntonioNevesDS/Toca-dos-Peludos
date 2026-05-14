@@ -14,7 +14,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function atualizarMenuNavegacao() {
-    const areaAuth = document.getElementById("areaAuth");
+    // 1. Procura o novo componente de cabeçalho na página
+    const cabecalhoGlobal = document.querySelector("global-header");
+    let areaAuth = null;
+
+    // 2. Se o componente existir, procuramos o areaAuth DENTRO do "campo de força" (Shadow DOM)
+    if (cabecalhoGlobal && cabecalhoGlobal.shadowRoot) {
+        areaAuth = cabecalhoGlobal.shadowRoot.getElementById("areaAuth");
+    } else {
+        // Se for uma página que ainda não atualizou para o componente, procura normalmente
+        areaAuth = document.getElementById("areaAuth");
+    }
     
     // Se a página não tiver essa área, o script para silenciosamente
     if (!areaAuth) return; 
@@ -29,17 +39,17 @@ function atualizarMenuNavegacao() {
         if (usuarioLogado.tipo === 'admin') {
             areaAuth.innerHTML = `
                 <span style="margin-right: 15px; font-weight: 500;">Olá, <strong>${primeiroNome}</strong>!</span>
-                <a href="painel_admin.html"><button class="btn-accent" style= border: none;">Painel Admin</button></a>
-                <button class="btn-accent" onclick="fazerLogoutPublico()" style="background-color: #e74c3c; border: none;">Sair</button>
+                <a href="painel_admin.html"><button class="btn-accent" style="border: none;">Painel Admin</button></a>
+                <button class="btn-accent" onclick="window.fazerLogoutPublico()" style="background-color: #e74c3c; border: none;">Sair</button>
             `;
         } 
-        // Se for um adotante normal (João Silva)
+        // Se for um adotante normal
         else {
             areaAuth.innerHTML = `
                 <span style="margin-right: 15px; font-weight: 500;">Olá, <strong>${primeiroNome}</strong>!</span>
-                <a href="perfil.html"><button class="btn-accent" style= border: none;">Meu Perfil</button></a>
-                <a href="index.html#ajude"><button class="btn-accent" style= border: none;">Doar</button></a>
-                <button class="btn-accent" onclick="fazerLogoutPublico()" style="background-color: #e74c3c; border: none;">Sair</button>
+                <a href="perfil.html"><button class="btn-accent" style="border: none;">Meu Perfil</button></a>
+                <a href="index.html#ajude"><button class="btn-accent" style="border: none;">Doar</button></a>
+                <button class="btn-accent" onclick="window.fazerLogoutPublico()" style="background-color: #e74c3c; border: none;">Sair</button>
             `;
         }
     } else {
