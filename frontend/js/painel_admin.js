@@ -1,21 +1,19 @@
-const usuario = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+// 1. Puxa o usuário logado com o nome que o resto do código espera
+const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
-if (!usuario) {
-  alert("Você precisa estar logado para acessar o painel.");
-  window.location.href = "login.html";
-  return;
+// 2. Verifica se existe, se é admin e se tem token
+if (!usuarioLogado || usuarioLogado.tipo !== "admin" || !usuarioLogado.token) {
+  alert("Acesso restrito ao administrador. Faça login.");
+  window.location.replace("login.html");
+  // O "throw new Error" faz o papel do "return", parando o script sem dar erro de sintaxe!
+  throw new Error("Parando a execução da página. Acesso negado.");
 }
 
-if (usuario.tipo !== "admin") {
-  alert("Acesso restrito ao administrador.");
-  window.location.href = "index.html";
-  return;
-}
+// 3. Salva o token para a API poder carregar as tabelas
+const TOKEN = usuarioLogado.token;
 
-configurarTabs();
-carregarSecao("pets");
-carregarResumoDashboard();
-
+// As chamadas de carregarSecao e carregarResumo já estão sendo feitas 
+// corretamente mais para baixo no DOMContentLoaded, então tiramos elas daqui.
 const ADMIN_ENDPOINTS = {
   pets: `${BASE_URL}/admin/pets.php`,
   eventos: `${BASE_URL}/admin/eventos.php`,
